@@ -23,5 +23,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
 
   <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
-
+  <!-- favicon icon -->
   <link rel="icon" href="favicon/logo_favicon.png">
+  <!-- css custom -->
+  <link rel="stylesheet" href="assets/css/management.css">
