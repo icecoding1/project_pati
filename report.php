@@ -21,7 +21,8 @@
     <?php include('layout/slidebar.php') ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper mr-3 ">
+
 
       <div class="content-header">
         <div class="container-fluid">
@@ -64,9 +65,9 @@
           <div class="d-flex justify-content-end align-items-center mt-4 ">
             <form action="" method="get">
               <label for="datetodate">เลือกช่วงเวลา</label>
-              <input type="date" name="datetodate1" id="datePicker1" class="set-input bg-light" value="">
+              <input type="date" name="datetodate1" id="datePicker1" class="set-input bg-light">
               <label for="to"> - </label>
-              <input type="date" name="datetodate2" id="datePicker2" class="set-input bg-light" value="">
+              <input type="date" name="datetodate2" id="datePicker2" class="set-input bg-light">
               <button type="submit" name="submit_date" class="mx-1 btn btn-outline-dark">submit</button>
             </form>
           </div>
@@ -86,11 +87,32 @@
             <form action="" method="get">
               <label for="select_type">เลือกประเภท</label>
               <select name="select_type" id="select_type" class="set-input bg-light">
-                <option value="alltotal">เลือกทั้งหมด</option>
+                <option value="alltotal" disabled>เลือก</option>
                 <option value="food">อาหาร</option>
                 <option value="drink">เครื่องดื่ม</option>
               </select>
             </form>
+          </div>
+
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">กราฟเเสดงข้อมูลเมนูขายดี</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="barChart" class="barChart" style="width:100%; max-height:500px; min-height:280px;"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
           </div>
 
         </div>
@@ -104,17 +126,50 @@
 
   </div>
 
+
+  <?php include 'add_framwork/js.php' ?>
   <script>
     var date = new Date();
     var year = date.getFullYear();
     var month = String(date.getMonth() + 1).padStart(2, '0');
     var todayDate = String(date.getDate()).padStart(2, '0');
-    var datePattern = todayDate + '-' + month + '-' + year;
-    document.getElementById("datePicker").value = datePattern;
+    var datePattern = year + '-' + month + '-' + todayDate;
+    document.getElementById("datePicker2").value = datePattern;
+    document.getElementById("datePicker1").value = datePattern;
     // console.log(datePattern);
-  </script>
 
-  <?php include 'add_framwork/js.php' ?>
+    const data = {
+      labels: ['ผัดกระเพราหมู', 'ผัดกระเพราหมูกรอบ', 'ข้าวผัดกุ้ง', 'ผัดคะน้า', 'เเกงส้ม', 'เเกงปลา'],
+      datasets: [{
+        barPercentage: 100,
+        barThickness: 60,
+        maxBarThickness: 80,
+        minBarLength: 25,
+        label: 'อาหาร : ยอดออเดอร์ ',
+        data: [19, 19, 7, 5, 2, 1],
+        backgroundColor: '#3E88FB',
+        borderColor: '#707070',
+        borderWidth: 1
+      }]
+    }
+
+    const config = {
+      type: 'horizontalBar',
+      data,
+      options: {
+        title: {
+          position: 'bottom',
+          display: true,
+          text: 'กราฟเเสดงข้อมูลออเดอร์ขายดี'
+        },
+      }
+    };
+
+    const myChart = new Chart(
+      document.getElementById('barChart'),
+      config
+    );
+  </script>
 </body>
 
 </html>

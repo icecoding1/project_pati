@@ -37,3 +37,33 @@
   border-radius: 5px;
   padding: 2px 10px;
 }
+
+.barChart {
+  width: 100%;
+  height: auto;
+}
+
+.bg-order-set {
+  // background: rgb(241, 236, 236);
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+
+  .order-menu {
+    height: 340px;
+    overflow-y: auto;
+  }
+
+  .fixed-footer-order {
+    position: absolute;
+    bottom: 0;
+    left: 7px;
+
+    width: 100%;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.37);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+}
