@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&family=Roboto+Condensed&display=swap');
 
+html {
+  scroll-padding-top: 6rem;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
