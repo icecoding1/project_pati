@@ -8,6 +8,7 @@ html {
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'Kanit', sans-serif;
 }
 
 .bg-login {
@@ -72,6 +73,114 @@ html {
   border-top: 0.5px solid rgba(0, 0, 0, 0.37);
   -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
           box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.content-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.content-top .search_listmenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.list-menu {
+  margin: 20px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.list-menu .content-menu {
+  background: #ffff;
+  width: 250px;
+  margin: 10px 15px;
+}
+
+.list-menu .content-menu .img_menu {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.list-menu .content-menu .content-menu-bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 10px 8px;
+  background: #ffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.358);
+  border-radius: 0px 0px 10px 10px;
+}
+
+.content-detail-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+
+.content-detail-top button {
+  padding: 5px 25px;
+}
+
+.content-detail-bottom {
+  padding: 10px;
+  margin: 10px 5px;
+}
+
+.content-detail-bottom .content-detail-inbottom-top {
+  background: #343a40;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.content-detail-bottom .content-detail-inbottom-top p {
+  padding-left: 10px;
+}
+
+.content-detail-bottom .content-detail-inbottom-top .setborder-dropdown {
+  padding: 10px 15px;
+  border-left: 2px solid #fff;
+}
+
+.content-detail-bottom .content-detail-inbottom-top .setborder-dropdown .i-icon {
+  cursor: pointer;
+  color: #fff;
+}
+
+.content-detail-bottom .content-detail-inbottom-bottom {
+  background: #fff;
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .font-five {

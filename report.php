@@ -94,7 +94,7 @@
             </form>
           </div>
 
-          <div class="card card-success">
+          <div class="card card-secondary">
             <div class="card-header">
               <h3 class="card-title">กราฟเเสดงข้อมูลเมนูขายดี</h3>
 
@@ -109,7 +109,8 @@
             </div>
             <div class="card-body">
               <div class="chart">
-                <canvas id="barChart" class="barChart" style="width:100%; max-height:500px; min-height:280px;"></canvas>
+                <canvas id="barChart" class="barChart" style="width:100%; max-height:500px; min-height:280px; ">
+                </canvas>
               </div>
             </div>
             <!-- /.card-body -->
@@ -137,6 +138,10 @@
     document.getElementById("datePicker2").value = datePattern;
     document.getElementById("datePicker1").value = datePattern;
     // console.log(datePattern);
+    // var bg_chart = {
+    //   background: "#3E88FB"
+    // };
+
 
     const data = {
       labels: ['ผัดกระเพราหมู', 'ผัดกระเพราหมูกรอบ', 'ข้าวผัดกุ้ง', 'ผัดคะน้า', 'เเกงส้ม', 'เเกงปลา'],
@@ -147,7 +152,7 @@
         minBarLength: 25,
         label: 'อาหาร : ยอดออเดอร์ ',
         data: [19, 19, 7, 5, 2, 1],
-        backgroundColor: '#3E88FB',
+        backgroundColor: '#426fbd',
         borderColor: '#707070',
         borderWidth: 1
       }]

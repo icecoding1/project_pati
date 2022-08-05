@@ -46,7 +46,9 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 5;
       <section class="content">
         <div class="container-fluid">
 
-          <div class="d-flex justify-content-end"> <button type="button" class="btn btn-danger mx-1">ยืนยันออเดอร์</button> <button type="button" class="btn btn-dark mx-1">ออกบิล</button></div>
+          <div class="d-flex justify-content-end"> <a href="order_progress.php?&id=<?= $id; ?>"><button type="button" class="btn btn-danger mx-1">ยืนยันออเดอร์</button></a>
+            <button type="button" class="btn btn-dark mx-1">ออกบิล</button>
+          </div>
 
           <div class="row my-3">
             <div class="col-md-4 mb-2">
