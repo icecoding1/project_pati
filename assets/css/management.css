@@ -145,6 +145,8 @@ html {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: end;
+  padding: 10px;
+  margin: 5px;
 }
 
 .content-detail-top button {
@@ -162,7 +164,8 @@ html {
 }
 
 .content-detail-bottom .content-detail-inbottom-top p {
-  padding-left: 10px;
+  padding: 10px;
+  margin: 5px 5px;
 }
 
 .content-detail-bottom .content-detail-inbottom-top .setborder-dropdown {
@@ -178,12 +181,39 @@ html {
 .content-detail-bottom .content-detail-inbottom-bottom {
   background: #fff;
   border-radius: 0px 0px 10px 10px;
-  padding: 10px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
           box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
+.content-detail-bottom .content-detail-inbottom-bottom .row-content-detail .content-row1 {
+  border-right: 0.5px solid rgba(0, 0, 0, 0.293);
+}
+
+.content-detail-bottom .content-detail-inbottom-bottom .row-content-detail .content-row1 .content-in-row1 {
+  padding: 15px;
+}
+
+.content-detail-bottom .content-detail-inbottom-bottom .row-content-detail .content-row1 .content-in-row1 .image-product {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.content-detail-bottom .content-detail-inbottom-bottom .row-content-detail .content-row2 .content-in-row2 {
+  padding: 15px;
+}
+
+.content-detail-bottom .content-detail-inbottom-bottom .row-content-detail .content-row2 .content-in-row2 .text-detail {
+  height: 150px;
+  width: 100%;
+}
+
 .font-five {
   font-weight: 500 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 /*# sourceMappingURL=management.css.map */

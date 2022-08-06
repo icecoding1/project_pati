@@ -45,7 +45,8 @@ $id   = isset($_GET['id']) ? $_GET['id'] : '';
         <div class="container-fluid">
 
           <div class="d-flex justify-content-end">
-            <a href="order_success.php?&id=<?= $id; ?>"><button type="button" class="btn btn-dark mx-1">ออกบิล</button></a>
+            <a href=""><button type="button" class="btn btn-dark mx-1">ออกบิล</button></a>
+            <a href="order_success.php?&id=<?= $id; ?>"><button type="button" class="btn btn-success mx-1">เสร็จสิ้นออเดอร์</button></a>
             <button type="button" class="btn btn-primary mx-1">เพิ่ม/เเก้ไข</button>
             <button type="button" class="btn btn-danger mx-1">ลบ</button>
           </div>

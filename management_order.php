@@ -48,7 +48,7 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 1;
       <section class="content ">
         <div class="container-fluid ">
 
-          <div class="row   px-4 py-3 border-report">
+          <div class="row   py-3 border-report">
             <div class="col-12 ">
               <div class="card card-primary card-tabs">
                 <div class="card-header p-0 pt-1">

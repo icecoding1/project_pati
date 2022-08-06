@@ -55,7 +55,7 @@ $id = 1;
                   </div>
                 </div>
               </div>
-              <button class="btn btn-primary mx-2 ">+ เพิ่มรายการ</button>
+              <a href="add_detail_list_menu.php" class="btn btn-primary mx-2 ">+ เพิ่มรายการ</a>
             </div>
           </div>
 
