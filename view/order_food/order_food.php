@@ -1,6 +1,6 @@
 <?php $name_web = "สั่งออเดอร์";
 
-$page = isset($_GET['ppage']) ? $_GET['ppage'] : 1;
+
 
 ?>
 
@@ -26,20 +26,20 @@ $page = isset($_GET['ppage']) ? $_GET['ppage'] : 1;
       <p class="mb-0 mx-2 text-white">สั่งออเดอร์</p>
     </div>
     <div>
-      <a href="../../index1.php" class="btn btn-light px-4 mx-2">กลับ</a>
+      <a href="../../index1.php" class="btn btn-light px-4 mx-2 my-3">กลับ</a>
     </div>
   </header>
 
-  <form action="" method="post">
+  <form action="order_receive.php" method="post" class="form-content">
     <div class="content-select">
-      <select class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" id="select">
+      <select class="form-select form-select-lg  " aria-label=".form-select-lg example" id="select" name="select_table">
         <option selected disabled value="disabled">เลือกโต๊ะ</option>
         <option value="1">โต๊ะ1</option>
         <option value="2">โต๊ะ2</option>
         <option value="3">โต๊ะ3</option>
       </select>
     </div>
-    <button type="submit" class="button-send fw-bold" id="disabled" disabled>สั่งอาหาร</button>
+    <button type="submit" class="button-send fw-bold" id="disabled" disabled>กรุณาเลือกโต๊ะของท่าน</button>
   </form>
 
   <script src="../../add_framwork/jquery.js"></script>
@@ -53,10 +53,12 @@ $page = isset($_GET['ppage']) ? $_GET['ppage'] : 1;
         } else {
           $("#disabled").prop('disabled', false);
           $("#disabled").addClass("btn-active");
+          $("#disabled").text("สั่งอาหาร");
         }
       })
       $("#disabled").click(function() {
         alert("โต๊ะที่ : " + $("#select").val())
+
       })
     });
   </script>
