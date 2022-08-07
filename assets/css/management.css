@@ -209,11 +209,126 @@ html {
   width: 100%;
 }
 
+.profile_member {
+  width: 60px;
+  height: auto;
+}
+
+.profile_member_edit {
+  width: 100px;
+  height: auto;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px !important;
+          box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px !important;
+  border-radius: 50%;
+}
+
 .font-five {
   font-weight: 500 !important;
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.bg-addmember {
+  background: rgba(209, 207, 207, 0.762);
+  width: 100vw;
+  height: 100vh;
+}
+
+.bg-addmember .box-add {
+  width: 100%;
+  height: 100%;
+}
+
+.bg-addmember .box-add .box-add-member {
+  width: 500px;
+  height: auto;
+  background: #fff;
+  padding: 15px 20px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+}
+
+.body-order {
+  width: 100vw;
+  height: 100vh;
+}
+
+.body-order .header-nav-order {
+  width: 100%;
+  padding: 5px 15px;
+  background: #343a40;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.body-order .header-nav-order .header-profile-order {
+  width: 55px;
+  height: auto;
+}
+
+.body-order .content-select {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 20px;
+}
+
+.body-order .content-select select {
+  max-width: 500px;
+  min-width: 250px;
+  border: 2px solid #000;
+  margin: 5px 15px;
+}
+
+.body-order .button-send {
+  display: block;
+  width: 100%;
+  padding: 15px 10px;
+  position: fixed;
+  bottom: 0px;
+  font-size: 20px;
+  background: #585656;
+  color: #fff;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.54);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 10px 10px 0px 0px;
+  -webkit-transition: all 1.0;
+  transition: all 1.0;
+}
+
+.body-order .btn-active {
+  background: #0576f0bf;
+  color: #fff;
+  -webkit-transition: all 1.0 ease-in-out;
+  transition: all 1.0 ease-in-out;
+}
+
+.body-order .btn-active:hover {
+  opacity: 0.9;
+  -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 /*# sourceMappingURL=management.css.map */

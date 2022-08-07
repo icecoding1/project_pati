@@ -231,7 +231,7 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 1;
 
         </div>
       </section>
-    </div>>
+    </div>
 
     <?php include('layout/footer.php') ?>
     <aside class="control-sidebar control-sidebar-dark">

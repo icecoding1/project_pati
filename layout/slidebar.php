@@ -68,7 +68,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="order.php" class="nav-link">
+                  <a href="view/order_food/order_food.php" class="nav-link">
                     <i class="bi bi-pencil-square"></i>
                     <p>สั่งออเดอร์</p>
                   </a>

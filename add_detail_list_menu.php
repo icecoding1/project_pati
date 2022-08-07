@@ -87,7 +87,7 @@ $id_product = $id + 1;
                       </p>
                       <p class="col-12 ">
                         <select class="form-select" aria-label="Default select example" id="text_type" name="text_type" required>
-                          <option selected>เลือกประเภท</option>
+                          <option selected disabled>เลือกประเภท</option>
                           <option value="1">อาหาร</option>
                           <option value="2">เครื่องดื่ม</option>
                           <option value="3">เเอลกอฮอล์</option>
