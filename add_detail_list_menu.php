@@ -3,6 +3,7 @@
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
 $food = $id == $id ? "ขนมปัง กาเเฟ" : '';
 $id_product = $id + 1;
+$page_nav = 3;
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,10 @@ $id_product = $id + 1;
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">

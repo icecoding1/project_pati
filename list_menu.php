@@ -1,6 +1,7 @@
 <?php $name_web = "ระบบจัดการร้านอาหาร";
 $food = "ขนมปัง กาเเฟ";
 $id = 1;
+$page_nav = 3;
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +16,10 @@ $id = 1;
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">

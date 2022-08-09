@@ -1,7 +1,7 @@
 <?php $name_web = "ระบบจัดการร้านอาหาร";
-$code = $_GET['c'];
-// $link = 'orders_new.php?c=' . $code;
-$id   = isset($_GET['id']) ? $_GET['id'] : 1;
+// $id   = isset($_GET['id']) ? $_GET['id'] : 1;
+
+$page_nav = 2;
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +16,10 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 1;
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">
@@ -234,11 +238,9 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 1;
     </div>
 
     <?php include('layout/footer.php') ?>
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
   </div>
 
+  <?php include 'add_framwork/js.php' ?>
   <!-- jQuery -->
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
@@ -247,6 +249,7 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 1;
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
+
 </body>
 
 </html>

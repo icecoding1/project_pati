@@ -21,10 +21,14 @@
     <?php include('layout/slidebar.php') ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper ">
       <section class="content">
-        <div class="container-fluid">
-          <p></p>
+        <div class="container-fluid ">
+          <div class="d-flex justify-content-center align-items-center">
+            <p class="fs-1 fw-bold p-3">
+              ขอให้พนักงานทุกท่านดูเเล เเละบริการลูกค้าเป็นอย่างดี😀🥰
+            </p>
+          </div>
         </div>
       </section>
     </div>

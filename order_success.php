@@ -1,7 +1,7 @@
 <?php $name_web = "ระบบจัดการร้านอาหาร";
 
 $id   = isset($_GET['id']) ? $_GET['id'] : 5;
-
+$page_nav = 2;
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +16,11 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 5;
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">
@@ -100,10 +105,6 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 5;
     </div>
 
     <?php include('layout/footer.php') ?>
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-
   </div>
 
   <?php include 'add_framwork/js.php' ?>

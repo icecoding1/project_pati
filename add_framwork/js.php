@@ -17,6 +17,7 @@
   <script src="plugins/sparklines/sparkline.js"></script>
   <!-- JQVMap -->
   <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+
   <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
   <!-- daterangepicker -->
   <script src="plugins/moment/moment.min.js"></script>
@@ -34,3 +35,6 @@
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- JavaScript Bundle with Popper -->
+
+  <!-- my script -->
+  <script src="assets/js/active_ui.js"></script>

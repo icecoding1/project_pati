@@ -5,6 +5,8 @@ $food = $id == $id ? "ขนมปัง กาเเฟ" : '';
 $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
 $detail = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo culpa consequuntur molestiae ea ipsam nostrum eaque nam quibusdam dicta, quas quod praesentium dolorem at unde laborum laudantium alias odit magni.";
 $price = 75;
+
+$page_nav = 3;
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +21,10 @@ $price = 75;
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">

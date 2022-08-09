@@ -3,7 +3,7 @@ $code = $_GET['c'];
 // $link = 'orders_new.php?c=' . $code;
 $id   = isset($_GET['id']) ? $_GET['id'] : 0;
 // $receive = $_POST['id_send'];
-
+$page_nav = 4;
 
 ?>
 
@@ -19,6 +19,11 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 0;
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">

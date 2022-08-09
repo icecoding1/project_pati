@@ -1,4 +1,8 @@
-<?php $name_web = "ระบบจัดการร้านอาหาร"; ?>
+<?php $name_web = "ระบบจัดการร้านอาหาร";
+
+$page_nav = 1;
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +16,10 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">
@@ -121,14 +129,11 @@
     </div>
 
     <?php include('layout/footer.php') ?>
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-
   </div>
 
 
   <?php include 'add_framwork/js.php' ?>
+
   <script>
     var date = new Date();
     var year = date.getFullYear();
@@ -175,6 +180,7 @@
       config
     );
   </script>
+
 </body>
 
 </html>

@@ -44,37 +44,37 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="report.php" class="nav-link ">
+                  <a href="report.php" class="nav-link" id="nav-link1">
                     <i class="bi bi-bar-chart-line nav-icon"></i>
                     <p>รายงานสรุปผล</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="management_order.php" class="nav-link">
+                  <a href="management_order.php" class="nav-link " id="nav-link2">
                     <i class="bi bi-bag-heart-fill nav-icon"></i>
                     <p>จัดการออเดอร์</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="list_menu.php" class="nav-link">
+                  <a href="list_menu.php" class="nav-link" id="nav-link3">
                     <i class="bi bi-receipt-cutoff nav-icon"></i>
                     <p>จัดการรายการเมนู</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="management_member.php" class="nav-link">
+                  <a href="management_member.php" class="nav-link" id="nav-link4">
                     <i class="bi bi-person-lines-fill nav-icon"></i>
                     <p>จัดการสมาชิก</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="view/order_food/order_food.php" class="nav-link">
+                  <a href="view/order_food/order_food.php" class="nav-link" id="nav-link5">
                     <i class="bi bi-pencil-square"></i>
                     <p>สั่งออเดอร์</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="setting.php" class="nav-link">
+                <li class="nav-item" id="nav-item-end">
+                  <a href="setting.php" class="nav-link" id="nav-link6">
                     <i class="bi bi-gear-wide nav-icon"></i>
                     <p>ตั้งค่า</p>
                   </a>

@@ -76,13 +76,6 @@ $food = "ขนมปัง กาเเฟ";
 
   <script src="../../add_framwork/jquery.js"></script>
   <?php include '../../add_framwork/js.php' ?>
-  <script>
-    $(document).ready(function() {
-
-
-
-    });
-  </script>
 
 </body>
 

@@ -1,6 +1,9 @@
 <?php $name_web = "ระบบจัดการร้านอาหาร";
 
 $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
+
+$page_nav = 6;
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +18,10 @@ $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-  
+
+  <!-- page to web -->
+  <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center bg-dark">
@@ -121,9 +127,9 @@ $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
                     <div class="col-xl-6 mb-3">
 
                       <?php if ($is_edit) { ?>
-                        <input type="text" class="form-control w-100" placeholder="ข้อความเเสดงหน้าเเรก" value="ข้อความเเสดงหน้าเเรก" name="change_textshow">
+                        <input type="text" class="form-control w-100" placeholder="ข้อความเเสดงหน้าเเรก" value="ขอให้พนักงานทุกท่านดูเเล เเละบริการลูกค้าเป็นอย่างดี😀🥰" name="change_textshow">
                       <?php } else {
-                        echo "ข้อความเเสดงหน้าเเรก";
+                        echo "ขอให้พนักงานทุกท่านดูเเล เเละบริการลูกค้าเป็นอย่างดี😀🥰";
                       } ?>
 
                     </div>
