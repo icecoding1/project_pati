@@ -3,6 +3,8 @@ $code = $_GET['c'];
 // $link = 'orders_new.php?c=' . $code;
 $id   = isset($_GET['id']) ? $_GET['id'] : 0;
 // $receive = $_POST['id_send'];
+
+
 ?>
 
 <!DOCTYPE html>

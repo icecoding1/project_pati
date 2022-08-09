@@ -212,6 +212,16 @@ html {
   width: 100%;
 }
 
+.content-detail-bottom .content-detail-inbottom-bottom .row-content-detail .content-row2 .content-in-row2 .change_bg {
+  max-width: 100%;
+  height: auto;
+}
+
+.content-detail-bottom .content-detail-inbottom-bottom .row-content-detail .content-row2 .content-in-row2 .change_logo {
+  width: 100px;
+  height: auto;
+}
+
 .profile_member {
   width: 60px;
   height: auto;
