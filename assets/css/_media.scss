@@ -1,33 +1,17 @@
 @media (max-width:706px) {
   .list-menu {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 5px;
+
     .content-menu {
-      width: 150px;
+
 
       .content-menu-bottom {
-        font-size: 80%;
+        font-size: 95%;
 
         .btn-detail {
           margin-top: 5px;
-          font-size: 80%;
-        }
-      }
-    }
-  }
-}
-
-
-@media (max-width:556px) {
-  .list-menu {
-    .content-menu {
-      width: 110px;
-      margin: 5px;
-
-      .content-menu-bottom {
-        font-size: 70%;
-
-        .btn-detail {
-          margin-top: 5px;
-          font-size: 70%;
+          font-size: 90%;
         }
       }
     }
@@ -37,19 +21,8 @@
 
 @media (max-width:406.5px) {
   .list-menu {
-    .content-menu {
-      width: 80px;
-
-
-      .content-menu-bottom {
-        font-size: 60%;
-
-        .btn-detail {
-          margin-top: 5px;
-          font-size: 60%;
-        }
-      }
-    }
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 5px 3px;
   }
 }
 

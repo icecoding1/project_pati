@@ -88,15 +88,13 @@ html {
 
 .list-menu {
   margin: 20px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
 
 
   .content-menu {
-    width: 200px;
-    margin: 10px;
+
 
     .img_menu {
       width: 100%;

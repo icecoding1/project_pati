@@ -76,16 +76,18 @@ $page_nav = 2;
                     <div class="tab-pane  fade show active" id="custom-tabs-two-neworder" role="tabpanel" aria-labelledby="custom-tabs-two-neworder-tab">
                       <div class="row">
                         <div class="col-12">
-                          <div class="card-header   ">
-                            <h3 class="card-title">ออเดอร์ใหม่</h3>
+                          <div class="card-header ">
+                            <div class="w-100 d-flex justify-content-between align-items-center flex-wrap">
+                              <h3 class="card-title mx-2">ออเดอร์ใหม่</h3>
 
-                            <div class="card-tools mt-2">
-                              <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                <div class="input-group-append">
-                                  <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                  </button>
+                              <div class="card-tools mt-2">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                  <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                      <i class="fas fa-search"></i>
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -123,15 +125,17 @@ $page_nav = 2;
                       <div class="row">
                         <div class="col-12">
                           <div class="card-header">
-                            <h3 class="card-title">ออเดอร์กำลังดำเนินการ</h3>
+                            <div class="w-100 d-flex justify-content-between align-items-center flex-wrap">
+                              <h3 class="card-title mx-2">ออเดอร์กำลังดำเนินการ</h3>
 
-                            <div class="card-tools  mt-2">
-                              <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                <div class="input-group-append">
-                                  <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                  </button>
+                              <div class="card-tools  mt-2">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                  <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                      <i class="fas fa-search"></i>
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -170,15 +174,17 @@ $page_nav = 2;
                       <div class="row">
                         <div class="col-12">
                           <div class="card-header">
-                            <h3 class="card-title">ออเดอร์เสร็จสิ้น</h3>
+                            <div class="w-100 d-flex justify-content-between align-items-center flex-wrap">
+                              <h3 class="card-title mx-2">ออเดอร์เสร็จสิ้น</h3>
 
-                            <div class="card-tools  mt-2">
-                              <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                <div class="input-group-append">
-                                  <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                  </button>
+                              <div class="card-tools  mt-2">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                  <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                      <i class="fas fa-search"></i>
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
