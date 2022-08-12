@@ -29,10 +29,10 @@ $page_nav = 1;
     <?php include('layout/slidebar.php') ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper mr-3 ">
+    <div class="content-wrapper">
 
 
-      <div class="content-header">
+      <div class="content-header mx-3">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -59,7 +59,7 @@ $page_nav = 1;
       $date_total2 = date("d-m-Y");
       ?>
 
-      <section class="content ">
+      <section class="content p-3">
         <div class="container-fluid ">
           <div class="row  bg-secondary px-4 py-3 border-report">
             <div class="col-xl-6  fw-bold"><i class="ion ion-stats-bars pr-1 "></i> ยอดขายวันนี้</div>
@@ -71,12 +71,14 @@ $page_nav = 1;
           </div>
 
           <div class="d-flex justify-content-end align-items-center mt-4 ">
-            <form action="" method="get">
-              <label for="datetodate">เลือกช่วงเวลา</label>
-              <input type="date" name="datetodate1" id="datePicker1" class="set-input bg-light">
-              <label for="to"> - </label>
-              <input type="date" name="datetodate2" id="datePicker2" class="set-input bg-light">
-              <button type="submit" name="submit_date" class="mx-1 btn btn-outline-dark">submit</button>
+            <form action="" method="get" class="d-flex flex-wrap align-items-center">
+              <div class="mx-2"> <label for="datetodate">เลือกช่วงเวลา</label></div>
+              <div class="mx-2 my-2">
+                <input type="date" name="datetodate1" id="datePicker1" class="set-input bg-light my-1">
+                <label for="to" class="to-date "> - </label>
+                <input type="date" name="datetodate2" id="datePicker2" class="set-input bg-light my-1">
+              </div>
+              <div class="mx-2"> <button type="submit" name="submit_date" class="mx-1 btn btn-outline-dark">submit</button></div>
             </form>
           </div>
 

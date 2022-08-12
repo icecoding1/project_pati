@@ -15,10 +15,6 @@
   <script src="plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
   <script src="plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
   <!-- daterangepicker -->
   <script src="plugins/moment/moment.min.js"></script>
   <script src="plugins/daterangepicker/daterangepicker.js"></script>
@@ -36,5 +32,10 @@
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- JavaScript Bundle with Popper -->
 
+  <!-- JQVMap -->
+  <!-- <script src="plugins/jqvmap/jquery.vmap.min.js"></script> -->
+  <!-- <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
+  <!-- error -->
+  
   <!-- my script -->
   <script src="assets/js/active_ui.js"></script>

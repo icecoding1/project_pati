@@ -29,9 +29,9 @@ $page_nav = 2;
     <?php include('layout/slidebar.php') ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper mr-3">
+    <div class="content-wrapper ">
 
-      <div class="content-header">
+      <div class="content-header mx-3">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -49,7 +49,7 @@ $page_nav = 2;
 
 
 
-      <section class="content ">
+      <section class="content p-3 ">
         <div class="container-fluid ">
 
           <div class="row   py-3 border-report">
@@ -76,10 +76,10 @@ $page_nav = 2;
                     <div class="tab-pane  fade show active" id="custom-tabs-two-neworder" role="tabpanel" aria-labelledby="custom-tabs-two-neworder-tab">
                       <div class="row">
                         <div class="col-12">
-                          <div class="card-header">
+                          <div class="card-header   ">
                             <h3 class="card-title">ออเดอร์ใหม่</h3>
 
-                            <div class="card-tools">
+                            <div class="card-tools mt-2">
                               <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                                 <div class="input-group-append">
@@ -125,7 +125,7 @@ $page_nav = 2;
                           <div class="card-header">
                             <h3 class="card-title">ออเดอร์กำลังดำเนินการ</h3>
 
-                            <div class="card-tools">
+                            <div class="card-tools  mt-2">
                               <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                                 <div class="input-group-append">
@@ -172,7 +172,7 @@ $page_nav = 2;
                           <div class="card-header">
                             <h3 class="card-title">ออเดอร์เสร็จสิ้น</h3>
 
-                            <div class="card-tools">
+                            <div class="card-tools  mt-2">
                               <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                                 <div class="input-group-append">
@@ -241,14 +241,8 @@ $page_nav = 2;
   </div>
 
   <?php include 'add_framwork/js.php' ?>
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

@@ -30,8 +30,8 @@ $page_nav = 2;
 
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper mr-3">
-      <div class="content-header">
+    <div class="content-wrapper ">
+      <div class="content-header mx-3">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -46,8 +46,8 @@ $page_nav = 2;
           </div>
         </div>
       </div>
-      <section class="content">
-        <div class="container-fluid">
+      <section class="content p-3">
+        <div class="container-fluid ">
 
           <div class="d-flex justify-content-end"> <a href="order_progress.php?&id=<?= $id; ?>"><button type="button" class="btn btn-danger mx-1">ยืนยันออเดอร์</button></a>
             <button type="button" class="btn btn-dark mx-1">ออกบิล</button>

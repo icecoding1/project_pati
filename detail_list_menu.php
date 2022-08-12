@@ -35,7 +35,7 @@ $page_nav = 3;
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <div class="content-header">
+      <div class="content-header mx-3">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -51,8 +51,8 @@ $page_nav = 3;
         </div>
       </div>
 
-      <section class="content">
-        <div class="container-fluid">
+      <section class="content p-3">
+        <div class="container-fluid ">
 
           <div class="content-detail-top">
             <?php if ($is_edit) { ?>

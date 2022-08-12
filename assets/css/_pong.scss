@@ -37,6 +37,7 @@ html {
   margin: 10px 0px;
 }
 
+
 .set-input {
   border: 1;
   border-radius: 5px;
@@ -86,7 +87,7 @@ html {
 
 
 .list-menu {
-  margin: 20px auto;
+  margin: 20px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,9 +95,8 @@ html {
 
 
   .content-menu {
-    background: #ffff;
-    width: 250px;
-    margin: 10px 15px;
+    width: 200px;
+    margin: 10px;
 
     .img_menu {
       width: 100%;
@@ -169,7 +169,7 @@ html {
           padding: 15px;
 
           .image-product {
-            width: 200px;
+            width: 100%;
             height: auto;
             border-radius: 10px;
             margin-bottom: 15px;
@@ -201,6 +201,14 @@ html {
           }
         }
       }
+
+      @media (max-width:1199.5px) {
+        .content-row1 {
+          border-right: 0px solid rgba(0, 0, 0, 0.293);
+        }
+      }
+
+
     }
 
 

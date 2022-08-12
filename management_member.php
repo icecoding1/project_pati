@@ -34,7 +34,7 @@ $page_nav = 4;
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <div class="content-header">
+      <div class="content-header mx-3">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -50,8 +50,8 @@ $page_nav = 4;
         </div>
       </div>
 
-      <section class="content">
-        <div class="container-fluid">
+      <section class="content p-3">
+        <div class="container-fluid ">
 
           <div class="d-flex justify-content-end my-3">
             <a href="view/member/add_member.php" class="btn btn-primary mx-1 ">+ เพิ่มสมาชิก</a>
@@ -112,12 +112,12 @@ $page_nav = 4;
                           </i>
                           View
                         </a> -->
-                        <button class="btn btn-info btn-sm mx-1" type="button" data-bs-toggle="modal" data-bs-target="#edit_member" id="<?= $id; ?>">
+                        <button class="btn btn-info btn-sm mx-1" type="button" data-bs-toggle="modal" data-bs-target="#edit_member" data-id="<?= $id; ?>">
                           <i class="fas fa-pencil-alt">
                           </i>
                           Edit
                         </button>
-                        <button class="btn btn-danger btn-sm mx-1 deletemember" type="button" data-bs-toggle="modal" data-bs-target="#delete_member" id="<?= $id; ?>">
+                        <button class="btn btn-danger btn-sm mx-1 deletemember" type="button" data-bs-toggle="modal" data-bs-target="#delete_member" data-id="<?= $id; ?>">
                           <i class="fas fa-trash">
                           </i>
                           Delete
@@ -137,9 +137,6 @@ $page_nav = 4;
     </div>
 
     <?php include('layout/footer.php') ?>
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
 
   </div>
   <!-- Modal delete -->
@@ -152,6 +149,10 @@ $page_nav = 4;
         </div>
         <div class="modal-body">
           คุณต้องการลบสมาชิก <b><?= "ปฏิพล วงศ์ศรี" . "\r:\r" . $id; ?></b> ออกใช่หรือไม่
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">ID:</label>
+            <input type="text" class="form-control" id="emp_id">
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
@@ -196,7 +197,10 @@ $page_nav = 4;
               <option value="2">cashier</option>
               <option value="3">member</option>
             </select>
-
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">ID:</label>
+              <input type="text" class="form-control" id="emp_id">
+            </div>
           </div>
           <div class="modal-footer d-flex justify-content-between">
             <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">ยกลิก</but>
@@ -208,26 +212,19 @@ $page_nav = 4;
   </div>
 
   <?php include 'add_framwork/js.php' ?>
-  <!-- <script>
+  <script>
     $(document).ready(function() {
 
-      $('.deletemember').click(function() {
-        var id_send = $(this).attr('id');
-        $.ajax({
-          url: "delete.php",
-          method: "post",
-          data: {
-            receive: id_send
-          },
-          success: function(data) {
-            // location.reload();
-            // $('#deletemember').show();
-          }
-        });
+      // test การใช้ งาน ส่ งค่ า id จาก button มา ที่ model
+      $('#delete_member').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var modal = $(this);
+        modal.find('#emp_id').val(id);
       });
-
+      // event.relatedtarget คือ event ค่าที่ใช้สำหรับรับส่งข้อมูล ที่มีความสัมพันธ์กัน
     });
-  </script> -->
+  </script>
 
 </body>
 

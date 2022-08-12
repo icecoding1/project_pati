@@ -29,8 +29,8 @@ $page_nav = 2;
     <?php include('layout/slidebar.php') ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper mr-3">
-      <div class="content-header">
+    <div class="content-wrapper ">
+      <div class="content-header mx-3">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -45,14 +45,14 @@ $page_nav = 2;
           </div>
         </div>
       </div>
-      <section class="content">
-        <div class="container-fluid">
+      <section class="content p-3">
+        <div class="container-fluid ">
 
-          <div class="d-flex justify-content-end">
-            <a href=""><button type="button" class="btn btn-dark mx-1">ออกบิล</button></a>
-            <a href="order_success.php?&id=<?= $id; ?>"><button type="button" class="btn btn-success mx-1">เสร็จสิ้นออเดอร์</button></a>
-            <button type="button" class="btn btn-primary mx-1">เพิ่ม/เเก้ไข</button>
-            <button type="button" class="btn btn-danger mx-1">ลบ</button>
+          <div class="d-flex justify-content-end flex-wrap">
+            <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
+            <a href="order_success.php?&id=<?= $id; ?>"><button type="button" class="btn btn-success m-1">เสร็จสิ้นออเดอร์</button></a>
+            <button type="button" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</button>
+            <button type="button" class="btn btn-danger m-1">ลบ</button>
           </div>
 
           <div class="row my-3">

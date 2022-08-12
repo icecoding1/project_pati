@@ -32,7 +32,7 @@ $page_nav = 3;
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <div class="content-header">
+      <div class="content-header mx-3">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
@@ -48,8 +48,8 @@ $page_nav = 3;
         </div>
       </div>
 
-      <section class="content">
-        <div class="container-fluid">
+      <section class="content p-3">
+        <div class="container-fluid ">
           <form action="" method="post">
 
             <div class="content-detail-top">
@@ -70,7 +70,7 @@ $page_nav = 3;
                       <label>
                         เพิ่มรูปสินค้า<span class="text-danger"> *เฉพาะ png, jpeg, jpg</span>
                       </label>
-                      <input type="file" class="cursor-pointer " name="image-product" id="image-product" accept="image/png,  image/jpeg" required>
+                      <input type="file" class="cursor-pointer w-100 " name="image-product" id="image-product" accept="image/png,  image/jpeg" required>
                     </div>
                   </div>
                   <div class="col-xl-9 content-row2">

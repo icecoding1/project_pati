@@ -32,23 +32,26 @@ $page_nav = 6;
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <section class="content">
+
+      <div class="content-header mx-3">
         <div class="container-fluid">
-          <div class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1 class="m-0"> <i class="bi bi-gear-wide nav-icon"></i> ตั้งค่า</h1>
-                </div>
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
-                    <li class="breadcrumb-item active">ตั้งค่า </li>
-                  </ol>
-                </div>
-              </div>
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0"> <i class="bi bi-gear-wide nav-icon"></i> ตั้งค่า</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
+                <li class="breadcrumb-item active">ตั้งค่า </li>
+              </ol>
             </div>
           </div>
+        </div>
+      </div>
+
+      <section class="content p-2">
+        <div class="container-fluid ">
+
 
           <div class="content-detail-top">
             <?php if ($is_edit) { ?>
