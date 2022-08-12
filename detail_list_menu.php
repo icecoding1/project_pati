@@ -66,7 +66,7 @@ $page_nav = 3;
           <div class="content-detail-bottom ">
 
             <div class="d-flex justify-content-between align-items-center content-detail-inbottom-top">
-              <p class="mb-0 text-white ">หมายเลขหลายการ : <?php echo $id; ?></p>
+              <p class="mb-0 text-white ">หมายเลขรายการ : <?php echo $id; ?></p>
               <div class="dropdown setborder-dropdown ">
                 <i class="bi bi-three-dots i-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                 <ul class="dropdown-menu">
@@ -153,7 +153,7 @@ $page_nav = 3;
                         <?= "พร้อมใช้งาน" ?>
                       </p>
                       <p class="col-12 font-five mb-0">
-                        ยอดขายด้วยรวม
+                        ยอดขายโดยรวม
                       </p>
                       <p class="col-12 text-primary">
                         <?php

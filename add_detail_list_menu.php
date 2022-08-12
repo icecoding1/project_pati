@@ -48,7 +48,7 @@ $page_nav = 3;
         </div>
       </div>
 
-      <section class="content p-3">
+      <section class="content p-3 ">
         <div class="container-fluid ">
           <form action="" method="post">
 
@@ -60,7 +60,7 @@ $page_nav = 3;
             <div class="content-detail-bottom ">
 
               <div class="d-flex justify-content-between align-items-center content-detail-inbottom-top">
-                <p class=" text-white ">หมายเลขหลายการ : <?php echo $id_product; ?></p>
+                <p class=" text-white ">หมายเลขรายการ : <?php echo $id_product; ?></p>
               </div>
 
               <div class="content-detail-inbottom-bottom ">

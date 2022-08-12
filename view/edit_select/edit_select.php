@@ -42,7 +42,7 @@ $id   = isset($_GET['id']) ? $_GET['id'] : 0;
     <table class="table table-hover table-head-fixed text-nowrap">
       <thead>
         <tr>
-          <th class="w-50">ปรเภท</th>
+          <th class="w-50">ประเภท</th>
           <th class="w-50" align="right">
           </th>
         </tr>

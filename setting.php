@@ -64,7 +64,7 @@ $page_nav = 6;
 
           <div class="content-detail-bottom ">
             <div class="d-flex justify-content-between align-items-center content-detail-inbottom-top">
-              <p class=" text-white ">ตั้งค่ารูปเเบบเเว็บไซต์</p>
+              <p class=" text-white ">ตั้งค่ารูปเเบบเว็บไซต์</p>
             </div>
 
             <div class="content-detail-inbottom-bottom ">
