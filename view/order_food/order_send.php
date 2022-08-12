@@ -40,8 +40,8 @@ $food = "ขนมปัง กาเเฟ";
     <p class="mb-0 fw-semibold fs-5 m-2">ราคารวม : <?= number_format(125, 2) . " ฿"; ?></p>
   </div>
 
-  <div class="list-menu-order">
-    <?php foreach (range(1, 4)  as $value) { ?>
+  <div class="list-menu-order mb-3">
+    <?php foreach (range(1, 10)  as $value) { ?>
       <div class="content-menu">
         <div>
           <img src="../../assets/img/coffee.jpg" alt="food_lists" class="img_menu">
@@ -52,8 +52,8 @@ $food = "ขนมปัง กาเเฟ";
             <p class="mb-0">ราคา : <span>75 ฿</span></p>
           </div>
           <div>
-            <button class="btn btn-primary p-1 px-3 " id="add_order">+ เพิ่ม</button>
-            <button class="btn btn-danger p-1 px-3 " id="add_order">ลบ</button>
+            <button class="btn btn-primary p-1 px-3 mt-1 " id="add_order">+ เพิ่ม</button>
+            <button class="btn btn-danger p-1 px-3 mt-1" id="add_order">ลบ</button>
           </div>
         </div>
         <p class="count mb-0 font-five">จำนวน : <span><?= $count_order ?></span></p>

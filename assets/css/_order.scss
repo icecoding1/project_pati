@@ -69,6 +69,10 @@
     align-items: center;
 
     div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
       width: 100%;
 
       .select-input {
@@ -82,19 +86,17 @@
   }
 
   .list-menu-order {
-    margin: 5px auto;
-    padding: 0px 15px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    padding: 0px 20px;
+    padding-bottom: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px 10px;
+
 
 
     .content-menu {
-      background: #ffff;
-      width: 250px;
-      margin: 10px 15px;
+      // width: 250px;
+      // margin: 10px 15px;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       border-radius: 10px;
       position: relative;
@@ -175,11 +177,11 @@
   }
 
   .send-to-manage {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    z-index: 10;
-    // height: px;
+    // position: fixed;
+    // bottom: 0px;
+    // width: 100%;
+    // z-index: 10;
+    // // height: px;
     padding: 15px;
     display: flex;
     justify-content: space-between;
@@ -195,12 +197,50 @@
       min-width: 240px;
 
       .note {
-        height: 50px;
+        height: 40px;
       }
     }
 
   }
 
 
+  @media (max-width:1085.5px) {
+    .send-to-manage {
+      justify-content: center;
+      padding: 10px 5px;
+    }
+  }
+
+  @media (max-width: 715.5px) {
+    .list-menu-order {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+  }
+
+  @media (max-width:495.5px) {
+    .header-content {
+
+
+      div {
+        justify-content: center;
+
+        .select-input {
+          width: 90%;
+        }
+
+        .search-input {
+          width: 90%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 350.5px) {
+    .list-menu-order {
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      // gap: 10px;
+    }
+  }
 
 }

@@ -37,7 +37,7 @@ $food = "ขนมปัง กาเเฟ";
   <div class="header-content my-3 mx-3">
     <p class="mb-0 fw-bold fs-3 ">รายการเมนู</p>
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap p-3 ">
+    <div class=" p-3 ">
       <select class="form-select   m-2 select-input" aria-label=".form-select example">
         <option selected disabled>เลือกประเภท</option>
         <option value="1">อาหาร</option>
@@ -54,7 +54,7 @@ $food = "ขนมปัง กาเเฟ";
   </div>
 
   <div class="list-menu-order">
-    <?php foreach (range(1, 23)  as $value) { ?>
+    <?php foreach (range(1, 10)  as $value) { ?>
       <div class="content-menu">
         <div>
           <img src="../../assets/img/coffee.jpg" alt="food_lists" class="img_menu">
@@ -64,13 +64,13 @@ $food = "ขนมปัง กาเเฟ";
             <p class="mb-0"><?= $food ?></p>
             <p class="mb-0">ราคา : <span>75 ฿</span></p>
           </div>
-          <button class="btn btn-primary p-1 px-3 " id="add_order">+ เพิ่ม</button>
+          <button class="btn btn-primary p-1 px-3 mt-1 " id="add_order">+ เพิ่ม</button>
         </div>
       </div>
     <?php } ?>
   </div>
 
-
+  <!-- //ตะกร้าสินค้า -->
   <div class="brand">
     <div>
       <p class="fw-semibold text-count" id="count_order"><?= $count_order  ?> </p>
