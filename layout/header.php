@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item d-flex  align-items-center">
-          <a href="index.php">
+          <a href="login.php">
             <button class="btn btn-danger btn-sm d-flex">
               <i class="bi bi-box-arrow-right pr-1"></i>
               <p class="mb-0">ออกระบบ</p>
