@@ -32,7 +32,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
       <p class="mb-0 mx-2 text-white">สั่งออเดอร์</p>
     </div>
     <div>
-      <a href="../../index1.php" class="btn btn-light px-4 m-2 ">กลับหน้าหลัก</a>
+      <a href="../../index.php" class="btn btn-light px-4 m-2 ">กลับหน้าหลัก</a>
       <a href="order_receive.php" class="btn btn-light px-4 m-2">กลับ</a>
     </div>
   </header>

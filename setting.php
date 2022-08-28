@@ -8,6 +8,7 @@ session_start();
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 ?>
 
+  <?php if ($_SESSION["session_status"] == "admin") { ?>
   <!DOCTYPE html>
   <html lang="en">
 
@@ -189,8 +190,9 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
   </body>
 
   </html>
-<?php } else {
+  <?php } ?>
 
+<?php } else {
   echo "<script>
 if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
 location.assign('login.php');
