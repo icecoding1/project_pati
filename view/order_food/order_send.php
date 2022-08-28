@@ -4,6 +4,9 @@ $count_order = isset($_GET['count_order']) ? $_GET['count_order'] : 0;
 $table = $_POST['select_table'];
 $food = "ขนมปัง กาเเฟ";
 
+ob_start();
+session_start();
+if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 ?>
 
 <!DOCTYPE html>
@@ -80,3 +83,13 @@ $food = "ขนมปัง กาเเฟ";
 </body>
 
 </html>
+
+<?php } else {
+echo "<script>
+if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
+location.assign('../../login.php');
+}else {
+location.assign('../../login.php');
+}
+</script>";
+} ?>

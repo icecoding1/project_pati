@@ -214,14 +214,34 @@ html {
 
 }
 
-.profile_member {
-  width: 60px;
-  height: auto;
+.box-slide {
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.158);
+
+  .image {
+
+    .profile_slidebar {
+      width: 50px;
+      height: 50px;
+    }
+
+  }
 }
+
+.profile_slidebar {
+  width: 55px;
+  height: 55px;
+}
+
+.profile_member {
+  width: 75px;
+  height: 75px;
+}
+
+
 
 .profile_member_edit {
   width: 100px;
-  height: auto;
+  height: 100px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px !important;
   border-radius: 50%;
 }

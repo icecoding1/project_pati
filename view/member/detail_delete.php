@@ -1,0 +1,26 @@
+<?php
+ob_start();
+session_start();
+if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+  require_once "../../connection/config.php";
+  $id = $_POST['id'];
+  $text = "";
+  $sql = "SELECT * FROM table_member WHERE id = $id";
+  $result = $obj->query($sql);
+
+  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $text .= " คุณต้องการลบสมาชิก <b> " . $row['name'] . " : " . $row['id'] . "</b> ออกใช่หรือไม่
+  <input type='hidden' value=" . $row['id'] . " name='id'>
+  ";
+  }
+
+  echo $text;
+} else {
+  echo "<script>
+if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
+location.assign('login.php');
+}else {
+  location.assign('login.php');
+}
+</script>";
+}

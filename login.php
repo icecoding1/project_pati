@@ -1,3 +1,36 @@
+<?php
+
+ob_start();
+session_start();
+require_once "connection/config.php";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $username = htmlentities($_POST['txt_username'], ENT_QUOTES);
+  $password = htmlentities($_POST['txt_password'], ENT_QUOTES);
+
+  $sql = "SELECT * FROM table_member WHERE username = '$username' AND password = '$password'";
+  $result =  $obj->query($sql);
+
+
+  if ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $_SESSION["id_member"] = $row["id"];
+    $_SESSION["session_username"] = $row["username"];
+    $_SESSION["session_password"] = $row["password"];
+    $_SESSION["session_status"] = $row["status"];
+    $_SESSION["session_image"] = $row["image"];
+    $_SESSION["session_name"] = $row["name"];
+    header("location: index.php");
+  } else {
+    echo "<script>
+    if(confirm(' password หรือ username ของคุณไม่ถูกต้อง')){
+      location.assign('login.php');
+    }
+    </script>";
+  }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en" class="html">
 
@@ -26,9 +59,10 @@
         <div class="card-body   ">
           <p class="login-box-msg">Sign in to management</p>
 
-          <form action="index1.php" method="get">
+
+          <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form">
             <div class="input-group mb-3">
-              <input type="username" class="form-control" placeholder="Username" name="txt_username">
+              <input type="username" class="form-control" placeholder="Username" name="txt_username" require>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="bi bi-person-circle"></span>
@@ -36,7 +70,7 @@
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" name="txt_password">
+              <input type="password" class="form-control" placeholder="Password" name="txt_password" require>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -63,9 +97,6 @@
         </div>
       </div>
     </div>
-
-
-
     <?php include 'add_framwork/js.php' ?>
 </body>
 

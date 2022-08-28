@@ -2,6 +2,10 @@
 $food = "ขนมปัง กาเเฟ";
 $id = 1;
 $page_nav = 3;
+
+ob_start();
+session_start();
+if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 ?>
 
 <!DOCTYPE html>
@@ -99,3 +103,13 @@ $page_nav = 3;
 </body>
 
 </html>
+
+<?php } else {
+echo "<script>
+if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
+location.assign('login.php');
+}else {
+location.assign('login.php');
+}
+</script>";
+} ?>
