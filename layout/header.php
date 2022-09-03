@@ -6,7 +6,7 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="index1.php" class="nav-link">Home</a>
+      <a href="index.php" class="nav-link">Home</a>
     </li>
     <!-- <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -23,7 +23,7 @@
     </li>
     <li class="nav-item d-flex  align-items-center">
       <a href="logout.php">
-        <button class="btn btn-danger btn-sm d-flex">
+        <button class="btn btn-danger btn-sm d-flex align-items-center">
           <i class="bi bi-box-arrow-right pr-1"></i>
           <p class="mb-0">ออกระบบ</p>
         </button>

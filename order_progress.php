@@ -33,7 +33,8 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
       <?php include('layout/slidebar.php') ?>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper ">
+
+      <div class="content-wrapper set-content">
         <div class="content-header mx-3">
           <div class="container-fluid">
             <div class="row mb-2">
@@ -111,7 +112,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         </section>
       </div>
 
-      <?php include('layout/footer.php') ?>
+
     </div>
 
     <?php include 'add_framwork/js.php' ?>
@@ -119,9 +120,9 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
   </html>
 
-  <?php } else {
+<?php } else {
 
-echo "<script>
+  echo "<script>
 if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
 location.assign('login.php');
 }else {

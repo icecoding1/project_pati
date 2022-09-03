@@ -2,12 +2,20 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="index.php" class="brand-link">
-    <img src="dist/img/food_pachaew_logo.png" alt="AdminLTE Logo" class="brand-image  elevation-3">
-    <span class="brand-text font-weight-light">ร้านอาหารป้าเเจ๋ว</span>
+
+    <?php if (strpos($_SESSION["session_image"], ".")) {
+    ?>
+      <img src="image_myweb/img_structure_management/<?= $_SESSION["logo_shop"] ?>" class="img-circle profile_slidebar" alt="User Image">
+    <?php } else { ?>
+      <img src="assets/img/logo_empty.jpg" alt="Logo" class="img-circle profile_slidebar">
+    <?php } ?>
+
+    <span class="brand-text font-weight-light mx-2"><?= $_SESSION["name_shop"] ?></span>
   </a>
   <!-- Sidebar user panel (optional)  user-panel-->
   <div class=" box-slide mt-3 pb-3 mb-3 px-3   d-flex  align-items-center">
     <div class="image">
+
       <?php if (strpos($_SESSION["session_image"], ".")) {
       ?>
         <img src="image_myweb/img_member/<?= $_SESSION["session_image"] ?>" class="img-circle profile_slidebar" alt="User Image">
@@ -76,7 +84,7 @@
               </li>
             <?php } ?>
             <li class="nav-item">
-              <a href="view/order_food/order_food.php" class="nav-link" id="nav-link5">
+              <a href="view/order_food/index.php" class="nav-link" id="nav-link5">
                 <i class="bi bi-pencil-square"></i>
                 <p>สั่งออเดอร์</p>
               </a>

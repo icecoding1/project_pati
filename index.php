@@ -2,7 +2,8 @@
 
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+
+if (isset($_SESSION["session_username"]) != "" &&  isset($_SESSION["session_password"]) != "") {
 ?>
 
   <!DOCTYPE html>
@@ -26,16 +27,18 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
       <?php include('layout/slidebar.php') ?>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper ">
+      <div class="content-wrapper set-content">
         <section class="content">
           <div class="container-fluid ">
             <div class="d-flex justify-content-center align-items-center">
               <p class="fs-1 fw-bold p-3">
-                ขอให้พนักงานทุกท่านดูเเล เเละบริการลูกค้าเป็นอย่างดี😀🥰
+                <?= $_SESSION["text_show"] ?>
               </p>
             </div>
           </div>
         </section>
+
+        <?php include('layout/footer.php') ?>
       </div>
 
 
@@ -51,9 +54,9 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
   echo "<script>
 if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
-location.assign('login.php');
+  location.assign('login.php');
 }else {
-location.assign('login.php');
+  location.assign('login.php');
 }
 </script>";
 } ?>

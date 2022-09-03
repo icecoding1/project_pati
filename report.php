@@ -31,7 +31,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <?php include('layout/slidebar.php') ?>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper set-content">
 
 
           <div class="content-header mx-3">
@@ -132,7 +132,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
           </section>
         </div>
 
-        <?php include('layout/footer.php') ?>
+
       </div>
 
 

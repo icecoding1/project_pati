@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION["session_status"] = $row["status"];
     $_SESSION["session_image"] = $row["image"];
     $_SESSION["session_name"] = $row["name"];
-    header("location: index.php");
+    header("location: set_session_structure.php");
   } else {
     echo "<script>
     if(confirm(' password หรือ username ของคุณไม่ถูกต้อง')){
@@ -27,6 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>";
   }
 }
+
+$sql_structure = "SELECT * FROM structure_management";
+$select_bg = $obj->query($sql_structure);
+$datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
+// $img = $datafetch['background'];
+// echo  $data;
+
 ?>
 
 
@@ -44,14 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
-  <div class="bg-login d-flex justify-content-center align-items-center">
 
-    <div class="login-box">
+  <div class="bg-login d-flex justify-content-center align-items-center" style="background-image: url('image_myweb/img_structure_management/<?= $datafetch['background'] ?>');">
+
+    <div class=" login-box">
 
       <div class="login-logo">
         <a href="index.php" class="d-flex justify-content-center align-items-center flex-wrap">
-          <img src="dist/img/food_pachaew_logo.png" alt="logo" class="logo-login">
-          <b class="text-white px-1 text-pachaew">ร้านป้าเเจ๋ว</b>
+          <?php if (strpos($datafetch['logo_shop'], ".")) { ?>
+            <img src="image_myweb/img_structure_management/<?= $datafetch['logo_shop']  ?>" alt="logo" class="logo-login" loading="lazy">
+          <?php } else { ?>
+            <img src="assets/img/logo_empty.jpg" alt="logo" class="logo-login" loading="lazy">
+          <?php } ?>
+          <b class="text-white px-1 text-pachaew"><?= $datafetch['name_shop'] ?></b>
         </a>
       </div>
 
@@ -98,6 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </div>
     <?php include 'add_framwork/js.php' ?>
+
+
 </body>
 
 </html>

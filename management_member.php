@@ -30,11 +30,13 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <div class="preloader flex-column justify-content-center align-items-center bg-dark">
           <img class="animation__shake" src="dist/img/food_pachaew_logo.png" alt="AdminLTELogo" height="80" width="80">
         </div>
+
         <?php include('layout/header.php') ?>
         <?php include('layout/slidebar.php') ?>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper set-content">
+
           <div class="content-header mx-3">
             <div class="container-fluid">
               <div class="row mb-2">
@@ -144,9 +146,10 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
             </div>
           </section>
-        </div>
 
-        <?php include('layout/footer.php') ?>
+
+
+        </div>
 
       </div>
 

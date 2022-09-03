@@ -3,6 +3,9 @@
 ob_start();
 session_start();
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+  $count_table =  $_SESSION["count_table"];
+  // echo $count_table;
+  // require_once "../../connection/config.php";
 ?>
 
 
@@ -15,7 +18,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $name_web;  ?></title>
-    <?php include '../../add_framwork/css.php' ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="../../assets/css/management.css">
     <link rel="icon" href="../../favicon/logo_favicon.png">
   </head>
@@ -37,16 +40,16 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
       <div class="content-select">
         <select class="form-select form-select-lg  " aria-label=".form-select-lg example" id="select" name="select_table">
           <option selected disabled value="disabled">เลือกโต๊ะ</option>
-          <option value="1">โต๊ะ1</option>
-          <option value="2">โต๊ะ2</option>
-          <option value="3">โต๊ะ3</option>
+          <?php for ($i = 1; $i <= $count_table; $i++) {  ?>
+            <option value="<?= $i ?>">โต๊ะ : <?= $i; ?></option>
+          <?php } ?>
         </select>
       </div>
       <button type="submit" class="button-send fw-bold" id="disabled" disabled>กรุณาเลือกโต๊ะของท่าน</button>
     </form>
 
     <script src="../../add_framwork/jquery.js"></script>
-    <?php include '../../add_framwork/js.php' ?>
+
 
     <script>
       $(document).ready(function() {
