@@ -31,7 +31,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
   <body class="hold-transition sidebar-mini layout-fixed">
 
     <!-- page to web -->
-    <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+    <input type="hidden" id="nav_page" value="<?= $page_nav  ?>">
 
     <div class="wrapper">
       <!-- Preloader -->

@@ -86,11 +86,13 @@
         .select-input {
           width: 200px;
         }
+
+        .search-input {
+          width: 200px;
+        }
       }
 
-      .search-input {
-        width: 200px;
-      }
+
 
     }
   }
@@ -349,13 +351,16 @@
       div {
         justify-content: center;
 
-        .select-input {
-          width: 90%;
+        form {
+          .select-input {
+            width: 95%;
+          }
+
+          .search-input {
+            width: 95%;
+          }
         }
 
-        .search-input {
-          width: 90%;
-        }
       }
     }
 

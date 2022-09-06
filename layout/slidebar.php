@@ -3,7 +3,7 @@
   <!-- Brand Logo -->
   <a href="index.php" class="brand-link">
 
-    <?php if (strpos($_SESSION["session_image"], ".")) {
+    <?php if (strpos($_SESSION["logo_shop"], ".")) {
     ?>
       <img src="image_myweb/img_structure_management/<?= $_SESSION["logo_shop"] ?>" class="img-circle profile_slidebar" alt="User Image">
     <?php } else { ?>

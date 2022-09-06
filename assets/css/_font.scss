@@ -3,3 +3,50 @@
 .font-five {
   font-weight: 500 !important;
 }
+
+.font-titel {
+  font-size: 120%;
+}
+
+
+.font-detail {
+  font-size: 110%;
+}
+
+
+@media(max-width:750px) {
+  .font-titel {
+    font-size: 100% !important;
+  }
+
+
+  .font-detail {
+    font-size: 90% !important;
+  }
+
+}
+
+@media(max-width:550px) {
+  .font-titel {
+    font-size: 95%;
+  }
+
+
+  .font-detail {
+    font-size: 85%;
+  }
+
+}
+
+
+@media(max-width:350px) {
+  .font-titel {
+    font-size: 90%;
+  }
+
+
+  .font-detail {
+    font-size: 80%;
+  }
+
+}
