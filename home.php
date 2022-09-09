@@ -1,4 +1,43 @@
-<?php $page = isset($_GET['page']) ? $_GET['page'] : 1; ?>
+<?php
+require_once("connection/config.php");
+ob_start();
+session_start();
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$select = isset($_GET['select_type']) ? $_GET['select_type'] : "";
+$text_search = isset($_GET['text_search']) ? $_GET['text_search'] : "";
+$_SESSION['response_select'] =  $select;
+$response_select = $_SESSION['response_select'];
+$_SESSION['response_text_search'] =  $text_search;
+$response_text_search = $_SESSION['response_text_search'];
+$sql = "";
+
+if ($text_search == "" && $select == "") {
+  $sql = "SELECT * FROM table_listfood";
+} else if ($text_search == "" && $select == "ประเภททั้งหมด") {
+  $sql = "SELECT * FROM table_listfood";
+} else if ($text_search != "" && $select == "") {
+  $sql = "SELECT * FROM table_listfood WHERE  name LIKE '%$text_search%'  OR  type_food LIKE '%$text_search%' OR number_menu LIKE '%$text_search%' ";
+} else if ($select != "" && $text_search == "") {
+  $sql = "SELECT * FROM table_listfood WHERE    type_food LIKE '%$select%' ";
+} else if ($text_search != "" && $select != "ประเภททั้งหมด") {
+  $sql = "SELECT * FROM table_listfood WHERE type_food LIKE '%$select%' AND  name LIKE '%$text_search%'  OR  type_food LIKE '%$text_search%' OR number_menu LIKE '%$text_search%'   ";
+} else if ($select == "ประเภททั้งหมด" &&   $text_search != "") {
+  $sql = "SELECT * FROM table_listfood WHERE  name LIKE '%$text_search%'  OR  type_food LIKE '%$text_search%' OR number_menu LIKE '%$text_search%' ";
+}
+
+$result = $obj->query($sql);
+// $row = $result->fetchAll(PDO::FETCH_OBJ);
+// $count = Count($row);
+// echo  $sql . "<br/>";
+// echo $count . "<br/>";
+// echo $response_select . "<br/>";
+// print_r($row->);
+
+
+
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -14,6 +53,7 @@
   <link rel="stylesheet" href="assets/css/slide.css">
   <link rel="icon" href="favicon/logo_favicon.png">
   <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <?php include 'add_framwork/css.php' ?>
 </head>
 
 <body class="bg-home">
@@ -53,13 +93,13 @@
       <div>
         <ul>
           <li>
-            <p id="nav1">หน้าเเรก</p>
+            <p id="nav_respone1" class="navbtn1">หน้าเเรก</p>
           </li>
           <li>
-            <p id="nav2">ติดต่อ</p>
+            <p id="nav_respone2" class="navbtn2">ติดต่อ</p>
           </li>
           <li>
-            <p href="" id="nav3">รายการอาหาร</p>
+            <p href="" id="nav_respone3" class="navbtn3">รายการอาหาร</p>
           </li>
           <li>
             <a href="login.php" class="login">เข้าสู่ระบบ</a>
@@ -101,15 +141,15 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-center div_btn">
-          <button class="btn btn btn-light border border-dark rounded-5 mx-2 px-2 fw-bold">ช่องทางการติดต่อ</button>
-          <button class="btn btn btn-light border border-dark rounded-5 mx-2 px-3 fw-bold">รายการอาหาร</button>
+          <button class="btn btn btn-light border border-dark rounded-5 mx-2 px-2 fw-bold  buttonnav2">ช่องทางการติดต่อ</button>
+          <button class="btn btn btn-light border border-dark rounded-5 mx-2 px-3 fw-bold buttonnav3">รายการอาหาร</button>
         </div>
 
       </div>
     </div>
 
     <div class="py-4 my-3 set_content">
-      <div class="content_index px-4">
+      <div class="content_index ">
         <?php foreach (range(1, 10) as $row) { ?>
           <div class="card mb-3 in_content_index">
             <div class="row g-0 content">
@@ -147,16 +187,22 @@
           <div class="d-flex flex-column justify-content-center align-items-center w-100 mt-3">
             <a href="" class="fw-seibold font-detail text-decoration-none text-dark"><i class="bi bi-messenger">&nbsp; &nbsp;messenger</i></a>
           </div>
+          <div class="d-flex flex-column justify-content-center align-items-center w-100 mt-3 mb-3">
+            <a href="" class="fw-seibold font-detail text-decoration-none text-dark"><i class="bi bi-telephone-fill"></i>&nbsp; &nbsp;061-xxx-xxxx</i></a>
+          </div>
         </div>
         <div class="col-xl-6">
 
-          <div class="d-flex justify-content-center align-items-center w-100">
+          <div class="d-flex justify-content-center align-items-center w-100 mt-3">
             <p class="fw-bold font-titel">ช่องทางการติดต่อ Email</p>
           </div>
           <div class="d-flex justify-content-center align-items-center w-100 mt-3">
             <div class="box-email">
               <form action="" class="form_email" id="myform" method="post">
-                <div class="msg"></div>
+                <div class="content-show">
+                  <p class="msg text-detail fw-bold">edbedgnh</p>
+                  <i class="bi bi-x-lg" id="closr_x"></i>
+                </div>
                 <div class="d-flex justify-content-center align-items-center w-100">
                   <p class="fw-bold font-detail">Email : patiphonwongsee01@gmail.com</p>
                 </div>
@@ -188,16 +234,157 @@
     </div>
   </div>
 
+  <div class="menu_list_home">
+
+    <div class="d-flex align-items-center flex-column mt-2">
+      <p class="font-titel fw-bold">รายการอาหาร</p>
+      <form action="" method="get" id="form_search">
+        <div class="form-search">
+          <select class="form-select m-2 select-input select_type" onChange=selectChange(this.value) name="select_type">
+            <?php
+            require_once("connection/config2.php");
+            $table_typefood = "SELECT * FROM  table_typefood";
+            $result_typefood = $obj->query($table_typefood); ?>
+
+            <?php if ($response_select == "") {   ?>
+              <option selected disabled>เลือกประเภท</option>
+              <option selected>ประเภททั้งหมด</option>
+              <?php while ($types = $result_typefood->fetch(PDO::FETCH_ASSOC)) { ?>
+                <option value="<?= $types['type'] ?>"><?= $types['type'] ?></option>
+              <?php }
+            } else  if ($response_select == "ประเภททั้งหมด") {   ?>
+              <option disabled>เลือกประเภท</option>
+              <option selected>ประเภททั้งหมด</option>
+              <?php while ($types = $result_typefood->fetch(PDO::FETCH_ASSOC)) { ?>
+                <option value="<?= $types['type'] ?>"><?= $types['type'] ?></option>
+              <?php }
+            } else { ?>
+              <option disabled>เลือกประเภท</option>
+              <option>ประเภททั้งหมด</option>
+              <?php while ($types = $result_typefood->fetch(PDO::FETCH_ASSOC)) { ?>
+
+                <?php if ($response_select == $types['type']) { ?>
+                  <option value="<?= $types['type'] ?>" selected><?= $types['type'] ?></option>
+                <?php } else { ?>
+                  <option value="<?= $types['type'] ?>"><?= $types['type'] ?></option>
+            <?php }
+              }
+            }
+            ?>
+          </select>
+          <div class="input-group  inputform-search">
+            <span class="input-group-text" id="inputGroup-sizing-default">ค้นหารายการ</span>
+            <?php if ($response_text_search == "") { ?>
+              <input type="text" class="form-control" name="text_search">
+            <?php } else { ?>
+              <input type="text" class="form-control" name="text_search" value="<?= $response_text_search ?>">
+            <?php } ?>
+            <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <p class="font-titel mx-3 px-3 mb-1 fw-bold">เมนูเเนะนำ</p>
+    <div class="content_menu_list_home">
+      <div class="menu_intro">
+
+        <?php foreach (range(1, 15) as $row) { ?>
+          <div class="content_menu position-relative">
+            <img src="assets/img/coffee.jpg" alt="" class="img_menu">
+            <div class="detail_bottom">
+              <p class="font_detail">ชื่อ : </p>
+              <p class="font_detail">ราคา :</p>
+            </div>
+            <div class="ribbon-wrapper">
+              <div class="ribbon bg-primary">
+                เเนะนำ
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+    </div>
+
+    <p class="font-titel mx-3 px-3 mb-1 fw-bold">เมนูใหม่</p>
+    <div class="content_menu_list_home">
+      <div class="menu_intro">
+
+        <?php foreach (range(1, 15) as $row) { ?>
+          <div class="content_menu position-relative">
+            <img src="assets/img/coffee.jpg" alt="" class="img_menu">
+            <div class="detail_bottom">
+              <p class="font_detail">ชื่อ : </p>
+              <p class="font_detail">ราคา :</p>
+            </div>
+            <div class="ribbon-wrapper">
+              <div class="ribbon bg-success">
+                ใหม่
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+    </div>
+
+    <p class="font-titel mx-3 px-3 mb-1 fw-bold">เมนูทั้งหมด</p>
+
+    <?php
+    $row = $result->fetchAll(PDO::FETCH_OBJ);
+    $count = Count($row);
+
+    if ($count > 6) { ?>
+      <div class="all_menu_home">
+        <?php foreach ($row as $row) { ?>
+          <div class="content_menu position-relative">
+            <img src="image_myweb/img_product/<?= $row->image; ?>" alt="img" class="img_menu">
+            <div class="detail_bottom">
+              <p class="font_detail">ชื่อ : <?= $row->name; ?></p>
+              <p class="font_detail">ราคา : <?= $row->price_food . " ฿"; ?></p>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+    <?php  } else if ($count < 6 && $count > 0) { ?>
+      <div class="all_menu_home_set">
+        <?php foreach ($row as $row) {  ?>
+          <div class="content_menu position-relative">
+            <img src="image_myweb/img_product/<?= $row->image ?>" alt="img" class="img_menu">
+            <div class="detail_bottom">
+              <p class="font_detail">ชื่อ : <?= $row->name ?></p>
+              <p class="font_detail">ราคา : <?= $row->price_food . " ฿"; ?></p>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+    <?php  } else if ($count == 0) { ?>
+      <div class="d-flex justify-content-center align-items-center w-100  my-4 ">
+        <p class="text-danger fw-bold fs-2">❗❗ ไม่พบข้อมูล</p>
+      </div>
+    <?php } ?>
+
+  </div>
+
   <div class="footer_web">
     <p class="fw-bold mb-0 text-white ">&copy; footer restaurant & food web version 1.0.0</p>
   </div>
+
 
   <script src="add_framwork/jquery.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/slide.js"></script>
   <script src="assets/js/home.js"></script>
-
   <script type="text/javascript">
+    function selectChange(val) {
+      document.getElementById("form_search").submit();
+    }
+
+    $('.content-show').hide();
+
+    $("#closr_x").click(function() {
+      $('.content-show').hide(300);
+    })
+
     function sendEmail() {
       var name = $("#name");
       var email = $("#email");
@@ -217,11 +404,15 @@
           },
           success: function(response) {
             $('#myform')[0].reset();
-            $('.msg').text("Message send successfully");
+            $('.content-show').show(100);
+            $('.msg').text("✅✅ Message send successfully");
           }
         });
       }
     }
+
+
+
 
     function isNotEmpty(caller) {
       if (caller.val() == "") {
@@ -232,6 +423,7 @@
       return true;
     }
   </script>
+
 </body>
 
 </html>

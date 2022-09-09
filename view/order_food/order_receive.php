@@ -34,7 +34,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
   $result = $obj->query($sql);
   $row = $result->fetchAll(PDO::FETCH_OBJ);
-  $count = count($row);
+  $count = Count($row);
   // echo  $sql;
   // echo $text_search;
   // echo $count . "<br/>";

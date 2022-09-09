@@ -12,6 +12,9 @@ if (isset($_POST['name']) && isset($_POST['email'])) {
     require_once "PHPMailer/SMTP.php";
     require_once "PHPMailer/Exception.php";
 
+    $emailaddress = "patiphonwongsee01@gmail.com";
+    $emailsend = "ผู้ส่ง : " . $email . "  <br/> ข้อความ : " . $detail;
+
     $mail = new PHPMailer();
 
     // SMTP Settings
@@ -19,16 +22,16 @@ if (isset($_POST['name']) && isset($_POST['email'])) {
     $mail->Host = "smtp.gmail.com";
     $mail->SMTPAuth = true;
     $mail->Username = "iceiiiii1998@gmail.com"; // enter your email address
-    $mail->Password = "asdbnmii495"; // enter your password
+    $mail->Password = "drrifytcwxgwayro"; // enter your password
     $mail->Port = 465;
     $mail->SMTPSecure = "ssl";
 
     //Email Settings
     $mail->isHTML(true);
-    $mail->setFrom($email);
-    $mail->addAddress("patiphonwongsee01@gmail.com"); // Send to mail
-    $mail->Subject = $email;
-    $mail->Body = $detail;
+    $mail->setFrom($emailaddress, $name);
+    $mail->addAddress($emailaddress); // Send to mail
+    $mail->Subject = $header;
+    $mail->Body =  $emailsend;
 
     if ($mail->send()) {
         $status = "success";
