@@ -1,7 +1,6 @@
 html {
   scroll-padding-top: 6rem;
   scroll-behavior: smooth;
-  width: 100vw;
   height: 100vh;
 }
 
@@ -12,18 +11,14 @@ html {
 
 
 
-
-
-
-
 .bg-login {
-  // background-image: url("../img/bg_restaurant.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.85;
   width: 100vw;
   height: 100vh;
+  position: relative;
 
   .logo-login {
     width: 80px;
@@ -36,6 +31,20 @@ html {
   .padding-card-login {
     padding: 20px 5px;
     border-radius: 10%;
+  }
+
+  .back_home {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 20px;
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
   }
 }
 

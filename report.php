@@ -42,7 +42,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="home.php">Home</a></li>
                     <li class="breadcrumb-item active">รายงานสรุปผล </li>
                   </ol>
                 </div>

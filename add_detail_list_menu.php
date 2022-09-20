@@ -13,11 +13,13 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     $type_food = $_POST['type_food'];
     $price_food = $_POST['price_food'];
     $detail = $_POST['detail'];
+    $ckeck_intro = $_POST['intro'];
     $image_product = isset($_FILES['image_product']) ? $_FILES['image_product'] : null;
 
     $name_img = (mt_rand());
     date_default_timezone_set("Asia/Bangkok");
     $name_img_date = date("dmY");
+    $date_create = date("dmYHis");
 
     if ($image_product != null) {
       $type = strrchr($_FILES['image_product']['name'], ".");
@@ -27,7 +29,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     }
 
 
-    $sql = "INSERT INTO table_listfood (number_menu, name, type_food,	price_food, detail, image) VALUES(:number_menu, :name, :type_food, :price_food, :detail, :image)";
+    $sql = "INSERT INTO table_listfood (number_menu, name, type_food,	price_food, detail, image, intro_check, new_menu) VALUES(:number_menu, :name, :type_food, :price_food, :detail, :image, :intro_check, :new_menu)";
 
     $insert = $obj->prepare($sql);
     $insert->bindParam("number_menu", $number_menu);
@@ -36,6 +38,8 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     $insert->bindParam("price_food", $price_food);
     $insert->bindParam("detail", $detail);
     $insert->bindParam("image", $name_img);
+    $insert->bindParam("intro_check", $ckeck_intro);
+    $insert->bindParam("new_menu", $date_create);
     $result = $insert->execute();
 
     if ($result) {
@@ -116,7 +120,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                         <label>
                           เพิ่มรูปสินค้า ขนาดเเนะนำ <span class="text-danger">250px * 150px *เฉพาะ png, jpeg, jpg</span>
                         </label>
-                        <input type="file" class="cursor-pointer w-100 " name="image_product" id="image_product" accept="image/png,  image/jpeg" required>
+                        <input type="file" class="cursor-pointer w-100 " name="image_product" id="image_product" accept="image/png,  image/jpeg">
                       </div>
                     </div>
                     <div class="col-xl-9 content-row2">
@@ -160,6 +164,13 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                         <p class="col-12 ">
                           <textarea class="form-control" id="detail" name="detail" placeholder="รายละเอียด"></textarea>
                         </p>
+                        <p class="col-12 font-five mb-0">
+                          คุณต้องการให้เมนูนี้เป็นเมนูเเนะนำหรือไม่
+                        </p>
+                        <div class="col-12 ">
+                          <input type="radio" name="intro" value="no" class="mx-2" required>ไม่
+                          <input type="radio" name="intro" value="yes" class="mx-2" required>ใช่
+                        </div>
                       </div>
                     </div>
                   </div>

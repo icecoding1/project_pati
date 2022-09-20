@@ -1,12 +1,49 @@
 <?php
-$name_web = "สั่งออเดอร์";
-$count_order = isset($_GET['count_order']) ? $_GET['count_order'] : 0;
-$table = $_POST['select_table'];
-$food = "ขนมปัง กาเเฟ";
-
 ob_start();
 session_start();
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+  $name_web = "สั่งออเดอร์";
+  $table =   $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
+  $food = "ขนมปัง กาเเฟ";
+  $array = "";
+  $countdata = 0;
+  $count_order = isset($_SESSION["count_order"]) ? $_SESSION["count_order"] : 0;
+  $_SESSION['total'] = isset($_SESSION["total"]) ? $_SESSION["total"] : 0;
+  if (isset($_SESSION['data']) != "") {
+    $array = $_SESSION['data'];
+    $array2 = $_SESSION['data'];
+    usort($array, function ($a, $b) {
+      return $a['id'] - $b['id'];
+    });
+    $input = array_map("unserialize", array_unique(array_map("serialize", $array)));
+    usort($input, function ($a, $b) {
+      return $a['id'] - $b['id'];
+    });
+    $data = $input;
+    $countdata = count($data);
+    // echo "<pre>";
+    // print_r($array);
+    // echo "</pre>";
+    $order = 1;
+    $total = 0;
+    $count_products = 0;
+    $count_delete = 0;
+
+    $count  = count($array) > 0  ?  count($array) : 0;
+    $_SESSION["count_order"] = $count;
+    $count_order = isset($_SESSION["count_order"]) ? $_SESSION["count_order"] : 0;
+
+
+    if (count($array) > 0) {
+      for ($x = 0; $x < count($array); $x++) {
+        $total += $array[$x]['price_food'];
+        $_SESSION['total'] = $total;
+      }
+    } else {
+      $total  = 0;
+      $_SESSION['total'] = $total;
+    }
+  }
 ?>
 
   <!DOCTYPE html>
@@ -40,44 +77,178 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     <div class="header-content my-3 mx-3">
       <p class="mb-0 fw-bold fs-3 ">รายการที่สั่ง</p>
       <p class="mb-0 fw-semibold fs-5 m-2">โต๊ะ : <?= $table ?></p>
-      <p class="mb-0 fw-semibold fs-5 m-2">ราคารวม : <?= number_format(125, 2) . " ฿"; ?></p>
+      <p class="mb-0 fw-semibold fs-5 m-2">ราคารวม : <?= number_format($_SESSION['total'], 2) . "฿"; ?> </p>
+      <p class="mb-0 fw-semibold fs-5 m-2">รายการทั้งหมด : <?= $count_order . " รายการ"; ?></p>
     </div>
 
-    <div class="list-menu-order mb-3">
-      <?php foreach (range(1, 10)  as $value) { ?>
-        <div class="content-menu">
-          <div>
-            <img src="../../assets/img/coffee.jpg" alt="food_lists" class="img_menu">
-          </div>
-          <div class="content-menu-bottom">
+    <?php if ($countdata > 5) { ?>
+      <div class="list-menu-order mb-3">
+        <?php for ($i  = 0; $i < count($data); $i++) {
+          $id_for1 = $data[$i]['id'];
+          for ($k  = 0; $k < count($array2); $k++) {
+            $id_for2 = $array2[$k]['id'];
+            if ($id_for1 ==  $id_for2) {
+              $count_products  += $array2[$k]['count'];
+              $data[$i]['count'] =  $count_products;
+            }
+          }
+          $data[$i]['priceAll'] =  $data[$i]['price_food'] * $count_products;
+          $priceAll = $data[$i]['priceAll'];
+          $count_delete += $data[$i]['count'];
+        ?>
+          <div class="content-menu">
             <div>
-              <p class="mb-0"><?= $food ?></p>
-              <p class="mb-0">ราคา : <span>75 ฿</span></p>
+              <?php if (strpos($data[$i]['image'], ".")) { ?>
+                <img src="../..//image_myweb/img_product/<?= $data[$i]['image'] ?>" alt="food_lists" class="img_menu">
+              <?php } else { ?>
+                <img src="../../assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
+              <?php } ?>
             </div>
-            <div>
-              <button class="btn btn-primary p-1 px-3 mt-1 " id="add_order">+ เพิ่ม</button>
-              <button class="btn btn-danger p-1 px-3 mt-1" id="add_order">ลบ</button>
+            <div class="content-menu-bottom">
+              <div>
+                <p class="mb-0 fw-semibold"><?= $data[$i]['name'] ?></p>
+                <p class="mb-0">ราคา : <span><?= number_format($data[$i]['price_food'], 2) ?> ฿</span></p>
+                <p class="mb-0">ราคารวม : <span><?= number_format($data[$i]['priceAll'], 2) ?> ฿</span></p>
+              </div>
+              <div>
+                <button class="btn btn-primary p-1 px-3 mt-1 add_order" id="<?= $data[$i]['id'] ?>">+ เพิ่ม</button>
+                <button class="btn btn-danger p-1 px-3 mt-1 delete_order" id="<?= $count_delete - 1  ?>">ลบ</button>
+              </div>
             </div>
+            <p class="count mb-0 font-five">จำนวน : <span><?= $data[$i]['count'] ?></span></p>
           </div>
-          <p class="count mb-0 font-five">จำนวน : <span><?= $count_order ?></span></p>
-        </div>
-      <?php } ?>
-    </div>
+        <?php
 
-    <div class="send-to-manage">
-      <div class="input-group m-2 ">
-        <span class="input-group-text">โน๊ต</span>
-        <textarea class="form-control note" aria-label="With textarea"></textarea>
+          $_SESSION['total'] +=  $priceAll;
+          $count_products = 0;
+        } ?>
+        <?php
+        $_SESSION['send_order'] = $data;
+        ?>
       </div>
-      <button class="btn btn-primary px-4 m-2  mt-2 ">
-        ยืนยันคำสั่ง
-      </button>
-    </div>
+    <?php } else if ($countdata < 5 && $countdata > 0) { ?>
+      <div class="list-menu-order-set mb-3">
+        <?php for ($i  = 0; $i < count($data); $i++) {
+          $id_for1 = $data[$i]['id'];
+          for ($k  = 0; $k < count($array2); $k++) {
+            $id_for2 = $array2[$k]['id'];
+            if ($id_for1 ==  $id_for2) {
+              $count_products  += $array2[$k]['count'];
+              $data[$i]['count'] =  $count_products;
+            }
+          }
+          $data[$i]['priceAll'] =  $data[$i]['price_food'] * $count_products;
+          $priceall = $data[$i]['priceAll'];
+          $count_delete += $data[$i]['count'];
+        ?>
+          <div class="content-menu">
+            <div>
+              <?php if (strpos($data[$i]['image'], ".")) { ?>
+                <img src="../..//image_myweb/img_product/<?= $data[$i]['image'] ?>" alt="food_lists" class="img_menu">
+              <?php } else { ?>
+                <img src="../../assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
+              <?php } ?>
+            </div>
+            <div class="content-menu-bottom">
+              <div>
+                <p class="mb-0 fw-semibold"><?= $data[$i]['name'] ?></p>
+                <p class="mb-0">ราคา : <span><?= number_format($data[$i]['price_food'], 2) ?> ฿</span></p>
+                <p class="mb-0">ราคารวม : <span><?= number_format($data[$i]['priceAll'], 2) ?> ฿</span></p>
+              </div>
+              <div>
+                <button class="btn btn-primary p-1 px-3 mt-1 add_order" id="<?= $data[$i]['id'] ?>">+ เพิ่ม</button>
+                <button class="btn btn-danger p-1 px-3 mt-1 delete_order" id="<?= $count_delete - 1  ?>">ลบ</button>
+              </div>
+            </div>
+            <p class="count mb-0 font-five">จำนวน : <span><?= $data[$i]['count'] ?></span></p>
+          </div>
+        <?php
+          $count_products = 0;
+        } ?>
+        <?php
+        $_SESSION['send_order'] = $data;
+        ?>
+      </div>
+    <?php } else { ?>
+      <div class="d-flex justify-content-center align-items-center mt-4">
+        <p class="fw-bold fs-4 set-hide" id="1">คุณไม่มีรายการที่เลือก❗❗❗</p>
+      </div>
+    <?php } ?>
 
-
-
+    <form action="insert_order.php" method="post" class="note">
+      <div class="send-to-manage">
+        <div class="input-group m-2 ">
+          <span class="input-group-text">โน๊ต</span>
+          <textarea class="form-control " aria-label="With textarea" id="note" name="note"></textarea>
+        </div>
+        <button class="btn btn-primary px-4 m-2  mt-2  mr-4" id="btn-confirm" type="submit">
+          ยืนยันคำสั่ง
+        </button>
+      </div>
+    </form>
 
     <script src="../../add_framwork/jquery.js"></script>
+    <script>
+      $("document").ready(() => {
+        $(".delete_order").click(function(e) {
+          e.preventDefault();
+          var mid = $(this).attr("id");
+          console.log(mid);
+
+          $.ajax({
+            url: "set_cart.php",
+            method: "post",
+            data: {
+              id: mid
+            },
+            success: function(response) {
+              console.log(response);
+              location.reload();
+            }
+          });
+        });
+
+        $(".add_order").click(function(e) {
+          e.preventDefault();
+          var mid = $(this).attr("id");
+
+          $.ajax({
+            url: "set_session_order.php",
+            method: "post",
+            data: {
+              id: mid
+            },
+            success: function(response) {
+              location.reload();
+              console.log(response);
+            }
+          });
+        });
+
+        var check_out = $(".set-hide").attr("id");
+        if (check_out == 1) {
+          $(".send-to-manage").hide();
+          $("#btn-confirm").attr("disabled", true);
+        }
+
+        // $("#btn-confirm").click(function() {
+        //   var textarea = $("textarea#note_order").val();
+        //   // console.log(textarea);
+        //   $.ajax({
+        //     url: "insert_order.php",
+        //     method: "post",
+        //     data: {
+        //       note: textarea
+        //     },
+        //     success: function(res) {
+        //       // location.reload();
+        //       console.log(res);
+        //     }
+        //   })
+        // })
+      })
+    </script>
+
   </body>
 
   </html>

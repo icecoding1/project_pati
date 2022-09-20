@@ -18,7 +18,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     if ($check_id == 1) {
       echo "<script> window.location.assign('setting.php');</script>";
     } else {
-      echo "<script> window.location.assign('index.php');</script>";
+      echo "<script> window.location.assign('home.php');</script>";
     }
   }
 } else {

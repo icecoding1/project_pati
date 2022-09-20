@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $type_food = $_POST["text_type"];
   $price_food = $_POST["text_price"];
   $detail = $_POST["detail"];
+  $intro =  $_POST["intro"];
   $image = isset($_FILES["image_product"]) ? $_FILES["image_product"] : null;
   $name_old_imd = $_POST["name_img_old"];
 
@@ -30,14 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   try {
-    $sql  = "UPDATE table_listfood SET name = :name, type_food=:type_food, price_food = :price_food, detail = :detail, image = :image   WHERE id = $id ";
+    $sql  = "UPDATE table_listfood SET name = :name, type_food=:type_food, price_food = :price_food, detail = :detail, image = :image, intro_check = :intro_check   WHERE id = $id ";
     $update = $obj->prepare($sql);
     $update->bindParam(":name", $name);
     $update->bindParam(":type_food", $type_food);
     $update->bindParam(":price_food", $price);
     $update->bindParam(":detail", $detail);
     $update->bindParam(":image", $nameimg);
-    // $update->bindParam(":id ", $id);
+    $update->bindParam(":intro_check", $intro);
     $result = $update->execute();
     if ($result) {
       echo "<script>alert('เเก้ไขเมนูสำเร็จ🍳🍽');</script>";

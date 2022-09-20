@@ -1,7 +1,10 @@
 .body-order {
-  width: 100vw;
-  height: 100%;
+  // width: 100vw;
+  // height: 100%;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   .header-nav-order {
     width: 100%;
@@ -243,31 +246,31 @@
 
   }
 
-  .send-to-manage {
-    // position: fixed;
-    // bottom: 0px;
-    // width: 100%;
-    // z-index: 10;
-    // // height: px;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    background: #343a40;
-    border-radius: 10px 10px 0 0;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+  .note {
+    margin-top: auto;
+
+    .send-to-manage {
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background: #343a40;
+      border-radius: 10px 10px 0 0;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 
-    div {
-      max-width: 900px;
-      min-width: 240px;
+      div {
+        max-width: 900px;
+        min-width: 240px;
 
-      .note {
-        height: 40px;
+        .note {
+          height: 40px;
+        }
       }
-    }
 
+    }
   }
 
   @media (max-width:1121.5px) {

@@ -158,13 +158,21 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                         <div class="content-in-row1">
                           <!-- image -->
                           <?php if ($is_edit) { ?>
-                            <input type="image" src="image_myweb/img_product/<?= $row['image'] ?>" alt="image" class="image-product">
+                            <?php if (strpos($row['image'], ".")) { ?>
+                              <img src="image_myweb/img_product/<?= $row['image'] ?>" alt="food_lists" class="image-product">
+                            <?php } else { ?>
+                              <img src="assets/img/empty_bg.jpeg" alt="food_lists" class="image-product">
+                            <?php } ?>
                             <label>
                               เปลี่ยนรูปสินค้า<span class="text-danger"> *เฉพาะ png, jpeg, jpg</span>
                             </label>
                             <input type="file" class="cursor-pointer " name="image_product" accept="image/png,  image/jpeg">
                           <?php } else { ?>
-                            <input type="image" src="image_myweb/img_product/<?= $row['image'] ?>" alt="image" class="image-product">
+                            <?php if (strpos($row['image'], ".")) { ?>
+                              <img src="image_myweb/img_product/<?= $row['image'] ?>" alt="food_lists" class="image-product">
+                            <?php } else { ?>
+                              <img src="assets/img/empty_bg.jpeg" alt="food_lists" class="image-product">
+                            <?php } ?>
                           <?php } ?>
                           <!-- image -->
                         </div>
@@ -262,6 +270,30 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                               ?>
                             </p>
                           <?php } ?>
+
+                          <?php if ($is_edit) { ?>
+
+                            <p class="col-12 font-five mb-0 ">
+                              คุณต้องการให้เมนูนี้เป็นเมนูเเนะนำหรือไม่
+                            </p>
+                            <div class="col-12 ">
+                              <?php if ($row['intro_check'] == "no") { ?>
+                                <input type="radio" name="intro" value="no" class="mx-2" checked>ไม่
+                                <input type="radio" name="intro" value="yes" class="mx-2">ใช่
+                              <?php } else { ?>
+                                <input type="radio" name="intro" value="no" class="mx-2">ไม่
+                                <input type="radio" name="intro" value="yes" class="mx-2" checked>ใช่
+                              <?php }  ?>
+                            </div>
+
+                            <?php } else {
+
+                            if ($row['intro_check'] == "yes") { ?>
+                              <p class="col-12 font-five mb-0 fw-bold">
+                                รายการนี้เป็นเมนูเเนะนำ
+                              </p>
+                          <?php }
+                          } ?>
 
                           <!-- send name img for set name old -->
                           <input type="hidden" name="name_img_old" value="<?= $row['image'] ?>">

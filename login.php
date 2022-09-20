@@ -54,7 +54,7 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
 
   <div class="bg-login d-flex justify-content-center align-items-center" style="background-image: url('image_myweb/img_structure_management/<?= $datafetch['background'] ?>');">
 
-    <div class=" login-box">
+    <div class="login-box">
 
       <div class="login-logo">
         <a href="index.php" class="d-flex justify-content-center align-items-center flex-wrap">
@@ -109,9 +109,12 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
         </div>
       </div>
     </div>
-    <?php include 'add_framwork/js.php' ?>
+    <div class="back_home">
+      <a href="index.php" class="font-title fw-bold">กลับหน้าหลัก</a>
+    </div>
+  </div>
 
-
+  <?php include 'add_framwork/js.php' ?>
 </body>
 
 </html>

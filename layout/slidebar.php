@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index.php" class="brand-link">
+  <a href="home.php" class="brand-link">
 
     <?php if (strpos($_SESSION["logo_shop"], ".")) {
     ?>

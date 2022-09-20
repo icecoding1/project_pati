@@ -269,7 +269,7 @@
 
           .img_menu {
             width: 100%;
-            height: auto;
+            height: 250px;
             border-radius: 10px 10px 0px 0px;
           }
 
@@ -438,6 +438,11 @@
 
           .content_menu {
             min-width: 280px;
+
+            .img_menu {
+              height: 210px;
+            }
+
           }
         }
       }
@@ -488,6 +493,10 @@
 
           .content_menu {
             min-width: 260px;
+
+            .img_menu {
+              height: 190px;
+            }
           }
         }
       }
@@ -528,6 +537,10 @@
 
           .content_menu {
             min-width: 245px;
+
+            .img_menu {
+              height: 185px;
+            }
           }
         }
       }
@@ -563,8 +576,6 @@
 
 
 
-
-
     @media(max-width:350px) {
 
       .content_menu_list_home {
@@ -573,6 +584,10 @@
 
           .content_menu {
             min-width: 200px;
+
+            .img_menu {
+              height: 160px;
+            }
           }
         }
       }

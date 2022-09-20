@@ -6,7 +6,8 @@ ob_start();
 session_start();
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
   $count_order = isset($_GET['count_order']) ? $_GET['count_order'] : 0;
-  $_SESSION["session_table"] = isset($_POST['select_table']) ? $_POST['select_table'] : $_SESSION["session_table"];
+  $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
+  $_SESSION["session_table"] = isset($_POST['select_table']) ? $_POST['select_table'] :  $_SESSION["session_table"];
 
   $select = isset($_GET['select_type']) ? $_GET['select_type'] : "";
   $text_search = isset($_GET['text_search']) ? $_GET['text_search'] : "";
@@ -14,6 +15,21 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
   $response_select = $_SESSION['response_select'];
   $_SESSION['response_text_search'] =  $text_search;
   $response_text_search = $_SESSION['response_text_search'];
+
+  $count = 0;
+  $_SESSION["count_order"] = isset($_SESSION["count_order"]) ? $_SESSION["count_order"] : 0;
+
+  if (isset($_SESSION['data']) != "") {
+    $array = $_SESSION['data'];
+    $count  = count($array) > 0  ?  count($array) : 0;
+    $_SESSION["count_order"] = $count;
+    // echo "<pre>";
+    // print_r($array);
+    // echo "</pre>";
+    // echo count($array);
+  }
+
+
   $sql = "";
 
 
@@ -65,7 +81,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <p class="mb-0 mx-2 text-white">สั่งออเดอร์</p>
       </div>
       <div>
-        <a href="../../index.php" class="btn btn-light px-4 m-2 ">กลับหน้าหลัก</a>
+        <a href="../../home.php" class="btn btn-light px-4 m-2 ">กลับหน้าหลัก</a>
         <a href="index.php" class="btn btn-light px-4 m-2">กลับ</a>
       </div>
     </header>
@@ -131,7 +147,11 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <?php foreach ($row as $row) {  ?>
           <div class="content-menu">
             <div>
-              <img src="../../image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+              <?php if (strpos($row->image, ".")) { ?>
+                <img src="../../image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+              <?php } else { ?>
+                <img src="../../assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
+              <?php } ?>
             </div>
             <div class="content-menu-bottom">
               <div>
@@ -141,7 +161,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
               <?php if ($row->status == "offline") { ?>
                 <button class="btn btn-danger p-1 px-3 mt-1 " disabled>หมด</button>
               <?php } else if ($row->status == "online") { ?>
-                <button class="btn btn-primary p-1 px-3 mt-1 add_order" id="add_order">+ เพิ่ม</button>
+                <button class="btn btn-primary p-1 px-3 mt-1 add_order" id="<?= $row->id ?>">+ เพิ่ม</button>
               <?php  } ?>
             </div>
           </div>
@@ -152,7 +172,11 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <?php foreach ($row as $row) {  ?>
           <div class="content-menu">
             <div>
-              <img src="../../image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+              <?php if (strpos($row->image, ".")) { ?>
+                <img src="../../image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+              <?php } else { ?>
+                <img src="../../assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
+              <?php } ?>
             </div>
             <div class="content-menu-bottom">
               <div>
@@ -162,7 +186,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
               <?php if ($row->status == "offline") { ?>
                 <button class="btn btn-danger p-1 px-3 mt-1 " disabled>หมด</button>
               <?php } else if ($row->status == "online") { ?>
-                <button class="btn btn-primary p-1 px-3 mt-1 add_order" id="add_order">+ เพิ่ม</button>
+                <button class="btn btn-primary p-1 px-3 mt-1 add_order" id="<?= $row->id ?>">+ เพิ่ม</button>
               <?php  } ?>
             </div>
           </div>
@@ -177,9 +201,9 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
 
     <!-- //ตะกร้าสินค้า -->
-    <div class="brand">
+    <div class="brand" onclick="order_send()">
       <div>
-        <p class="fw-semibold text-count" id="count_order"><?= $count_order  ?> </p>
+        <p class="fw-semibold text-count " id="count_order"><?= $_SESSION["count_order"] ?></p>
         <button type="button" class="shop_order">
           <img src="../../assets/icon/brand_order.svg" alt="brand" class="icon-brand">
         </button>
@@ -191,23 +215,39 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     <script>
       $(document).ready(function() {
 
-        $(".brand").hide();
-        var count_order = $('#count_order');
-        var count = 0;
+
+        var count_order = $('#count_order').text();
+        console.log(count_order);
+        if (count_order == 0) {
+          $(".brand").hide();
+        } else {
+          $('.brand').show(100);
+        }
 
         $(".add_order").click(function() {
-          $('.brand').show(100);
-          count++;
-          count_order.text(count);
-          // if (this) {
-          //   <?php $count_order =  $count_order + 1; ?>
-          //   console.log(<?= $count_order ?>);
-          // }
+          var mid = $(this).attr("id");
+          console.log(mid);
+          $.ajax({
+            url: "set_session_order.php",
+            method: "post",
+            data: {
+              id: mid
+            },
+            success: function(response) {
+              location.reload();
+              console.log(response);
+            }
+          });
         });
+
       });
 
       function selectChange(val) {
         document.getElementById("form_search").submit();
+      }
+
+      function order_send() {
+        location.assign("order_send.php");
       }
     </script>
 

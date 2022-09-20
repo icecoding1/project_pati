@@ -1,4 +1,5 @@
 <?php $name_web = "สั่งออเดอร์";
+require_once "../../connection/config.php";
 
 ob_start();
 session_start();
@@ -23,7 +24,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     <link rel="icon" href="../../favicon/logo_favicon.png">
   </head>
 
-  <body class="body-order ">
+  <body class="body-order">
 
 
     <header class="header-nav-order">
@@ -32,7 +33,8 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <p class="mb-0 mx-2 text-white">สั่งออเดอร์</p>
       </div>
       <div>
-        <a href="../../index.php" class="btn btn-light px-4 mx-2 my-3">กลับ</a>
+        <a href="order_receive.php" class="btn btn-light px-4 mx-2 my-3">รายการอาหารของฉัน</a>
+        <a href="../../home.php" class="btn btn-light px-4 mx-2 my-3">กลับ</a>
       </div>
     </header>
 
