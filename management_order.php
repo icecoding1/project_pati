@@ -1,10 +1,9 @@
 <?php $name_web = "ระบบจัดการร้านอาหาร";
-// $id   = isset($_GET['id']) ? $_GET['id'] : 1;
-
-$page_nav = 2;
-
 ob_start();
 session_start();
+require_once("connection/config.php");
+$page_nav = 2;
+
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 ?>
 
@@ -109,15 +108,17 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <?php foreach (range(1, 4) as $key => $value) { ?>
-
+                                  <?php
+                                  $sql1 = "SELECT * FROM table_order WHERE status = 1";
+                                  $result  = $obj->query($sql1);
+                                  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                  ?>
                                     <tr>
-                                      <td nowrap>000000001</td>
-                                      <td nowrap>11-7-2014 | 12:00</td>
-                                      <td nowrap>โต๊ะ 1</td>
+                                      <td nowrap><?= $row['number_order'] ?></td>
+                                      <td nowrap><?= $row['create_date'] ?></td>
+                                      <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
                                       <td nowrap><span class="text-danger fw-semibold">รอการยืนยัน</span></td>
-                                      <td nowrap> <a href="order_new.php"> <button type="button" class="btn btn-primary btn-sm">รายละเอียด</button> </a> </td>
-
+                                      <td nowrap> <a href="order_new.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
                                     </tr>
                                   <?php  } ?>
                                 </tbody>
@@ -158,15 +159,17 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                 </thead>
 
                                 <tbody>
-                                  <?php foreach (range(1, 4) as $key => $value) { ?>
-
+                                  <?php
+                                  $sql2 = "SELECT * FROM table_order WHERE status = 2";
+                                  $result2  = $obj->query($sql2);
+                                  while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+                                  ?>
                                     <tr>
-                                      <td nowrap>000000001</td>
-                                      <td nowrap>11-7-2014 | 12:00</td>
-                                      <td nowrap>โต๊ะ 1</td>
+                                      <td nowrap><?= $row['number_order'] ?></td>
+                                      <td nowrap><?= $row['create_date'] ?></td>
+                                      <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
                                       <td nowrap><span class="text-warning fw-semibold">ยืนยันออเดอร์เเล้ว</span></td>
-                                      <td nowrap> <a href="order_progress.php"> <button type="button" class="btn btn-primary btn-sm">รายละเอียด</button> </a> </td>
-
+                                      <td nowrap> <a href="order_progress.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
                                     </tr>
                                   <?php  } ?>
                                 </tbody>
@@ -205,34 +208,21 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                     <th>รายการ</th>
                                   </tr>
                                 </thead>
-                                <!-- <tbody>
-                                <tr>
-                                  <td nowrap>000000001</td>
-                                  <td nowrap>11-7-2014 | 12:00</td>
-                                  <td nowrap>โต๊ะ 1</td>
-                                  <td nowrap><span class="text-danger fw-semibold">รอการยืนยัน</span></td>
-                                  <td nowrap> <a href=""> <button type="button" class="btn btn-primary btn-sm">รายละเอียด</button> </a> </td>
-                                </tr>
-                                <tr>
-                                  <td nowrap>000000002</td>
-                                  <td nowrap>11-7-2014 | 12:00</td>
-                                  <td nowrap>โต๊ะ 3</td>
-                                  <td nowrap><span class="text-danger fw-semibold">รอการยืนยัน</span></td>
-                                  <td nowrap> <a href=""> <button type="button" class="btn btn-primary btn-sm">รายละเอียด</button> </a> </td>
-                                </tr>
-                              </tbody> -->
                                 <tbody>
-                                  <?php foreach (range(1, 4) as $key => $value) { ?>
-
+                                  <?php
+                                  $sql3 = "SELECT * FROM table_order WHERE status = 3";
+                                  $result3  = $obj->query($sql3);
+                                  while ($row = $result3->fetch(PDO::FETCH_ASSOC)) {
+                                  ?>
                                     <tr>
-                                      <td nowrap>000000001</td>
-                                      <td nowrap>11-7-2014 | 12:00</td>
-                                      <td nowrap>โต๊ะ 1</td>
-                                      <td nowrap><span class="text-success fw-semibold">จ่ายเงินเรียนร้อย</span></td>
-                                      <td nowrap> <a href="order_success.php"> <button type="button" class="btn btn-primary btn-sm">รายละเอียด</button> </a> </td>
-
+                                      <td nowrap><?= $row['number_order'] ?></td>
+                                      <td nowrap><?= $row['create_date'] ?></td>
+                                      <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
+                                      <td nowrap><span class="text-success fw-semibold">จ่ายเงินเรียบร้อย</span></td>
+                                      <td nowrap> <a href="order_success.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
                                     </tr>
                                   <?php  } ?>
+                                </tbody>
                               </table>
                             </div>
                           </div>

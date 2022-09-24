@@ -2,11 +2,10 @@
 require_once "../../connection/config.php";
 ob_start();
 session_start();
-
 date_default_timezone_set("Asia/Bangkok");
-$date = date("dmy");
-$numrandom = (mt_rand());
-
+$date = date("His");
+// $numrandom = (mt_rand());
+$numrandom = (rand(100, 1000));
 $array = $_SESSION['data'];
 
 

@@ -1,11 +1,14 @@
 <?php $name_web = "ระบบจัดการร้านอาหาร";
-
-$id   = isset($_GET['id']) ? $_GET['id'] : '';
+require_once "connection/config.php";
 $page_nav = 2;
-
+$id = isset($_GET['id']) ? $_GET['id'] : "";
 ob_start();
 session_start();
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+
+  $sql = "SELECT * FROM table_order WHERE id = $id";
+  $result = $obj->query($sql);
+  $row = $result->fetchAll(PDO::FETCH_OBJ);
 ?>
 
   <!DOCTYPE html>
@@ -52,62 +55,72 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         </div>
         <section class="content p-3">
           <div class="container-fluid ">
-
-            <div class="d-flex justify-content-end flex-wrap">
-              <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
-              <a href="order_success.php?&id=<?= $id; ?>"><button type="button" class="btn btn-success m-1">เสร็จสิ้นออเดอร์</button></a>
-              <button type="button" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</button>
-              <button type="button" class="btn btn-danger m-1">ลบ</button>
-            </div>
-
-            <div class="row my-3">
-              <div class="col-md-4 mb-2">
-                <div class="row fs-5">
-                  <div class="col-md-5 font-five">เลขที่ออเดอร์</div>
-                  <div class="col-md-5 mb-2">0000001</div>
-                  <div class="col-md-5 font-five">เวลา</div>
-                  <div class="col-md-5  mb-2">11-7-2014 | 12:00</div>
-                  <div class="col-md-5 font-five">โต๊ะ </div>
-                  <div class="col-md-5 mb-2">1</div>
-                  <div class="col-md-5 font-five ">โน๊ตจากลูกค้า</div>
-                  <div class="col-md-5">เอาไข่ดาวสุกๆ</div>
-                </div>
+            <?php foreach ($row as $data) { ?>
+              <div class="d-flex justify-content-end">
+                <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
+                <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-success m-1">เสร็จสิ้นออเดอร์</a>
+                <button type="button" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</button>
+                <button type="button" class="btn btn-danger m-1">ลบ</button>
               </div>
 
-              <div class="col-md-8 bg-order-set fs-5 bg-light">
 
-                <div class="row ">
-                  <div class="d-flex justify-content-center align-items-center mb-2">รายการ</div>
-                  <div class="row mb-2">
-                    <div class="col-4">เมนู</div>
-                    <div class="col-4">ประเภท</div>
-                    <div class="col-4">ราคา(บาท)</div>
-                  </div>
-
-                  <div class="order-menu">
-                    <div class="row">
-                      <div class="col-4">ข้าวผัด</div>
-                      <div class="col-4">อาหาร/ผัด</div>
-                      <div class="col-4">40</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-4">ไข่ดาว</div>
-                      <div class="col-4">อาหาร/ทอด</div>
-                      <div class="col-4">5</div>
+              <div class="row my-3">
+                <div class="col-xl-4 mb-2">
+                  <div class="row fs-5">
+                    <div class="col-md-5 font-five ">เลขที่ออเดอร์</div>
+                    <div class="col-md-5 mb-2 "><?= $data->number_order; ?></div>
+                    <div class="col-md-5 font-five">เวลา</div>
+                    <div class="col-md-5  mb-2"><?= $data->create_date; ?></div>
+                    <div class="col-md-5 font-five">โต๊ะ </div>
+                    <div class="col-md-5 mb-2"><?= $data->table_user; ?></div>
+                    <div class="col-md-5 font-five ">จำนวนรายการ</div>
+                    <div class="col-md-5 mb-2"><?= $data->count_order; ?></div>
+                    <div class="col-md-5 font-five ">โน๊ตจากลูกค้า</div>
+                    <div class="col-md-5 mb-2">
+                      <?php
+                      $str = $data->note;
+                      echo (empty($str)) ? "-" : $data->note;
+                      ?>
                     </div>
                   </div>
-
-
-                  <div class="row fixed-footer-order p-3 ">
-                    <div class="col-4">รวม</div>
-                    <div class="col-8">45 <span>บาท</span> </div>
-                  </div>
-
-
                 </div>
 
+                <div class="col-xl-8 bg-order-set fs-5 bg-light">
+                  <div class="content_order">
+                    <div class="row ">
+                      <div class="d-flex justify-content-center align-items-center mb-2 font-five">รายการ</div>
+                      <div class="row mb-2">
+                        <div class="col-3 font-five ">เมนู</div>
+                        <div class="col-3 font-five">ประเภท</div>
+                        <div class="col-3 font-five">จำนวน</div>
+                        <div class="col-3 font-five">ราคา/รวม(บาท)</div>
+                      </div>
+
+                      <div class="order-menu">
+                        <?php
+                        $data_order = json_decode($data->list_order);
+                        // echo "<pre>";
+                        // print_r($data_order);
+                        // echo "</pre>";
+                        for ($i = 0; $i < count($data_order); $i++) {
+                        ?>
+                          <div class="row">
+                            <div class="col-3"><?= $data_order[$i]->name; ?></div>
+                            <div class="col-3"><?= $data_order[$i]->type; ?></div>
+                            <div class="col-3"><?= $data_order[$i]->count; ?></div>
+                            <div class="col-3"><?= $data_order[$i]->price_food . "/" . $data_order[$i]->priceAll; ?></div>
+                          </div>
+                        <?php } ?>
+                      </div>
+                    </div>
+                    <div class=" fixed-footer-order row p-3">
+                      <div class="col-4 font-five">รวม</div>
+                      <div class="col-8"><?= number_format($data->priceAll, 2) . " "; ?><span>บาท</span> </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            <?php } ?>
           </div>
         </section>
       </div>

@@ -12,6 +12,7 @@ try {
   </script>
 
 <?php
+echo "success connec";
 } catch (PDOException $e) { ?>
   <script>
     console.log("not connection")
