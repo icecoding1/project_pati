@@ -20,7 +20,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
       return $a['id'] - $b['id'];
     });
     $data = $input;
-    $countdata = count($data);
+    $countdata = count($array);
     // echo "<pre>";
     // print_r($array);
     // echo "</pre>";
@@ -69,7 +69,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <p class="mb-0 mx-2 text-white">สั่งออเดอร์</p>
       </div>
       <div>
-        <a href="../../index.php" class="btn btn-light px-4 m-2 ">กลับหน้าหลัก</a>
+        <a href="../../home.php" class="btn btn-light px-4 m-2 ">กลับหน้าหลัก</a>
         <a href="order_receive.php" class="btn btn-light px-4 m-2">กลับ</a>
       </div>
     </header>
@@ -93,7 +93,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
             }
           }
           $data[$i]['priceAll'] =  $data[$i]['price_food'] * $count_products;
-          $priceAll = $data[$i]['priceAll'];
           $count_delete += $data[$i]['count'];
         ?>
           <div class="content-menu">
@@ -118,15 +117,13 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
             <p class="count mb-0 font-five">จำนวน : <span><?= $data[$i]['count'] ?></span></p>
           </div>
         <?php
-
-          $_SESSION['total'] +=  $priceAll;
           $count_products = 0;
         } ?>
         <?php
         $_SESSION['send_order'] = $data;
         ?>
       </div>
-    <?php } else if ($countdata < 5 && $countdata > 0) { ?>
+    <?php } else if ($countdata <= 5 && $countdata > 0) { ?>
       <div class="list-menu-order-set mb-3">
         <?php for ($i  = 0; $i < count($data); $i++) {
           $id_for1 = $data[$i]['id'];
@@ -169,7 +166,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         $_SESSION['send_order'] = $data;
         ?>
       </div>
-    <?php } else { ?>
+    <?php } else if ($countdata <= 0) { ?>
       <div class="d-flex justify-content-center align-items-center mt-4">
         <p class="fw-bold fs-4 set-hide" id="1">คุณไม่มีรายการที่เลือก❗❗❗</p>
       </div>
@@ -231,21 +228,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
           $("#btn-confirm").attr("disabled", true);
         }
 
-        // $("#btn-confirm").click(function() {
-        //   var textarea = $("textarea#note_order").val();
-        //   // console.log(textarea);
-        //   $.ajax({
-        //     url: "insert_order.php",
-        //     method: "post",
-        //     data: {
-        //       note: textarea
-        //     },
-        //     success: function(res) {
-        //       // location.reload();
-        //       console.log(res);
-        //     }
-        //   })
-        // })
       })
     </script>
 

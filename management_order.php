@@ -118,7 +118,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                       <td nowrap><?= $row['create_date'] ?></td>
                                       <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
                                       <td nowrap><span class="text-danger fw-semibold">รอการยืนยัน</span></td>
-                                      <td nowrap> <a href="order_new.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      <td nowrap> <a href="order_new.php?page=1&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
                                     </tr>
                                   <?php  } ?>
                                 </tbody>
@@ -169,7 +169,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                       <td nowrap><?= $row['create_date'] ?></td>
                                       <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
                                       <td nowrap><span class="text-warning fw-semibold">ยืนยันออเดอร์เเล้ว</span></td>
-                                      <td nowrap> <a href="order_progress.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      <td nowrap> <a href="order_new.php?page=2&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
                                     </tr>
                                   <?php  } ?>
                                 </tbody>
@@ -219,7 +219,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                       <td nowrap><?= $row['create_date'] ?></td>
                                       <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
                                       <td nowrap><span class="text-success fw-semibold">จ่ายเงินเรียบร้อย</span></td>
-                                      <td nowrap> <a href="order_success.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      <td nowrap> <a href="order_new.php?page=3&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
                                     </tr>
                                   <?php  } ?>
                                 </tbody>

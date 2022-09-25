@@ -12,7 +12,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
       $result = $obj->prepare($sql);
       $result->execute();
       if ($result) {
-        echo "<script>location.assign('../../order_progress.php?&id=" . $id . "')</script>";
+        echo "<script>location.assign('../../order_new.php?page=2&id=" . $id . "')</script>";
       }
     } catch (PDOException $e) {
       echo "error" . $e->getMessage();
@@ -23,7 +23,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
       $result = $obj->prepare($sql);
       $result->execute();
       if ($result) {
-        echo "<script>location.assign('../../order_success.php?&id=" . $id . "')</script>";
+        echo "<script>location.assign('../../order_new.php?page=3&id=" . $id . "')</script>";
       }
     } catch (PDOException $e) {
       echo "error" . $e->getMessage();

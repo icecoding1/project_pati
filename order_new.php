@@ -3,6 +3,7 @@ require_once "connection/config.php";
 $name_web = "ระบบจัดการร้านอาหาร";
 $page_nav = 2;
 $id = isset($_GET['id']) ? $_GET['id'] : "";
+$page = isset($_GET['page']) ? $_GET['page'] : "";
 ob_start();
 session_start();
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
@@ -43,7 +44,15 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">กรุณายืนยันออเดอร์</h1>
+                <h1 class="m-0">
+                  <?php if ($page == 1) {
+                    echo "กรุณายืนยันออเดอร์";
+                  } else if ($page == 2) {
+                    echo "จัดการออเดอร์เเละออกบิล";
+                  } else if ($page == 3) {
+                    echo "ออเดอร์ที่สำเร็จ";
+                  } ?>
+                </h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -56,12 +65,25 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         </div>
         <section class="content p-3">
           <div class="container-fluid ">
-            <?php foreach ($row as $data) { ?>
-              <div class="d-flex justify-content-end"> 
-                <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-danger mx-1">ยืนยันออเดอร์</a>
-                <button type="button" class="btn btn-dark mx-1">ออกบิล</button>
-              </div>
+            <?php foreach ($row as $data) {
+              $number_order = $data->number_order;
+              $_SESSION['number_order'] = $number_order;
+            ?>
+              <div class="d-flex justify-content-end">
 
+                <?php if ($page == 1) { ?>
+                  <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-danger mx-1">ยืนยันออเดอร์</a>
+                  <button type="button" class="btn btn-dark mx-1">ออกบิล</button>
+                <?php   } else if ($page == 2) { ?>
+                  <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
+                  <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-success m-1">เสร็จสิ้นออเดอร์</a>
+                  <a href="view/add_editorder/index.php?id=<?= $id; ?>" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</a>
+                  <button type="button" class="btn btn-danger m-1">ลบ</button>
+                <?php   } else if ($page == 3) { ?>
+                  <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
+                <?php    } ?>
+
+              </div>
 
               <div class="row my-3">
                 <div class="col-xl-4 mb-2">
@@ -101,6 +123,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                         // echo "<pre>";
                         // print_r($data_order);
                         // echo "</pre>";
+                        $_SESSION["array_order"]  = json_decode(json_encode($data_order), true);;
                         for ($i = 0; $i < count($data_order); $i++) {
                         ?>
                           <div class="row">
