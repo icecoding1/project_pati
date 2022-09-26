@@ -77,7 +77,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                   </div>
                   <div class="card-body p-2">
                     <div class="tab-content" id="custom-tabs-two-tabContent-order">
-                      <div class="tab-pane  fade show active" id="custom-tabs-two-neworder" role="tabpanel" aria-labelledby="custom-tabs-two-neworder-tab">
+                      <div class="tab-pane fade show active" id="custom-tabs-two-neworder" role="tabpanel" aria-labelledby="custom-tabs-two-neworder-tab">
                         <div class="row">
                           <div class="col-12">
                             <div class="card-header ">

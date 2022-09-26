@@ -1,11 +1,3 @@
-<?php
-$sql_showcount = "SELECT * FROM table_order WHERE status = 1";
-$result_showcount  = $obj->query($sql_showcount);
-$count_list_new = $result_showcount->rowCount();
-$_SESSION['count_list'] = $count_list_new;
-?>
-
-
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
@@ -76,7 +68,7 @@ $_SESSION['count_list'] = $count_list_new;
                 <i class="bi bi-bag-heart-fill nav-icon"></i>
                 <p>จัดการออเดอร์</p>
               </a>
-              <span class="count_list_new"><?= $_SESSION['count_list'] ?></span>
+              <p class="count_list_new mb-0" id="count_list_new"></p>
             </li>
             <li class="nav-item">
               <a href="list_menu.php" class="nav-link" id="nav-link3">
@@ -114,3 +106,16 @@ $_SESSION['count_list'] = $count_list_new;
   </div>
   <!-- /.sidebar -->
 </aside>
+
+
+<script>
+  var count_order = document.getElementById("count_list_new");
+
+  setInterval(fetchdata = async () => {
+    const data = await fetch("fetch_count_order.php?show_count=1", {
+      method: "GET"
+    })
+    const res = await data.text();
+    count_order.innerHTML = res;
+  }, 1000);
+</script>
