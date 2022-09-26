@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
   $name_web = "สั่งออเดอร์";
   $table =   $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
   $food = "ขนมปัง กาเเฟ";
@@ -9,7 +9,8 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
   $countdata = 0;
   $count_order = isset($_SESSION["count_order"]) ? $_SESSION["count_order"] : 0;
   $_SESSION['total'] = isset($_SESSION["total"]) ? $_SESSION["total"] : 0;
-  if (isset($_SESSION['data']) != "") {
+  $_SESSION['check_update'] = true;
+  if (isset($_SESSION['data'])) {
     $array = $_SESSION['data'];
     $array2 = $_SESSION['data'];
     usort($array, function ($a, $b) {
@@ -20,10 +21,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
       return $a['id'] - $b['id'];
     });
     $data = $input;
-    $countdata = count($array);
-    // echo "<pre>";
-    // print_r($array);
-    // echo "</pre>";
+    $countdata = count($data);
     $order = 1;
     $total = 0;
     $count_products = 0;
@@ -44,6 +42,13 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
       $_SESSION['total'] = $total;
     }
   }
+
+  // usort($_SESSION['data'], function ($a, $b) {
+  //   return $a['id'] - $b['id'];
+  // });
+  // echo "<pre>";
+  // print_r($_SESSION['data']);
+  // echo "</pre>";
 ?>
 
   <!DOCTYPE html>

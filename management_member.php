@@ -1,4 +1,5 @@
 <?php
+require_once("connection/config.php");
 $name_web = "ระบบจัดการร้านอาหาร";
 $id_member = 1;
 $page_nav = 4;
@@ -88,7 +89,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                     </thead>
                     <tbody>
                       <?php
-                      include("connection/config.php");
                       $sql = "SELECT * FROM  table_member";
                       $result = $obj->query($sql);
                       while ($row = $result->fetch(PDO::FETCH_ASSOC)) {

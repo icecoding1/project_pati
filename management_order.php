@@ -109,18 +109,25 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                 </thead>
                                 <tbody>
                                   <?php
-                                  $sql1 = "SELECT * FROM table_order WHERE status = 1";
+                                  $sql1 = "SELECT * FROM table_order WHERE status = 1 ORDER BY number_sort DESC";
                                   $result  = $obj->query($sql1);
-                                  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                  ?>
+                                  $count_list_new = $result->rowCount();
+                                  if ($count_list_new == 0) { ?>
                                     <tr>
-                                      <td nowrap><?= $row['number_order'] ?></td>
-                                      <td nowrap><?= $row['create_date'] ?></td>
-                                      <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
-                                      <td nowrap><span class="text-danger fw-semibold">รอการยืนยัน</span></td>
-                                      <td nowrap> <a href="order_new.php?page=1&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      <td colspan="5" align="center">ไม่มีรายการ</td>
                                     </tr>
-                                  <?php  } ?>
+                                    <?php } else {
+                                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                      <tr>
+                                        <td nowrap><?= $row['number_order'] ?></td>
+                                        <td nowrap><?= $row['create_date'] ?></td>
+                                        <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
+                                        <td nowrap><span class="text-danger fw-semibold">รอการยืนยัน</span></td>
+                                        <td nowrap> <a href="order_new.php?page=1&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      </tr>
+                                  <?php  }
+                                  } ?>
                                 </tbody>
                               </table>
                             </div>
@@ -160,18 +167,25 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
                                 <tbody>
                                   <?php
-                                  $sql2 = "SELECT * FROM table_order WHERE status = 2";
+                                  $sql2 = "SELECT * FROM table_order WHERE status = 2 ORDER BY number_sort DESC";
                                   $result2  = $obj->query($sql2);
-                                  while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-                                  ?>
+                                  $count_list = $result2->rowCount();
+                                  if ($count_list == 0) { ?>
                                     <tr>
-                                      <td nowrap><?= $row['number_order'] ?></td>
-                                      <td nowrap><?= $row['create_date'] ?></td>
-                                      <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
-                                      <td nowrap><span class="text-warning fw-semibold">ยืนยันออเดอร์เเล้ว</span></td>
-                                      <td nowrap> <a href="order_new.php?page=2&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      <td colspan="5" align="center">ไม่มีรายการ</td>
                                     </tr>
-                                  <?php  } ?>
+                                    <?php } else {
+                                    while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                      <tr>
+                                        <td nowrap><?= $row['number_order'] ?></td>
+                                        <td nowrap><?= $row['create_date'] ?></td>
+                                        <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
+                                        <td nowrap><span class="text-warning fw-semibold">ยืนยันออเดอร์เเล้ว</span></td>
+                                        <td nowrap> <a href="order_new.php?page=2&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      </tr>
+                                  <?php  }
+                                  } ?>
                                 </tbody>
                               </table>
                             </div>
@@ -210,18 +224,25 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                 </thead>
                                 <tbody>
                                   <?php
-                                  $sql3 = "SELECT * FROM table_order WHERE status = 3";
+                                  $sql3 = "SELECT * FROM table_order WHERE status = 3 ORDER BY number_sort DESC";
                                   $result3  = $obj->query($sql3);
-                                  while ($row = $result3->fetch(PDO::FETCH_ASSOC)) {
-                                  ?>
+                                  $count_list = $result3->rowCount();
+                                  if ($count_list == 0) { ?>
                                     <tr>
-                                      <td nowrap><?= $row['number_order'] ?></td>
-                                      <td nowrap><?= $row['create_date'] ?></td>
-                                      <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
-                                      <td nowrap><span class="text-success fw-semibold">จ่ายเงินเรียบร้อย</span></td>
-                                      <td nowrap> <a href="order_new.php?page=3&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      <td colspan="5" align="center">ไม่มีรายการ</td>
                                     </tr>
-                                  <?php  } ?>
+                                    <?php } else {
+                                    while ($row = $result3->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                      <tr>
+                                        <td nowrap><?= $row['number_order'] ?></td>
+                                        <td nowrap><?= $row['create_date'] ?></td>
+                                        <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
+                                        <td nowrap><span class="text-success fw-semibold">จ่ายเงินเรียบร้อย</span></td>
+                                        <td nowrap> <a href="order_new.php?page=3&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
+                                      </tr>
+                                  <?php  }
+                                  } ?>
                                 </tbody>
                               </table>
                             </div>

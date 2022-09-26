@@ -78,7 +78,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                   <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
                   <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-success m-1">เสร็จสิ้นออเดอร์</a>
                   <a href="view/add_editorder/index.php?id=<?= $id; ?>" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</a>
-                  <button type="button" class="btn btn-danger m-1">ลบ</button>
+                  <a href="view/add_editorder/deleteAll_order.php?id=<?= $id; ?>" class="btn btn-danger m-1">ลบ</a>
                 <?php   } else if ($page == 3) { ?>
                   <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
                 <?php    } ?>
@@ -100,7 +100,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                     <div class="col-md-5 mb-2">
                       <?php
                       $str = $data->note;
-                      echo (empty($str)) ? "-" : $data->note;
+                      echo (empty($str)) ?  "-" : $data->note;
                       ?>
                     </div>
                   </div>
@@ -120,10 +120,11 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                       <div class="order-menu">
                         <?php
                         $data_order = json_decode($data->list_order);
+                        $dataAll_order = json_decode($data->listAll_order);
                         // echo "<pre>";
                         // print_r($data_order);
                         // echo "</pre>";
-                        $_SESSION["array_order"]  = json_decode(json_encode($data_order), true);;
+                        $_SESSION["array_order"]  = json_decode(json_encode($dataAll_order), true);
                         for ($i = 0; $i < count($data_order); $i++) {
                         ?>
                           <div class="row">

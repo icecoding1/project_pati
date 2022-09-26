@@ -1,3 +1,11 @@
+<?php
+$sql_showcount = "SELECT * FROM table_order WHERE status = 1";
+$result_showcount  = $obj->query($sql_showcount);
+$count_list_new = $result_showcount->rowCount();
+$_SESSION['count_list'] = $count_list_new;
+?>
+
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
@@ -63,11 +71,12 @@
                 </a>
               </li>
             <?php } ?>
-            <li class="nav-item">
+            <li class="nav-item show_count_list">
               <a href="management_order.php" class="nav-link " id="nav-link2">
                 <i class="bi bi-bag-heart-fill nav-icon"></i>
                 <p>จัดการออเดอร์</p>
               </a>
+              <span class="count_list_new"><?= $_SESSION['count_list'] ?></span>
             </li>
             <li class="nav-item">
               <a href="list_menu.php" class="nav-link" id="nav-link3">

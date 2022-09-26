@@ -1,4 +1,6 @@
-<?php $name_web = "ระบบจัดการร้านอาหาร";
+<?php
+require_once("connection/config.php");
+$name_web = "ระบบจัดการร้านอาหาร";
 
 ob_start();
 session_start();

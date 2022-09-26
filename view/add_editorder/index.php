@@ -4,7 +4,11 @@ require_once "../../connection/config.php";
 
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
+  if (isset($_SESSION['array_order']) == "") {
+    echo "<script>window.history.back();</script>";
+  }
+
   $count_order = isset($_GET['count_order']) ? $_GET['count_order'] : 0;
   $select = isset($_GET['select_type']) ? $_GET['select_type'] : "";
   $text_search = isset($_GET['text_search']) ? $_GET['text_search'] : "";
@@ -17,9 +21,9 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
   $array = "";
   $countdata = 0;
-  $count_order = isset($_SESSION["total_order_success"]) ? $_SESSION["total_order_success"] : 0;
-  $_SESSION['total'] = isset($_SESSION["total"]) ? $_SESSION["total"] : 0;
   $_SESSION['id_forupdate'] = isset($_GET['id']) ? $_GET['id'] : 0;
+  $id_forupdate = $_SESSION['id_forupdate'];
+  $_SESSION['check_update'] = true;
 
   if (isset($_SESSION['array_order'])) {
     $array_order = $_SESSION['array_order'];
@@ -102,15 +106,19 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         <p class="mb-0 mx-2 text-white">จัดการออเดอร์</p>
       </div>
       <div>
-        <a href="../../home.php" class="btn btn-light px-4 m-2 ">กลับหน้าหลัก</a>
-        <a href="index.php" class="btn btn-light px-4 m-2">กลับ</a>
+        <a href="../../order_new.php?page=2&id=<?= $id_forupdate; ?>" class="btn btn-light px-4 m-2 ">ยกเลิก</a>
+        <a href="update_order.php" class="btn btn-light px-4 m-2">บันทึกข้อมูล</a>
       </div>
     </header>
 
     <div class="my-3 mx-3">
-      <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <p class=" fw-bold fs-4 ">รายการอาหารของฉัน</p>
-        <p class=""><?= "หมายเลขออเดอร์ : " . $_SESSION['number_order'] . " | จำนวนรายการ : " . $count_order . " | ราคารวม : " . $total; ?></p>
+      <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+        <p class=" fw-bold fs-4 mb-0 " style="margin-right:10px;">รายการอาหารของฉัน</p>
+        <div class="d-flex  align-items-center flex-wrap">
+          <p class="mb-0 mx-1"><?= "หมายเลขออเดอร์ : " . $_SESSION['number_order']; ?></p>
+          <p class="mb-0 mx-1"><?= " | จำนวนรายการ : " . $count_order; ?></p>
+          <p class="mb-0 mx-1"><?= " | ราคารวม : " . $total; ?></p>
+        </div>
       </div>
 
       <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -153,7 +161,10 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
               </tr>
             <?php
               $count_products = 0;
-            } ?>
+            }
+            $_SESSION['update_order'] = $data;
+            $_SESSION['update_orderAll'] = $array_order;
+            ?>
           </tbody>
         </table>
       </div>

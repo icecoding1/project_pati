@@ -1,9 +1,10 @@
-<?php $name_web = "ระบบจัดการร้านอาหาร";
+<?php
+$name_web = "ระบบจัดการร้านอาหาร";
 require_once("connection/config.php");
 
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
   $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
   $page_nav = 6;
 

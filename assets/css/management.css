@@ -327,6 +327,20 @@ html {
   right: 0;
 }
 
+.show_count_list {
+  position: relative;
+}
+
+.show_count_list .count_list_new {
+  position: absolute;
+  top: -10px;
+  right: 3px;
+  background: #007bff;
+  color: white;
+  padding: 0px 8px;
+  border-radius: 10px;
+}
+
 .font-five {
   font-weight: 600 !important;
 }
