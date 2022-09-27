@@ -23,6 +23,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
     <!-- page to web -->
     <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+    <input type="number" id="page" value="1" class="d-none">
 
     <div class="wrapper">
       <!-- Preloader -->
@@ -34,7 +35,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper set-content">
-
         <div class="content-header mx-3">
           <div class="container-fluid">
             <div class="row mb-2">
@@ -50,12 +50,8 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
             </div>
           </div>
         </div>
-
-
-
         <section class="content p-3 ">
           <div class="container-fluid ">
-
             <div class="row   py-3 border-report">
               <div class="col-12 ">
                 <div class="card card-primary card-tabs">
@@ -65,38 +61,27 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                         <h3 class="card-title">จัดการออเดอร์</h3>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" id="custom-tabs-two-neworder-teb" data-toggle="pill" href="#custom-tabs-two-neworder" role="tab" aria-controls="custom-tabs-two-neworder" aria-selected="true">ออเดอร์ใหม่</a>
+                        <a class="nav-link active1 " id="btn_conntent_taborder1" href="#">ออเดอร์ใหม่</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-two-progress-tab" data-toggle="pill" href="#custom-tabs-two-progress" role="tab" aria-controls="custom-tabs-two-progress" aria-selected="false">กำลังดำเนินการ</a>
+                        <a class="nav-link active2" id="btn_conntent_taborder2" href="#">กำลังดำเนินการ</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-two-success-tab" data-toggle="pill" href="#custom-tabs-two-success" role="tab" aria-controls="custom-tabs-two-success" aria-selected="false">เสร็จสิ้น</a>
+                        <a class="nav-link active3" id="btn_conntent_taborder3" href="#">เสร็จสิ้น</a>
                       </li>
                     </ul>
                   </div>
                   <div class="card-body p-2">
-                    <div class="tab-content" id="custom-tabs-two-tabContent-order">
-                      <div class="tab-pane fade show active" id="custom-tabs-two-neworder" role="tabpanel" aria-labelledby="custom-tabs-two-neworder-tab">
+                    <div class="tab-content">
+                      <div class="" id="conntent_taborder1">
                         <div class="row">
                           <div class="col-12">
                             <div class="card-header ">
-                              <div class="w-100 d-flex justify-content-between align-items-center flex-wrap">
+                              <div class="w-100 d-flex justify-content-between align-items-center flex-wrap py-2">
                                 <h3 class="card-title mx-2">ออเดอร์ใหม่</h3>
-
-                                <div class="card-tools mt-2">
-                                  <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                    <div class="input-group-append">
-                                      <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                             </div>
-                            <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <div class="card-body table-responsive p-0" style="height: 400px;">
                               <table class="table table-head-fixed text-nowrap">
                                 <thead>
                                   <tr>
@@ -107,111 +92,63 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                     <th>รายการ</th>
                                   </tr>
                                 </thead>
-                                <tbody>
-                                  <?php
-                                  $sql1 = "SELECT * FROM table_order WHERE status = 1 ORDER BY number_sort DESC";
-                                  $result  = $obj->query($sql1);
-                                  $count_list_new = $result->rowCount();
-                                  if ($count_list_new == 0) { ?>
-                                    <tr>
-                                      <td colspan="5" align="center">ไม่มีรายการ</td>
-                                    </tr>
-                                    <?php } else {
-                                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                    ?>
-                                      <tr>
-                                        <td nowrap><?= $row['number_order'] ?></td>
-                                        <td nowrap><?= $row['create_date'] ?></td>
-                                        <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
-                                        <td nowrap><span class="text-danger fw-semibold">รอการยืนยัน</span></td>
-                                        <td nowrap> <a href="order_new.php?page=1&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
-                                      </tr>
-                                  <?php  }
-                                  } ?>
+                                <tbody id="table_ordernew1">
+
                                 </tbody>
                               </table>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="custom-tabs-two-progress" role="tabpanel" aria-labelledby="custom-tabs-two-progress-tab">
+                      <div class="" id="conntent_taborder2">
                         <div class="row">
                           <div class="col-12">
                             <div class="card-header">
-                              <div class="w-100 d-flex justify-content-between align-items-center flex-wrap">
+                              <div class="w-100 d-flex justify-content-between align-items-center flex-wrap py-2">
                                 <h3 class="card-title mx-2">ออเดอร์กำลังดำเนินการ</h3>
-
-                                <div class="card-tools  mt-2">
-                                  <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                    <div class="input-group-append">
-                                      <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                             </div>
-                            <div class="card-body table-responsive p-0" style="height: 300px;">
-                              <table class="table table-head-fixed text-nowrap">
-                                <thead>
-                                  <tr>
-                                    <th>เลขที่ออเดอร์</th>
-                                    <th>วันเวลา</th>
-                                    <th>โต๊ะ</th>
-                                    <th>สถานะ</th>
-                                    <th>รายการ</th>
-                                  </tr>
-                                </thead>
+                          </div>
+                          <div class="card-body table-responsive p-0" style="height: 400px;">
+                            <table class="table table-head-fixed text-nowrap">
+                              <thead>
+                                <tr>
+                                  <th>เลขที่ออเดอร์</th>
+                                  <th>วันเวลา</th>
+                                  <th>โต๊ะ</th>
+                                  <th>สถานะ</th>
+                                  <th>รายการ</th>
+                                </tr>
+                              </thead>
 
-                                <tbody>
-                                  <?php
-                                  $sql2 = "SELECT * FROM table_order WHERE status = 2 ORDER BY number_sort DESC";
-                                  $result2  = $obj->query($sql2);
-                                  $count_list = $result2->rowCount();
-                                  if ($count_list == 0) { ?>
-                                    <tr>
-                                      <td colspan="5" align="center">ไม่มีรายการ</td>
-                                    </tr>
-                                    <?php } else {
-                                    while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-                                    ?>
-                                      <tr>
-                                        <td nowrap><?= $row['number_order'] ?></td>
-                                        <td nowrap><?= $row['create_date'] ?></td>
-                                        <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
-                                        <td nowrap><span class="text-warning fw-semibold">ยืนยันออเดอร์เเล้ว</span></td>
-                                        <td nowrap> <a href="order_new.php?page=2&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
-                                      </tr>
-                                  <?php  }
-                                  } ?>
-                                </tbody>
-                              </table>
-                            </div>
+                              <tbody id="table_ordernew2">
+
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="custom-tabs-two-success" role="tabpanel" aria-labelledby="custom-tabs-two-success-tab">
+                      <div class="" id="conntent_taborder3">
                         <div class="row">
                           <div class="col-12">
                             <div class="card-header">
                               <div class="w-100 d-flex justify-content-between align-items-center flex-wrap">
                                 <h3 class="card-title mx-2">ออเดอร์เสร็จสิ้น</h3>
 
-                                <div class="card-tools  mt-2">
+                                <form class="card-tools  mt-2 d-flex justify-content-center align-items-center flex-wrap" id="form_search">
+                                  <button typr="button" class="btn btn-dark px-3 py-1 mx-3" onclick="showAll_order()">รายการทั้งหมด</button>
                                   <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                    <input type="text" name="text_search_order" id="text_search_order" class="form-control float-right" placeholder="Search">
                                     <div class="input-group-append">
-                                      <button type="submit" class="btn btn-default">
+                                      <button type="submit" class="btn btn-default" id="btn_search_order">
                                         <i class="fas fa-search"></i>
                                       </button>
                                     </div>
                                   </div>
-                                </div>
+                                </form>
                               </div>
                             </div>
-                            <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <div class="card-body table-responsive p-0" style="height: 400px;">
                               <table class="table table-head-fixed text-nowrap">
                                 <thead>
                                   <tr>
@@ -222,30 +159,11 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                     <th>รายการ</th>
                                   </tr>
                                 </thead>
-                                <tbody>
-                                  <?php
-                                  $sql3 = "SELECT * FROM table_order WHERE status = 3 ORDER BY number_sort DESC";
-                                  $result3  = $obj->query($sql3);
-                                  $count_list = $result3->rowCount();
-                                  if ($count_list == 0) { ?>
-                                    <tr>
-                                      <td colspan="5" align="center">ไม่มีรายการ</td>
-                                    </tr>
-                                    <?php } else {
-                                    while ($row = $result3->fetch(PDO::FETCH_ASSOC)) {
-                                    ?>
-                                      <tr>
-                                        <td nowrap><?= $row['number_order'] ?></td>
-                                        <td nowrap><?= $row['create_date'] ?></td>
-                                        <td nowrap>โต๊ะ <?= $row['table_user'] ?></td>
-                                        <td nowrap><span class="text-success fw-semibold">จ่ายเงินเรียบร้อย</span></td>
-                                        <td nowrap> <a href="order_new.php?page=3&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm">รายละเอียด </a></td>
-                                      </tr>
-                                  <?php  }
-                                  } ?>
-                                </tbody>
-                              </table>
                             </div>
+                            <tbody id="table_ordernew3">
+
+                            </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
@@ -257,13 +175,12 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
           </div>
         </section>
       </div>
-
-
     </div>
 
+
     <?php include 'add_framwork/js.php' ?>
-    <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/management_order.js"></script>
 
   </body>
 
