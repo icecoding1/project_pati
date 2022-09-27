@@ -6,14 +6,8 @@ $page_nav = 1;
 ob_start();
 session_start();
 if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
-
-  date_default_timezone_set("Asia/Bangkok");
+  date_default_timezone_set("Asia/bangkok");
   $date_now = date("Y-m-d");
-  $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : false;
-  $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : false;
-
-
-
 ?>
   <?php if ($_SESSION["session_status"] == "admin" || $_SESSION["session_status"] == "cashier") { ?>
     <!DOCTYPE html>
@@ -61,67 +55,29 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
           </div>
           <section class="content p-3">
             <div class="container-fluid ">
-              <?php
-              $date_oneday = date("Y-m-d");
-              $total_income = 0;
-              $count_orderday = 0;
-              $sql_onedaty = "SELECT * FROM table_order WHERE date_report LIKE '%$date_oneday%' AND status = 3 ";
-              $result_search_ondeday =  $obj->query($sql_onedaty);
 
-              while ($row = $result_search_ondeday->fetch(PDO::FETCH_ASSOC)) {
-                $count_orderday = $result_search_ondeday->rowCount();
-                $total_income += $row['priceAll'];
-              }
-              ?>
-
-              <div class="row  bg-secondary px-4 py-3 border-report">
-                <div class="col-xl-6  fw-bold"><i class="ion ion-stats-bars pr-1 "></i> ยอดขายวันนี้</div>
-                <div class="col-xl-6 mb-2">วันที่ &nbsp;<?= date("d-m-Y"); ?></div>
-                <div class="col-xl-6 font-five">รายได้ทั้งหมด</div>
-                <div class="col-xl-6 mb-2 "><?= number_format($total_income, 2); ?> <span> &nbsp;&nbsp;&nbsp; บาท </span> </div>
-                <div class="col-xl-6 font-five">ออเดอร์ที่สำเร็จ</div>
-                <div class="col-xl-6 mb-2"><?= number_format($count_orderday); ?> <span> &nbsp;&nbsp;&nbsp;ออเดอร์ </span></div>
+              <div class="row  bg-secondary px-4 py-3 border-report" id="report_oneday">
               </div>
 
               <div class="d-flex justify-content-between align-items-center flex-wrap  mb-3">
-                <button type="button" class="btn btn-dark  px-2 mt-4 mx-2" onclick="showAll_order()">เเสดงทั้งหมด</button>
-                <form action="" method="get" class="d-flex flex-wrap align-items-center mb-0 mt-4">
+                <button type="button" class="btn btn-dark  px-2 mt-4 mx-2" onclick="showAll_order()">เเสดงทั้งหมด | ใหม่</button>
+                <form id="fetchdata_fromdate" class="d-flex flex-wrap align-items-center mb-0 mt-4">
                   <div class="mx-2"> <label for="datetodate" class="mb-0">เลือกช่วงเวลา</label></div>
                   <div class="mx-2 ">
-                    <input type="date" name="from_date" id="from_date" class="set-input bg-light my-1" value="<?= $from_date ?>">
+                    <input type="date" name="from_date" id="from_date" class="set-input bg-light my-1">
                     <label for="to" class="to-date "> - </label>
-                    <input type="date" name="to_date" id="to_date" class="set-input bg-light my-1" value="<?= $to_date ?>">
+                    <input type="date" name="to_date" id="to_date" class="set-input bg-light my-1" value="<?= $date_now ?>">
                   </div>
                   <button type="submit" class="mx-2 btn btn-outline-dark">submit</button>
                 </form>
               </div>
 
-              <?php
-              $totalAll_income = 0;
-              $count_orderAll = 0;
-              $sql = $from_date && $to_date ? "SELECT * FROM table_order WHERE status = 3 AND date_report BETWEEN '$from_date' AND '$to_date'" : "SELECT * FROM table_order WHERE status = 3 ";
-              $result_all_success =  $obj->query($sql);
-
-              while ($row = $result_all_success->fetch(PDO::FETCH_ASSOC)) {
-                $count_orderAll = $result_all_success->rowCount();
-                $totalAll_income += $row['priceAll'];
-              }
-
-              ?>
-
-              <div class="row  bg-secondary px-4 py-3 border-report">
-                <div class="col-xl-12 mb-2 fw-bold"><i class="ion ion-pie-graph pr-1 "></i> ยอดขายโดยรวม</div>
-                <div class="col-xl-6 font-five">รายได้ทั้งหมด</div>
-                <div class="col-xl-6 mb-2 "><?= number_format($totalAll_income, 2); ?> <span> &nbsp;&nbsp;&nbsp; บาท </span> </div>
-                <div class="col-xl-6 font-five">ออเดอร์ที่สำเร็จ</div>
-                <div class="col-xl-6 mb-2"><?= number_format($count_orderAll); ?> <span> &nbsp;&nbsp;&nbsp;ออเดอร์ </span></div>
-                <div class="col-xl-6 font-five">ช่วงเวลา</div>
-                <div class="col-xl-6 mb-2"><?= $from_date && $to_date ?   date("d-m-Y", strtotime($from_date)) . " - " . date("d-m-Y", strtotime($to_date)) : "ทั้งหมด"; ?></div>
+              <div class="row  bg-secondary px-4 py-3 border-report" id="report_All">
               </div>
 
 
               <div class="d-flex justify-content-start align-items-center mt-4 ">
-                <form action="" method="get">
+                <form>
                   <label for="select_type">เลือกประเภท</label>
                   <select name="select_type" id="select_type" class="set-input bg-light">
                     <option value="alltotal" disabled>เลือก</option>
@@ -176,10 +132,82 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
         //   background: "#3E88FB"
         // };
 
+
+
+        setInterval(async () => {
+          const data = await fetch("fetch_count_order.php?read_detail_one=1", {
+            method: "GET"
+          })
+          const res = await data.text();
+          document.getElementById("report_oneday").innerHTML = res;
+        }, 100);
+
+
+
+        var form_date = document.getElementById("fetchdata_fromdate");
+
+
+        form_date.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const formData = new FormData(form_date);
+          formData.append("read_detail_all", 1);
+
+          if (form_date.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          } else {
+            const data = await fetch("fetch_count_order.php", {
+              method: "POST",
+              body: formData
+            })
+            const response = await data.text();
+            document.getElementById("report_All").innerHTML = response;
+          }
+        })
+
+
+
+        form_date.addEventListener("keypress", async (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            const formData = new FormData(form_date);
+            formData.append("read_detail_all", 1);
+
+            if (form_date.checkValidity() === false) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            } else {
+              const data = await fetch("fetch_count_order.php", {
+                method: "POST",
+                body: formData
+              })
+              const response = await data.text();
+              document.getElementById("report_All").innerHTML = response;
+            }
+          }
+        })
+
+        const fetdetail_all = async () => {
+          const data = await fetch("fetch_count_order.php?read_detail_All=1", {
+            method: "GET"
+          })
+          const res = await data.text();
+          document.getElementById("report_All").innerHTML = res;
+        }
+
+        fetdetail_all();
+
+
+
+
+
+
         const showAll_order = () => {
-          // document.getElementById("from_date").value = "";
-          // document.getElementById("to_date").value = "";
-          location.assign("report.php");
+          document.getElementById("from_date").value = "";
+          document.getElementById("to_date").value = "<?= $date_now ?>";
+          fetdetail_all();
         }
 
 
