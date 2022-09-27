@@ -31,6 +31,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
   $table =   $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "";
   $note = isset($_POST['note']) ? $_POST['note'] : "";
   $create_date = date("d-m-Y  H:i:s");
+  $date_report = date("Y-m-d");
 
   $list_order =  json_encode($list);
   $listAll_order =  json_encode($listAll);
@@ -47,7 +48,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
 
   if (count($array) > 0) {
     try {
-      $sql = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort) VALUES(:number_order, :list_order, :listAll_order, :priceAll, :count_order, :table_user, :note, :create_date, :number_sort)";
+      $sql = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort, date_report) VALUES(:number_order, :list_order, :listAll_order, :priceAll, :count_order, :table_user, :note, :create_date, :number_sort, :date_report)";
       $result = $obj->prepare($sql);
       $result->execute([
         'number_order' => $number_order,
@@ -59,6 +60,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
         'note' => $note,
         'create_date' => $create_date,
         'number_sort' => $number_sort,
+        'date_report' => $date_report,
       ]);
 
       if ($result) {

@@ -4,6 +4,7 @@ ob_start();
 session_start();
 if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
   if ($_SERVER['REQUEST_METHOD']  == 'GET') {
+    
     if (isset($_GET['show_count'])) {
       $sql_showcount = "SELECT * FROM table_order WHERE status = 1";
       $result_showcount  = $obj->query($sql_showcount);
