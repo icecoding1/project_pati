@@ -125,6 +125,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                         // print_r($data_order);
                         // echo "</pre>";
                         $_SESSION["array_order"]  = json_decode(json_encode($dataAll_order), true);
+                        $_SESSION['add_count_sales'] =   $_SESSION["array_order"];
                         for ($i = 0; $i < count($data_order); $i++) {
                         ?>
                           <div class="row">

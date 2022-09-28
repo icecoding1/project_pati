@@ -46,6 +46,8 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
 
 
 
+
+
   if (count($array) > 0) {
     try {
       $sql = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort, date_report) VALUES(:number_order, :list_order, :listAll_order, :priceAll, :count_order, :table_user, :note, :create_date, :number_sort, :date_report)";
@@ -68,7 +70,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
         unset($_SESSION['data']);
         unset($_SESSION['total']);
         unset($_SESSION["count_order"]);
-        echo "<script>alert('เพิ่มรายการสำเร็จ " . gettype($number_sort) . "');</script>";
+        echo "<script>alert('เพิ่มรายการสำเร็จ');</script>";
         echo "<script>location.assign('order_receive.php');</script>";
       }
     } catch (PDOException $e) {

@@ -8,6 +8,30 @@ session_start();
 if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
   date_default_timezone_set("Asia/bangkok");
   $date_now = date("Y-m-d");
+  // $select_type = isset($_GET['select_type']) ? $_GET['select_type'] : "ทั้งหมด";
+  // if ($select_type == "ทั้งหมด" || $select_type == "all") {
+  //   $sql_show_dashbord = "SELECT * FROM table_listfood  ORDER BY count_sales DESC LIMIT 10";
+  //   $data_form_select = $obj->prepare($sql_show_dashbord);
+  //   $data_form_select->execute();
+  // } else {
+  //   $sql_show_dashbord = "SELECT * FROM table_listfood WHERE type_food = :type_food ORDER BY count_sales DESC LIMIT 10";
+  //   $data_form_select = $obj->prepare($sql_show_dashbord);
+  //   $data_form_select->execute([
+  //     'type_food' =>  $select_type,
+  //   ]);
+  // }
+
+  // $name_sales  = [];
+  // $sales = [];
+  // while ($row = $data_form_select->fetch(PDO::FETCH_ASSOC)) {
+  //   extract($row);
+  //   $data = array(
+  //     $name => $name,
+  //     $count_sales => $count_sales,
+  //   );
+  //   array_push($name_sales,  $data[$name]);
+  //   array_push($sales,  $data[$count_sales]);
+  // }
 ?>
   <?php if ($_SESSION["session_status"] == "admin" || $_SESSION["session_status"] == "cashier") { ?>
     <!DOCTYPE html>
@@ -56,53 +80,72 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
           <section class="content p-3">
             <div class="container-fluid ">
 
-              <div class="row  bg-secondary px-4 py-3 border-report" id="report_oneday">
+              <div class="row border-report" id="report_oneday">
               </div>
 
               <div class="d-flex justify-content-between align-items-center flex-wrap  mb-3">
-                <button type="button" class="btn btn-dark  px-2 mt-4 mx-2" onclick="showAll_order()">เเสดงทั้งหมด | ใหม่</button>
-                <form id="fetchdata_fromdate" class="d-flex flex-wrap align-items-center mb-0 mt-4">
+                <button type="button" class="btn btn-dark  px-2 mt-3 mx-2" onclick="showAll_order()">เเสดงทั้งหมด | ใหม่</button>
+                <form id="fetchdata_fromdate" class="d-flex flex-wrap align-items-center mb-0 mt-3">
                   <div class="mx-2"> <label for="datetodate" class="mb-0">เลือกช่วงเวลา</label></div>
                   <div class="mx-2 ">
                     <input type="date" name="from_date" id="from_date" class="set-input bg-light my-1">
                     <label for="to" class="to-date "> - </label>
-                    <input type="date" name="to_date" id="to_date" class="set-input bg-light my-1" value="<?= $date_now ?>">
+                    <input type="date" name="to_date" id="to_date" class="set-input bg-light my-1" value="<?= $date_now  ?>">
                   </div>
                   <button type="submit" class="mx-2 btn btn-outline-dark">submit</button>
                 </form>
               </div>
 
-              <div class="row  bg-secondary px-4 py-3 border-report" id="report_All">
+              <div class="row border-report" id="report_All">
               </div>
 
 
-              <div class="d-flex justify-content-start align-items-center mt-4 ">
-                <form>
-                  <label for="select_type">เลือกประเภท</label>
-                  <select name="select_type" id="select_type" class="set-input bg-light">
-                    <option value="alltotal" disabled>เลือก</option>
-                    <option value="food">อาหาร</option>
-                    <option value="drink">เครื่องดื่ม</option>
+              <div class="d-flex justify-content-start align-items-center mt-4 mb-2">
+                <form id="select_sales" class="mt-4">
+                  <label for="">เลือกประเภท</label>
+                  <select id="select_type" class="set-input bg-light" name="select_type">
+                    <?php $sql_select = "SELECT * FROM table_typefood";
+                    $select = $obj->query($sql_select); ?>
+                    <?php if ($select_type == "ทั้งหมด" || $select_type == "all") { ?>
+                      <option value="alltotal" disabled>เลือก</option>
+                      <option value="ทั้งหมด" selected>ทั้งหมด</option>
+                      <?php while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+                        extract($row);
+                      ?>
+                        <option value="<?= $type ?>"><?= $type ?></option>
+                      <?php }
+                    } else { ?>
+                      <option value="alltotal" disabled>เลือก</option>
+                      <option value="ทั้งหมด">ทั้งหมด</option>
+                      <?php while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+                        extract($row);
+                      ?>
+                        <?php if ($type == $select_type) { ?>
+                          <option value="<?= $type ?>" selected><?= $type ?></option>
+                        <?php } else { ?>
+                          <option value="<?= $type ?>"><?= $type ?></option>
+                    <?php }
+                      }
+                    } ?>
                   </select>
                 </form>
               </div>
 
-              <div class="card card-secondary">
-                <div class="card-header">
-                  <h3 class="card-title">กราฟเเสดงข้อมูลเมนูขายดี</h3>
-
+              <div class="card ">
+                <div class="card-header card-dashboard">
+                  <h3 class=" card-title text-white">กราฟเเสดงข้อมูลเมนูขายดี</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
+                      <i class="fas fa-minus text-white"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove">
-                      <i class="fas fa-times"></i>
+                      <i class="fas fa-times text-white"></i>
                     </button>
                   </div>
                 </div>
                 <div class="card-body">
-                  <div class="chart">
-                    <canvas id="barChart" class="barChart" style="width:100%; max-height:500px; min-height:280px; ">
+                  <div class="chart" id="body_chart">
+                    <canvas id="barChart" class="barChart" style="width:100%; max-height:auto; min-height:300px; ">
                     </canvas>
                   </div>
                 </div>
@@ -115,9 +158,9 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
 
 
       </div>
-
-
+      <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
       <?php include 'add_framwork/js.php' ?>
+
 
       <script>
         // var date = new Date();
@@ -132,6 +175,9 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
         //   background: "#3E88FB"
         // };
 
+        var select_sales = document.getElementById("select_sales");
+        var form_date = document.getElementById("fetchdata_fromdate");
+        var select_form = document.getElementById("select_sales");
 
 
         setInterval(async () => {
@@ -141,11 +187,6 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
           const res = await data.text();
           document.getElementById("report_oneday").innerHTML = res;
         }, 100);
-
-
-
-        var form_date = document.getElementById("fetchdata_fromdate");
-
 
         form_date.addEventListener("submit", async (e) => {
           e.preventDefault();
@@ -165,8 +206,6 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
             document.getElementById("report_All").innerHTML = response;
           }
         })
-
-
 
         form_date.addEventListener("keypress", async (e) => {
           if (e.key === "Enter") {
@@ -200,10 +239,6 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
         fetdetail_all();
 
 
-
-
-
-
         const showAll_order = () => {
           document.getElementById("from_date").value = "";
           document.getElementById("to_date").value = "<?= $date_now ?>";
@@ -211,37 +246,63 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
         }
 
 
-        const data = {
-          labels: ['ผัดกระเพราหมู', 'ผัดกระเพราหมูกรอบ', 'ข้าวผัดกุ้ง', 'ผัดคะน้า', 'เเกงส้ม', 'เเกงปลา'],
-          datasets: [{
-            barPercentage: 100,
-            barThickness: 60,
-            maxBarThickness: 80,
-            minBarLength: 25,
-            label: 'อาหาร : ยอดออเดอร์ ',
-            data: [19, 19, 7, 5, 2, 1],
-            backgroundColor: '#426fbd',
-            borderColor: '#707070',
-            borderWidth: 1
-          }]
+
+        document.getElementById("select_type").addEventListener("change", () => {
+          show_report();
+        })
+
+        const show_report = async (e) => {
+
+          const formData = new FormData(select_form);
+
+          const datafetch = await fetch("api_datasales.php", {
+            method: "POST",
+            body: formData,
+          })
+          const res = await datafetch.json();
+          // console.log(res.type);
+
+          const data = {
+            labels: res.name,
+            datasets: [{
+              barPercentage: 1.0,
+              barThickness: 60,
+              maxBarThickness: 200,
+              minBarLength: 100,
+              label: `${res.type} : ยอดออเดอร์`,
+              data: res.countSales,
+              backgroundColor: '#007bff',
+              borderColor: '#707070',
+              borderWidth: 1.5
+            }]
+          }
+
+          const config = {
+            type: 'horizontalBar',
+            data,
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontSize: 20
+                }
+              },
+              title: {
+                position: 'bottom',
+                display: true,
+                text: 'กราฟเเสดงข้อมูลออเดอร์ขายดี',
+                fontSize: 20
+              },
+            }
+          };
+
+          const myChart = new Chart(
+            document.getElementById('barChart'),
+            config
+          );
         }
 
-        const config = {
-          type: 'horizontalBar',
-          data,
-          options: {
-            title: {
-              position: 'bottom',
-              display: true,
-              text: 'กราฟเเสดงข้อมูลออเดอร์ขายดี'
-            },
-          }
-        };
-
-        const myChart = new Chart(
-          document.getElementById('barChart'),
-          config
-        );
+        show_report();
       </script>
 
     </body>

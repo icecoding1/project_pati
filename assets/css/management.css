@@ -50,7 +50,15 @@ html {
 
 .border-report {
   border-radius: 10px;
-  margin: 10px 0px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  margin-bottom: 30px !important;
+  background-color: white;
+  padding: 25px 15px;
+}
+
+.card-dashboard {
+  background-color: #343a40;
 }
 
 .set-input {

@@ -13,7 +13,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
   $result = $obj->query($sql);
 
   $row = $result->fetchAll(PDO::FETCH_OBJ);
-  $count = count($row);
+  $count = $result->rowCount();
 
 ?>
 
@@ -120,68 +120,72 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                 <?php
                 foreach ($row as $row) { ?>
                   <div class="content-menu position-relative">
-                    <?php if (strpos($row->image, ".")) { ?>
-                      <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
-                    <?php } else { ?>
-                      <img src="assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
+                    <div class="content-img">
+                      <?php if (strpos($row->image, ".")) { ?>
+                        <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+                      <?php } else { ?>
+                        <img src="assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
+                      <?php } ?>
+                    </div>
+                    <div class="content-menu-bottom">
+                      <div>
+                        <p class="mb-0"><?= $row->name ?></p>
+                        <?php
+                        $price =  $row->price_food;
+                        $price_set =  number_format($price, 2);
+                        ?>
+                        <p class="mb-0">ราคา : <span><?= $price_set . " ฿"; ?></span></p>
+                      </div>
+                      <a class="btn btn-primary p-1 btn-detail" href="detail_list_menu.php?id=<?= $row->id ?>">รายละเอียด</a>
+                    </div>
+                    <?php if ($row->status == "offline") { ?>
+                      <div class="ribbon-wrapper ribbon-xl">
+                        <div class="ribbon bg-danger text-lg">
+                          ปิดการใช้งานอยู่
+                        </div>
+                      </div>
                     <?php } ?>
                   </div>
-                  <div class="content-menu-bottom">
-                    <div>
-                      <p class="mb-0"><?= $row->name ?></p>
-                      <?php
-                      $price =  $row->price_food;
-                      $price_set =  number_format($price, 2);
-                      ?>
-                      <p class="mb-0">ราคา : <span><?= $price_set . " ฿"; ?></span></p>
-                    </div>
-                    <a class="btn btn-primary p-1 btn-detail" href="detail_list_menu.php?id=<?= $row->id ?>">รายละเอียด</a>
-                  </div>
-                  <?php if ($row->status == "offline") { ?>
-                    <div class="ribbon-wrapper ribbon-xl">
-                      <div class="ribbon bg-danger text-lg">
-                        ปิดการใช้งานอยู่
-                      </div>
-                    </div>
-                  <?php } ?>
+                <?php } ?>
               </div>
-            <?php } ?>
-          </div>
-        <?php } else { ?>
-          <div class="list-menu-set">
-            <?php
-              foreach ($row as $row) { ?>
-              <div class="content-menu position-relative">
-                <div class="content-img">
-                  <!-- <img src="assets/img/coffee.jpg" alt="food_lists" class="img_menu"> -->
-                  <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
-                </div>
-                <div class="content-menu-bottom">
-                  <div>
-                    <p class="mb-0"><?= $row->name ?></p>
-                    <?php
-                    $price =  $row->price_food;
-                    $price_set =  number_format($price, 2);
-                    ?>
-                    <p class="mb-0">ราคา : <span><?= $price_set . " ฿"; ?></span></p>
-                  </div>
-                  <a class="btn btn-primary p-1 btn-detail" href="detail_list_menu.php?id=<?= $row->id ?>">รายละเอียด</a>
-                </div>
-                <?php if ($row->status == "offline") { ?>
-                  <div class="ribbon-wrapper ribbon-xl">
-                    <div class="ribbon bg-danger text-lg">
-                      ปิดการใช้งานอยู่
+            <?php } else { ?>
+              <div class="list-menu-set">
+                <?php
+                foreach ($row as $row) { ?>
+                  <div class="content-menu position-relative">
+                    <div class="content-img">
+                      <?php if (strpos($row->image, ".")) { ?>
+                        <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+                      <?php } else { ?>
+                        <img src="assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
+                      <?php } ?>
                     </div>
+                    <div class="content-menu-bottom">
+                      <div>
+                        <p class="mb-0"><?= $row->name ?></p>
+                        <?php
+                        $price =  $row->price_food;
+                        $price_set =  number_format($price, 2);
+                        ?>
+                        <p class="mb-0">ราคา : <span><?= $price_set . " ฿"; ?></span></p>
+                      </div>
+                      <a class="btn btn-primary p-1 btn-detail" href="detail_list_menu.php?id=<?= $row->id ?>">รายละเอียด</a>
+                    </div>
+                    <?php if ($row->status == "offline") { ?>
+                      <div class="ribbon-wrapper ribbon-xl">
+                        <div class="ribbon bg-danger text-lg">
+                          ปิดการใช้งานอยู่
+                        </div>
+                      </div>
+                    <?php } ?>
                   </div>
                 <?php } ?>
               </div>
             <?php } ?>
-          </div>
-        <?php } ?>
 
+          </div>
+        </section>
       </div>
-      </section>
-    </div>
 
     </div>
 
