@@ -2,7 +2,7 @@
 include "connection/config.php";
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 
 
   $number_menu = (mt_rand());
@@ -73,10 +73,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
 
     <div class="wrapper">
-      <!-- Preloader -->
-      <div class="preloader flex-column justify-content-center align-items-center bg-dark">
-        <img class="animation__shake" src="dist/img/food_pachaew_logo.png" alt="AdminLTELogo" height="80" width="80">
-      </div>
+      <?php include('layout/preloader.php') ?>
       <?php include('layout/header.php') ?>
       <?php include('layout/slidebar.php') ?>
 

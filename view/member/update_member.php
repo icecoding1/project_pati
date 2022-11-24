@@ -8,8 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $id = isset($_POST["id"]) ? $_POST["id"] : null;
   $check_id = isset($_POST["id"]) ? true : false;
   $name = $_POST["name"];
-  $username = $_POST["username"];
-  $password = $_POST["password"];
   $status = $_POST["status"];
   $old_img = isset($_POST['image']) ? $_POST['image'] : "";
 
@@ -50,14 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-  $sql = $check_id ?   "UPDATE table_member SET image = :image, name = :name, username = :username, password = :password, status = :status WHERE id = :id" : "INSERT INTO table_member(image, name, username, password, status) VALUES(:image,:name,:username,:password,:status)";
+  $sql = $check_id ?   "UPDATE table_member SET image = :image, name = :name, password = :password, status = :status WHERE id = :id" : "INSERT INTO table_member(image, name, username, password, status) VALUES(:image,:name,:username,:password,:status)";
 
   try {
     if ($check_id) {
       $insert = $obj->prepare($sql);
       $insert->bindParam(":image", $nameimg);
       $insert->bindParam(":name", $name);
-      $insert->bindParam(":username", $username);
       $insert->bindParam(":password", $password);
       $insert->bindParam(":status", $status);
       $insert->bindParam(":id", $id);
@@ -68,11 +65,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script> window.location.assign('../../management_member.php');</script>";
       }
     } else {
+      $username = $_POST["username"];
+      $password = $_POST["password"];
+      $hash = md5($password);
       $insert = $obj->prepare($sql);
       $insert->bindParam(":image", $nameimg);
       $insert->bindParam(":name", $name);
       $insert->bindParam(":username", $username);
-      $insert->bindParam(":password", $password);
+      $insert->bindParam(":password", $hash);
       $insert->bindParam(":status", $status);
       $result = $insert->execute();
       if ($result) {
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 ?>
 
   <?php if ($_SESSION["session_status"] == "admin") { ?>

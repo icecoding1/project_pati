@@ -4,7 +4,7 @@ require_once("connection/config.php");
 
 ob_start();
 session_start();
-if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
   $page_nav = 6;
 
@@ -91,9 +91,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
 
       <div class="wrapper">
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center bg-dark">
-          <img class="animation__shake" src="dist/img/food_pachaew_logo.png" alt="AdminLTELogo" height="80" width="80">
-        </div>
+        <?php include('layout/preloader.php') ?>
         <?php include('layout/header.php') ?>
         <?php include('layout/slidebar.php') ?>
 

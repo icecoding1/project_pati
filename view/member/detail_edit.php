@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   require_once "../../connection/config.php";
   $id = $_POST['id'];
   $sql = "SELECT * FROM table_member WHERE id = $id";
@@ -63,11 +63,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 </div>
 <div class='input-group mb-3 '>
   <span class='input-group-text fw-bold'>Username</span>
-  <input type='text' class='form-control'  name='username' value=" . $row['username'] . ">
-</div>
-<div class='input-group mb-3 '>
-  <span class='input-group-text fw-bold'>Password</span>
-  <input type='text' class='form-control'  name='password' value=" . $row['password'] . ">
+  <input type='text' class='form-control'  name='username' value=" . $row['username'] . " disabled>
 </div>
 <p class='fw-bold  mb-1'>เปลี่ยนรูปภาพของคุณ ขนาดที่เเนะนำ <span class='text-danger'>50px * 50px เฉพาะ png, jpg/jpeg</span></p>
 <div class='input-group mb-3'>

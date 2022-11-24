@@ -1,0 +1,12 @@
+@page {
+  size: A4;
+  margin: 0px;
+}
+
+.btn_print {
+  display: none;
+}
+
+.box-print {
+  padding: 10px;
+}

@@ -3,7 +3,7 @@ require_once("connection/config.php");
 ob_start();
 session_start();
 date_default_timezone_set("Asia/Bangkok");
-if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   if ($_SERVER['REQUEST_METHOD']  == 'GET') {
 
     if (isset($_GET['show_count'])) {
@@ -33,7 +33,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
           <td nowrap> " . $row['create_date'] . "</td>
           <td nowrap>โต๊ะ " . $row['table_user'] . "</td>
           <td nowrap><span class='text-danger fw-semibold'>รอการยืนยัน</span></td>
-          <td nowrap> <a href='order_new.php?page=1&id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
+          <td nowrap> <a href='order_new.php?id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
         </tr> ";
         }
       }
@@ -59,7 +59,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
           <td nowrap> " . $row['create_date'] . "</td>
           <td nowrap>โต๊ะ " . $row['table_user'] . "</td>
           <td nowrap><span class='text-warning fw-semibold'>ยืนยันเเล้ว</span></td>
-          <td nowrap> <a href='order_new.php?page=2&id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
+          <td nowrap> <a href='order_new.php?id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
         </tr> ";
         }
       }
@@ -86,7 +86,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
           <td nowrap> " . $row['create_date'] . "</td>
           <td nowrap>โต๊ะ " . $row['table_user'] . "</td>
           <td nowrap><span class='text-success fw-semibold'>สำเร็จ</span></td>
-          <td nowrap> <a href='order_new.php?page=3&id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
+          <td nowrap> <a href='order_new.php?id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
         </tr> ";
         }
       }

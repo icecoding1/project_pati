@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 require_once "connection/config.php";
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $id = isset($_GET['id']) ? $_GET['id'] : 1;
   $check_id = isset($_GET['id']) ? $_GET['id'] : "";
 

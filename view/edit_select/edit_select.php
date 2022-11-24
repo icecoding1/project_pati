@@ -5,7 +5,7 @@ $name_web = "เเก้ไขประเภท";
 
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {

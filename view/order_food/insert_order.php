@@ -3,7 +3,7 @@ require_once "../../connection/config.php";
 ob_start();
 session_start();
 
-if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 
   if (isset($_SESSION['check_update']) == "") {
     echo "<script>window.history.back();</script>";

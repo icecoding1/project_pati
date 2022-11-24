@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $name_web = "สั่งออเดอร์";
   $table =   $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
   $food = "ขนมปัง กาเเฟ";

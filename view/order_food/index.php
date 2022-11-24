@@ -3,7 +3,7 @@ require_once "../../connection/config.php";
 
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $count_table =  $_SESSION["count_table"];
   // echo $count_table;
   // require_once "../../connection/config.php";

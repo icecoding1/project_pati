@@ -2,15 +2,14 @@
 require_once "connection/config.php";
 $name_web = "ระบบจัดการร้านอาหาร";
 $page_nav = 2;
-$id = isset($_GET['id']) ? $_GET['id'] : "";
-$page = isset($_GET['page']) ? $_GET['page'] : "";
+$id = isset($_GET['id']) ? $_GET['id'] : header("Location: management_order.php");
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
-
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $sql = "SELECT * FROM table_order WHERE id = $id";
   $result = $obj->query($sql);
-  $row = $result->fetchAll(PDO::FETCH_OBJ);
+  $data = $result->fetch(PDO::FETCH_OBJ);
+  $page = $data->status;
 ?>
 
   <!DOCTYPE html>
@@ -20,7 +19,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $name_web;  ?></title>
-
     <?php include 'add_framwork/css.php' ?>
   </head>
 
@@ -29,10 +27,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
 
     <div class="wrapper">
-      <!-- Preloader -->
-      <!-- <div class="preloader flex-column justify-content-center align-items-center bg-dark">
-        <img class="animation__shake" src="dist/img/food_pachaew_logo.png" alt="AdminLTELogo" height="80" width="80">
-      </div> -->
       <?php include('layout/header.php') ?>
       <?php include('layout/slidebar.php') ?>
 
@@ -65,91 +59,115 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
         </div>
         <section class="content p-3">
           <div class="container-fluid ">
-            <?php foreach ($row as $data) {
-              $number_order = $data->number_order;
-              $_SESSION['number_order'] = $number_order;
+            <?php
+            $number_order = $data->number_order;
+            $_SESSION['number_order'] = $number_order;
             ?>
-              <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end">
 
-                <?php if ($page == 1) { ?>
-                  <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-danger mx-1">ยืนยันออเดอร์</a>
-                  <button type="button" class="btn btn-dark mx-1">ออกบิล</button>
-                <?php   } else if ($page == 2) { ?>
-                  <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
+              <?php if ($page == 1) { ?>
+                <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-danger mx-1">ยืนยันออเดอร์</a>
+                <a href="print_all.php?id_confrim=<?= $data->id ?>" class="btn btn-dark mx-1">ออกบิล</a>
+              <?php   } else if ($page == 2) { ?>
+                <button type="button" class="btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#print_bill">ออกบิล</button>
+                <?php if ($data->pay_from_user > 0) { ?>
                   <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-success m-1">เสร็จสิ้นออเดอร์</a>
-                  <a href="view/add_editorder/index.php?id=<?= $id; ?>" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</a>
-                  <a href="view/add_editorder/deleteAll_order.php?id=<?= $id; ?>" class="btn btn-danger m-1">ลบ</a>
-                <?php   } else if ($page == 3) { ?>
-                  <a href=""><button type="button" class="btn btn-dark m-1">ออกบิล</button></a>
-                <?php    } ?>
+                <?php  } ?>
+                <a href="view/add_editorder/index.php?id=<?= $id; ?>" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</a>
+                <a href="view/add_editorder/deleteAll_order.php?id=<?= $id; ?>" class="btn btn-danger m-1">ลบ</a>
+              <?php   } else if ($page == 3) { ?>
+                <a href="print_all.php?id_confrim=<?= $data->id ?>&show_all=1" class="btn btn-dark m-1">ออกบิล</a>
+              <?php    } ?>
 
+            </div>
+
+            <div class="row my-3">
+              <div class="col-xl-4 mb-2">
+                <div class="row fs-5">
+                  <div class="col-md-5 font-five ">เลขที่ออเดอร์</div>
+                  <div class="col-md-5 mb-2 "><?= $data->number_order; ?></div>
+                  <div class="col-md-5 font-five">เวลา</div>
+                  <div class="col-md-5  mb-2"><?= $data->create_date; ?></div>
+                  <div class="col-md-5 font-five">โต๊ะ </div>
+                  <div class="col-md-5 mb-2"><?= $data->table_user; ?></div>
+                  <div class="col-md-5 font-five ">จำนวนรายการ</div>
+                  <div class="col-md-5 mb-2"><?= $data->count_order; ?></div>
+                  <div class="col-md-5 font-five ">โน๊ตจากลูกค้า</div>
+                  <div class="col-md-5 mb-2">
+                    <?php
+                    $str = $data->note;
+                    echo (empty($str)) ?  "-" : $data->note;
+                    ?>
+                  </div>
+                </div>
               </div>
 
-              <div class="row my-3">
-                <div class="col-xl-4 mb-2">
-                  <div class="row fs-5">
-                    <div class="col-md-5 font-five ">เลขที่ออเดอร์</div>
-                    <div class="col-md-5 mb-2 "><?= $data->number_order; ?></div>
-                    <div class="col-md-5 font-five">เวลา</div>
-                    <div class="col-md-5  mb-2"><?= $data->create_date; ?></div>
-                    <div class="col-md-5 font-five">โต๊ะ </div>
-                    <div class="col-md-5 mb-2"><?= $data->table_user; ?></div>
-                    <div class="col-md-5 font-five ">จำนวนรายการ</div>
-                    <div class="col-md-5 mb-2"><?= $data->count_order; ?></div>
-                    <div class="col-md-5 font-five ">โน๊ตจากลูกค้า</div>
-                    <div class="col-md-5 mb-2">
+              <div class="col-xl-8 bg-order-set fs-5 bg-light">
+                <div class="content_order">
+                  <div class="row ">
+                    <div class="d-flex justify-content-center align-items-center mb-2 font-five">รายการ</div>
+                    <div class="row mb-2">
+                      <div class="col-3 font-five ">เมนู</div>
+                      <div class="col-3 font-five">ประเภท</div>
+                      <div class="col-3 font-five">จำนวน</div>
+                      <div class="col-3 font-five">ราคา/รวม(บาท)</div>
+                    </div>
+
+                    <div class="order-menu">
                       <?php
-                      $str = $data->note;
-                      echo (empty($str)) ?  "-" : $data->note;
+                      $data_order = json_decode($data->list_order);
+                      $dataAll_order = json_decode($data->listAll_order);
+                      $_SESSION["array_order"]  = json_decode(json_encode($dataAll_order), true);
+                      $_SESSION['add_count_sales'] =   $_SESSION["array_order"];
+                      for ($i = 0; $i < count($data_order); $i++) {
                       ?>
+                        <div class="row">
+                          <div class="col-3"><?= $data_order[$i]->name; ?></div>
+                          <div class="col-3"><?= $data_order[$i]->type; ?></div>
+                          <div class="col-3"><?= $data_order[$i]->count; ?></div>
+                          <div class="col-3"><?= $data_order[$i]->price_food . "/" . $data_order[$i]->priceAll; ?></div>
+                        </div>
+                      <?php } ?>
                     </div>
                   </div>
-                </div>
-
-                <div class="col-xl-8 bg-order-set fs-5 bg-light">
-                  <div class="content_order">
-                    <div class="row ">
-                      <div class="d-flex justify-content-center align-items-center mb-2 font-five">รายการ</div>
-                      <div class="row mb-2">
-                        <div class="col-3 font-five ">เมนู</div>
-                        <div class="col-3 font-five">ประเภท</div>
-                        <div class="col-3 font-five">จำนวน</div>
-                        <div class="col-3 font-five">ราคา/รวม(บาท)</div>
-                      </div>
-
-                      <div class="order-menu">
-                        <?php
-                        $data_order = json_decode($data->list_order);
-                        $dataAll_order = json_decode($data->listAll_order);
-                        // echo "<pre>";
-                        // print_r($data_order);
-                        // echo "</pre>";
-                        $_SESSION["array_order"]  = json_decode(json_encode($dataAll_order), true);
-                        $_SESSION['add_count_sales'] =   $_SESSION["array_order"];
-                        for ($i = 0; $i < count($data_order); $i++) {
-                        ?>
-                          <div class="row">
-                            <div class="col-3"><?= $data_order[$i]->name; ?></div>
-                            <div class="col-3"><?= $data_order[$i]->type; ?></div>
-                            <div class="col-3"><?= $data_order[$i]->count; ?></div>
-                            <div class="col-3"><?= $data_order[$i]->price_food . "/" . $data_order[$i]->priceAll; ?></div>
-                          </div>
-                        <?php } ?>
-                      </div>
-                    </div>
-                    <div class=" fixed-footer-order row p-3">
-                      <div class="col-4 font-five">รวม</div>
-                      <div class="col-8"><?= number_format($data->priceAll, 2) . " "; ?><span>บาท</span> </div>
-                    </div>
+                  <div class=" fixed-footer-order row p-3">
+                    <div class="col-4 font-five">รวม</div>
+                    <div class="col-8"><?= number_format($data->priceAll, 2) . " "; ?><span>บาท</span> </div>
+                    <div class="col-4 font-five">จ่ายเเล้ว</div>
+                    <div class="col-8"><?= number_format($data->pay_from_user, 2) . " "; ?><span>บาท</span> </div>
+                    <?php if ($data->pay_from_user > 0) { ?>
+                      <div class="col-4 font-five">ทอน</div>
+                      <div class="col-8"><?= number_format($data->pay_from_user - $data->priceAll, 2) . " "; ?><span>บาท</span> </div>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
-            <?php } ?>
+            </div>
           </div>
         </section>
       </div>
+    </div>
 
-
+    <!-- comfirm -->
+    <div class="modal fade" id="print_bill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form method="POST" id="pass_order" class="modal-content" action="print_all.php">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">รับเงินจากลูกค้า</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="id_confrim" value="<?= $data->id ?>">
+            <p class="mb-0">คุณต้องการออกบิลรายการ&nbsp;<span class="fw-bold"><?= $data->number_order ?></span>&nbsp;นี่ใช่หรือไม่</p>
+            <p class="mb-0 text-danger">**กรุณากรอกเงินที่ลูกค้าจะจ่าย</p>
+            <input type="number" name="pay_money" id="pay_money" placeholder="กรุณากรอกจำนวนเงินที่ลูกค้าจ่าย" required class="form-control mt-2">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+            <button type="submit" class="btn btn-dark">ไปหน้าออกบิล</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <?php include 'add_framwork/js.php' ?>
@@ -158,7 +176,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
   </html>
 
 <?php } else {
-
   echo "<script>
 if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
 location.assign('login.php');

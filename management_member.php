@@ -6,10 +6,10 @@ $page_nav = 4;
 
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 ?>
   <?php if ($_SESSION["session_status"] == "admin") {
-    $sql = "SELECT * FROM  table_member";
+    $sql = "SELECT * FROM  table_member WHERE id != " . $_SESSION["id_member"];
     $select =  $obj->prepare($sql);
     $select->execute();
     $rows = $select->fetchAll();
@@ -32,11 +32,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
 
       <div class="wrapper">
-        <!-- Preloader -->
-        <!-- <div class="preloader flex-column justify-content-center align-items-center bg-dark">
-          <img class="animation__shake" src="dist/img/food_pachaew_logo.png" alt="AdminLTELogo" height="80" width="80">
-        </div> -->
-
+        <?php include('layout/preloader.php') ?>
         <?php include('layout/header.php') ?>
         <?php include('layout/slidebar.php') ?>
 
@@ -92,14 +88,16 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                         <th>Image</th>
                         <th>Name</th>
                         <th>Username</th>
-                        <th>Password</th>
                         <th>Status</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php
-                      foreach ($rows as $row) {
+                      <?php if (empty($rows)) { ?>
+                        <tr></tr>
+                        <td colspan="6" class="text-center"> ไม่พบข้มูล</td>
+                        </tr>
+                      <?php } else foreach ($rows as $row) {
                       ?>
                         <tr>
                           <td>
@@ -121,9 +119,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                             <?= $row['username']; ?>
                           </td>
                           <td>
-                            <?= $row['password']; ?>
-                          </td>
-                          <td>
                             <span class="badge badge-success"><?= $row['status']; ?></span>
                           </td>
                           <td class="project-actions text-right">
@@ -137,7 +132,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                               </i>
                               Edit
                             </button>
-                            <button class="btn btn-danger btn-sm mx-1 deletebtn_member" type="button" id="<?= $row['id'] ?>" <?= $_SESSION["id_member"] ==  $row['id'] ? 'disabled' : '' ?>>
+                            <button class="btn btn-danger btn-sm mx-1 deletebtn_member" type="button" id="<?= $row['id'] ?>">
                               <i class="fas fa-trash">
                               </i>
                               Delete
@@ -163,7 +158,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
 
 
-      <?php include "view/member/modal_edit.php"; ?>
+      <?php include "view/member/modal_edit.php"; ?>1
       <?php include "view/member/madal_delete.php"; ?>
 
       <?php include 'add_framwork/js.php' ?>
@@ -200,15 +195,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
               }
             });
           });
-
-          // // test การใช้ งาน ส่ งค่ า id จาก button มา ที่ model
-          // $('#delete_member').on('show.bs.modal', function(event) {
-          //   var button = $(event.relatedTarget);
-          //   var id = button.data('id');
-          //   var modal = $(this);
-          //   modal.find('#emp_id').val(id);
-          // });
-          // // event.relatedtarget คือ event ค่าที่ใช้สำหรับรับส่งข้อมูล ที่มีความสัมพันธ์กัน
         });
       </script>
 

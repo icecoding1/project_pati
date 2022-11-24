@@ -7,33 +7,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $username = htmlentities($_POST['txt_username'], ENT_QUOTES);
   $password = htmlentities($_POST['txt_password'], ENT_QUOTES);
 
-  $sql = "SELECT * FROM table_member WHERE username = '$username' AND password = '$password'";
-  $result =  $obj->query($sql);
+  $hash = md5($password);
 
+  $sql = "SELECT * FROM table_member WHERE username = '$username' AND password = '$hash'";
+  $result =  $obj->query($sql);
 
   if ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     $_SESSION["id_member"] = $row["id"];
-    $_SESSION["session_username"] = $row["username"];
-    $_SESSION["session_password"] = $row["password"];
     $_SESSION["session_status"] = $row["status"];
     $_SESSION["session_image"] = $row["image"];
     $_SESSION["session_name"] = $row["name"];
     header("location: set_session_structure.php");
-  } else {
-    echo "<script>
-    if(confirm(' password หรือ username ของคุณไม่ถูกต้อง')){
-      location.assign('login.php');
-    }
-    </script>";
   }
 }
 
 $sql_structure = "SELECT * FROM structure_management";
 $select_bg = $obj->query($sql_structure);
-$datafetch = $select_bg->fetch(PDO::FETCH_ASSOC); 
-// $img = $datafetch['background'];
-// echo  $data;
-
+$datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -82,7 +72,7 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" name="txt_password" require>
+              <input type="password" class="form-control" placeholder="Password" name="txt_password" require id="txt_password">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -92,9 +82,9 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
             <div class="row">
               <div class="col-sm-8">
                 <div class="icheck-primary">
-                  <input type="checkbox" id="remember">
-                  <label for="remember">
-                    จดจำ
+                  <input type="checkbox" name="show_password" id="show_password">
+                  <label for="show_password">
+                    Show password
                   </label>
                 </div>
               </div>
@@ -115,6 +105,19 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
   </div>
 
   <?php include 'add_framwork/js.php' ?>
+
+  <script>
+    var show_password = document.getElementById("show_password");
+    var password = document.getElementById("txt_password");
+
+    show_password.addEventListener("click", () => {
+      if (show_password.checked == true) {
+        password.type = 'text';
+      } else if ((show_password.checked == false)) {
+        password.type = 'password';
+      }
+    })
+  </script>
 </body>
 
 </html>

@@ -4,7 +4,7 @@ require_once "../../connection/config.php";
 
 ob_start();
 session_start();
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $count_order = isset($_GET['count_order']) ? $_GET['count_order'] : 0;
   $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
   $_SESSION["session_table"] = isset($_POST['select_table']) ? $_POST['select_table'] :  $_SESSION["session_table"];

@@ -4,7 +4,7 @@ session_start();
 require_once("connection/config.php");
 $page_nav = 2;
 
-if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 ?>
 
 
@@ -23,13 +23,9 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
     <!-- page to web -->
     <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
-    <input type="number" id="page" value="1" class="d-none">
 
     <div class="wrapper">
-      <!-- Preloader -->
-      <div class="preloader flex-column justify-content-center align-items-center bg-dark">
-        <img class="animation__shake" src="dist/img/food_pachaew_logo.png" alt="AdminLTELogo" height="80" width="80">
-      </div>
+      <?php include('layout/preloader.php') ?>
       <?php include('layout/header.php') ?>
       <?php include('layout/slidebar.php') ?>
 
@@ -93,7 +89,6 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                                   </tr>
                                 </thead>
                                 <tbody id="table_ordernew1">
-
                                 </tbody>
                               </table>
                             </div>
@@ -137,7 +132,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
                                 <form class="card-tools  mt-2 d-flex justify-content-center align-items-center flex-wrap" id="form_search">
                                   <button typr="button" class="btn btn-dark px-3 py-1 mx-3" onclick="showAll_order()">รายการทั้งหมด</button>
-                                  <div class="input-group input-group-sm" style="width: 150px;">
+                                  <div class="input-group input-group-sm" style="width: 250px;">
                                     <input type="text" name="text_search_order" id="text_search_order" class="form-control float-right" placeholder="Search">
                                     <div class="input-group-append">
                                       <button type="submit" class="btn btn-default" id="btn_search_order">

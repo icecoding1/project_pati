@@ -2,7 +2,7 @@
 require_once "../../connection/config.php";
 ob_start();
 session_start();
-if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"])) {
+if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $array = $_SESSION['add_count_sales'];
   $id = isset($_GET['id']) ? $_GET['id'] : "";
   $status = isset($_GET['status']) ? $_GET['status'] : "";

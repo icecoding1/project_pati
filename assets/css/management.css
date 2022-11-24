@@ -203,6 +203,45 @@ html {
   border-radius: 0px 0px 10px 10px;
 }
 
+.box_add_edit_form {
+  margin-top: 20px;
+  border: 0.3px solid rgba(0, 0, 0, 0.466);
+  border-radius: 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+}
+
+.box_add_edit_form .header {
+  padding: 10px;
+  border-bottom: 1px solid rgba(21, 20, 20, 0.505);
+  background-color: #343A40;
+  color: #fff;
+}
+
+.box_add_edit_form .content {
+  padding: 10px;
+}
+
+.box_add_edit_form_white {
+  margin-top: 20px;
+  border: 0.3px solid rgba(0, 0, 0, 0.466);
+  border-radius: 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  background-color: #ffff;
+}
+
+.box_add_edit_form_white .header {
+  padding: 10px;
+  border-bottom: 1px solid rgba(21, 20, 20, 0.505);
+}
+
+.box_add_edit_form_white .content {
+  padding: 10px;
+}
+
 .content-detail-top {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2550,5 +2589,27 @@ html {
   .bg-home .footer_web p {
     font-size: 75%;
   }
+}
+
+.box-allprint {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.box-allprint .box-print {
+  padding: 30px;
+  max-width: 500px;
 }
 /*# sourceMappingURL=management.css.map */
