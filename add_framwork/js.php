@@ -36,6 +36,7 @@
   <!-- <script src="plugins/jqvmap/jquery.vmap.min.js"></script> -->
   <!-- <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
   <!-- error -->
-  
+
   <!-- my script -->
   <script src="assets/js/active_ui.js"></script>
+  <script src="assets/js/sweetalert.js"></script>

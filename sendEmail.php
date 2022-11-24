@@ -13,7 +13,7 @@ if (isset($_POST['name']) && isset($_POST['email'])) {
     require_once "PHPMailer/Exception.php";
 
     $emailaddress = "patiphonwongsee01@gmail.com";
-    $emailsend = "ผู้ส่ง : " . $email . "  <br/> ข้อความ : " . $detail;
+    $emailsend = "ผู้ส่ง : " . $name . "<br/> email : " . $email . "  <br/> ข้อความ : " . $detail;
 
     $mail = new PHPMailer();
 
@@ -28,7 +28,7 @@ if (isset($_POST['name']) && isset($_POST['email'])) {
 
     //Email Settings
     $mail->isHTML(true);
-    $mail->setFrom($emailaddress, $name);
+    $mail->setFrom($emailaddress, $email);
     $mail->addAddress($emailaddress); // Send to mail
     $mail->Subject = $header;
     $mail->Body =  $emailsend;

@@ -116,13 +116,14 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
               <div class="container-fluid ">
 
                 <div class="content-detail-top">
+
                   <?php if ($is_edit) { ?>
                     <a class="btn btn-dark  mx-2" href="detail_list_menu.php?id=<?= $id ?>">ยกเลิก</a>
-                    <!-- <a href="detail_list_menu.php?id=<?= $id ?>"></a> -->
                     <button type="submit" name="submit_datail-product" class="btn btn-primary">บันทึกข้อมูล</button>
                   <?php } else { ?>
                     <a class="btn btn-outline-dark px-3" href="detail_list_menu.php?is_edit=1&id=<?= $id ?>">เเก้ไขข้อมูล</a>
                   <?php } ?>
+
                 </div>
                 <div class="content-detail-bottom ">
 
@@ -265,8 +266,8 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                             </p>
                             <p class="col-12 text-primary">
                               <?php
-                              $count_order = 10;
-                              echo number_format($count_order);
+
+                              echo number_format($row['count_sales']);
                               ?>
                             </p>
                           <?php } ?>

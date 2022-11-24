@@ -25,7 +25,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
     $_SESSION["count_order"] = $count;
     // echo "<pre>";
     // print_r($array);
-    // echo "</pre>";
+    // echo "</pre>";g 
     // echo count($array);
   }
 

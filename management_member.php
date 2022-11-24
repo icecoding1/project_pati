@@ -8,7 +8,12 @@ ob_start();
 session_start();
 if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 ?>
-  <?php if ($_SESSION["session_status"] == "admin") { ?>
+  <?php if ($_SESSION["session_status"] == "admin") {
+    $sql = "SELECT * FROM  table_member";
+    $select =  $obj->prepare($sql);
+    $select->execute();
+    $rows = $select->fetchAll();
+  ?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -28,9 +33,9 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
 
       <div class="wrapper">
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center bg-dark">
+        <!-- <div class="preloader flex-column justify-content-center align-items-center bg-dark">
           <img class="animation__shake" src="dist/img/food_pachaew_logo.png" alt="AdminLTELogo" height="80" width="80">
-        </div>
+        </div> -->
 
         <?php include('layout/header.php') ?>
         <?php include('layout/slidebar.php') ?>
@@ -55,6 +60,11 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
           </div>
 
           <section class="content p-3">
+            <?php
+            // echo "<pre>";
+            // print_r($rows);
+            // echo "</pre>";
+            ?>
             <div class="container-fluid ">
 
               <div class="d-flex justify-content-end my-3">
@@ -89,9 +99,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                     </thead>
                     <tbody>
                       <?php
-                      $sql = "SELECT * FROM  table_member";
-                      $result = $obj->query($sql);
-                      while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                      foreach ($rows as $row) {
                       ?>
                         <tr>
                           <td>
@@ -129,7 +137,7 @@ if ($_SESSION["session_username"] &&  $_SESSION["session_password"]) {
                               </i>
                               Edit
                             </button>
-                            <button class="btn btn-danger btn-sm mx-1 deletebtn_member" type="button" id="<?= $row['id'] ?>">
+                            <button class="btn btn-danger btn-sm mx-1 deletebtn_member" type="button" id="<?= $row['id'] ?>" <?= $_SESSION["id_member"] ==  $row['id'] ? 'disabled' : '' ?>>
                               <i class="fas fa-trash">
                               </i>
                               Delete

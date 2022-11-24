@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $sql_structure = "SELECT * FROM structure_management";
 $select_bg = $obj->query($sql_structure);
-$datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
+$datafetch = $select_bg->fetch(PDO::FETCH_ASSOC); 
 // $img = $datafetch['background'];
 // echo  $data;
 

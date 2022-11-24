@@ -202,7 +202,7 @@ $date = (int)$date;
                 </div>
                 <div class="input-group input-group-lg mb-3">
                   <span class="input-group-text font-detail ">หัวข้อ</span>
-                  <input type="text" class="form-control" id="header" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="titel" placeholder="พิมพ์.." required>
+                  <input type="text" class="form-control" id="header" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="titel" readonly value="contect restaurant">
                 </div>
                 <div class="input-group input-group-lg mb-3">
                   <span class="input-group-text font-detail" id="inputGroup-sizing-default">ชื่อ</span>

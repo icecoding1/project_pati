@@ -183,7 +183,7 @@ if (isset($_SESSION["session_username"]) &&  isset($_SESSION["session_password"]
           <span class="input-group-text">โน๊ต</span>
           <textarea class="form-control " aria-label="With textarea" id="note" name="note"></textarea>
         </div>
-        <button class="btn btn-primary px-4 m-2  mt-2  mr-4" id="btn-confirm" type="submit">
+        <button class="btn btn-primary px-4 m-2  mt-2  mr-4" id="btn-confirm" type="submit" <?= $table == "คุณไม่ได้เลือกโต๊ะ" ? 'disabled' : '' ?>>
           ยืนยันคำสั่ง
         </button>
       </div>

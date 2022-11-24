@@ -64,7 +64,7 @@
               </li>
             <?php } ?>
             <li class="nav-item show_count_list">
-              <a href="management_order.php" class="nav-link " id="nav-link2">
+              <a href="management_order.php" class="nav-link" id="nav-link2">
                 <i class="bi bi-bag-heart-fill nav-icon"></i>
                 <p>จัดการออเดอร์</p>
               </a>
