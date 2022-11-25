@@ -164,7 +164,7 @@ $result = $select->fetch(PDO::FETCH_ASSOC);
       })
 
       const res = await data.text();
-      if (res == "อัพเดทข้อมูลเเละรหัสผ่านสำเร็จ" || "อัพเดทข้อมูลสำเร็จ") {
+      if (res == "อัพเดทข้อมูลเเละรหัสผ่านสำเร็จ" || res == "อัพเดทข้อมูลสำเร็จ") {
         Swal.fire({
           icon: 'success',
           title: res

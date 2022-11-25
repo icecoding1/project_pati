@@ -201,20 +201,17 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                                 <?php
                                 include("connection/config2.php");
                                 $table_typefood = "SELECT * FROM  table_typefood";
-                                $result_typefood = $obj->query($table_typefood); ?>
-                                <option selected disabled>ประเภททั้งหมด</option>
-                                <?php while ($types = $result_typefood->fetch(PDO::FETCH_ASSOC)) {
-                                  if ($row['type_food'] == $types['type']) {
+                                $result_typefood = $obj->query($table_typefood);
+                                $types = $result_typefood->fetchAll()
                                 ?>
-                                    <option value="<?= $types['type'] ?>" selected><?= $types['type'] ?></option>
-                                  <?php  } else { ?>
-                                    <option value="<?= $types['type'] ?>"><?= $types['type'] ?></option>
-                                <?php   }
-                                } ?>
+                                <option disabled>ประเภททั้งหมด</option>
+                                <?php foreach ($types as $data) { ?>
+                                  <option value="<?= $data['type'] ?>" <?= $row['type_food'] == $data['type'] ? 'selecded' : '' ?>><?= $data['type'] ?></option>
+                                <?php } ?>
                               </select>
-                            <?php } else { ?>
+                            <?php  } else { ?>
                               <?= $row['type_food'] ?>
-                              <?php } ?>detail
+                            <?php } ?>
                           </p>
                           <!-- select type -->
                           <!-- price food -->
