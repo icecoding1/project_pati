@@ -2,7 +2,7 @@
 require_once "connection/config.php";
 ob_start();
 session_start();
-$_SESSION["session_username"] &&  $_SESSION["session_password"] ? '' : header("Location: login.php");
+isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"]) ? '' : header("Location: login.php");
 $name_web = "ออกบิลรายการร้านอาหาร";
 $page_nav = 2;
 $pay_money = false;
