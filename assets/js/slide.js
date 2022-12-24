@@ -1,6 +1,7 @@
 var redio1 = document.getElementById("radio1");
 var redio2 = document.getElementById("radio2");
 var redio3 = document.getElementById("radio2");
+var count_slide = document.getElementById("count_slide").value;
 
 var counter = 1;
 
@@ -16,10 +17,11 @@ redio3.addEventListener("click", () => {
 });
 
 
+
 setInterval(function () {
   document.getElementById('radio' + counter).checked = true;
   counter++;
-  if (counter > 3) {
+  if (counter > count_slide) {
     counter = 1;
   }
 }, 5000);

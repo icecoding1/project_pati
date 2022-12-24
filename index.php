@@ -30,6 +30,14 @@ date_default_timezone_set("Asia/Bangkok");
 $date = date("dmYHis");
 $date = (int)$date;
 
+
+$sql_select = "SELECT * FROM structure_management";
+$select_str = $obj->query($sql_select);
+$result_str = $select_str->fetch();
+$image_decode = json_decode($result_str['slide_image']);
+$image_slide_encode = json_decode(json_encode($image_decode), true);
+$count_slide = count($image_slide_encode);
+// print_r($image_slide_encode);
 ?>
 
 
@@ -40,11 +48,11 @@ $date = (int)$date;
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ร้านป้าเเจ๋ว</title>
+  <title><?= $result_str['name_shop'] ?></title>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/management.css">
   <link rel="stylesheet" href="assets/css/slide.css">
-  <link rel="icon" href="favicon/logo_favicon.png">
+  <link rel="icon" href="image_myweb/img_structure_management/<?= $result_str['logo_shop'] ?>">
   <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
   <?php include 'add_framwork/css.php' ?>
 </head>
@@ -52,11 +60,12 @@ $date = (int)$date;
 <body class="bg-home">
 
   <input type="hidden" name="page_output" id="page_output" value="<?= $page ?>">
+  <input type="hidden" name="count_slide" id="count_slide" value="<?= $count_slide ?>">
 
   <div class="header_nav">
     <div class="navbar">
-      <a href="home.php" class="mr-auto">
-        <img src="assets/img/food_pachaew_logo.png" alt="logo">
+      <a href="index.php" class="mr-auto">
+        <img src="image_myweb/img_structure_management/<?= $result_str['logo_shop'] ?>" alt="logo">
       </a>
       <ul>
         <li>
@@ -106,32 +115,40 @@ $date = (int)$date;
   <div class="index">
     <div class="slider">
       <div class="slides">
+
         <!--radio buttons start-->
-        <input type="radio" name="radio-btn" id="radio1">
-        <input type="radio" name="radio-btn" id="radio2">
-        <input type="radio" name="radio-btn" id="radio3">
+        <?php for ($i = 0; $i < $count_slide; $i++) {
+          $ii = $i; ?>
+          <input type="radio" name="radio-btn" id="radio<?= $ii + 1 ?>">
+        <?php } ?>
 
-        <div class="slide first">
-          <img src="assets/img/bg_restaurant.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="assets/img/img2.png" alt="">
-        </div>
-        <div class="slide">
-          <img src="assets/img/imgfood1.png" alt="">
-        </div>
+        <!-- image -->
+        <?php for ($i = 0; $i < $count_slide; $i++) { ?>
+          <?php if ($i == 0) { ?>
+            <div class="slide first">
+              <img src="image_myweb/img_structure_management/<?= $image_slide_encode[$i]['name'] ?>">
+            </div>
+          <?php } else { ?>
+            <div class="slide">
+              <img src="image_myweb/img_structure_management/<?= $image_slide_encode[$i]['name'] ?>">
+            </div>
+        <?php }
+        } ?>
 
+        <!-- moc btn -->
         <div class="navigation-auto">
-          <div class="auto-btn1"></div>
-          <div class="auto-btn2"></div>
-          <div class="auto-btn3"></div>
+          <?php for ($i = 0; $i < $count_slide; $i++) {
+            $ii = $i; ?>
+            <div class="auto-btn<?= $ii + 1 ?>"></div>
+          <?php } ?>
         </div>
 
         <!--automatic navigation end-->
         <div class="navigation-manual">
-          <label for="radio1" class="manual-btn"></label>
-          <label for="radio2" class="manual-btn"></label>
-          <label for="radio3" class="manual-btn"></label>
+          <?php for ($i = 0; $i < $count_slide; $i++) {
+            $ii = $i; ?>
+            <label for="radio<?= $ii + 1 ?>" class="manual-btn"></label>
+          <?php } ?>
         </div>
 
         <div class="d-flex justify-content-center align-items-center div_btn">
@@ -237,17 +254,10 @@ $date = (int)$date;
         <div class="form-search">
           <select class="form-select m-2 select-input select_type" onChange=selectChange(this.value) name="select_type">
             <?php
-            require_once("connection/config2.php");
             $table_typefood = "SELECT * FROM  table_typefood";
             $result_typefood = $obj->query($table_typefood); ?>
 
-            <?php if ($response_select == "") {   ?>
-              <option selected disabled>เลือกประเภท</option>
-              <option selected>ประเภททั้งหมด</option>
-              <?php while ($types = $result_typefood->fetch(PDO::FETCH_ASSOC)) { ?>
-                <option value="<?= $types['type'] ?>"><?= $types['type'] ?></option>
-              <?php }
-            } else  if ($response_select == "ประเภททั้งหมด") {   ?>
+            <?php if ($response_select == "" || $response_select == "ประเภททั้งหมด") {   ?>
               <option disabled>เลือกประเภท</option>
               <option selected>ประเภททั้งหมด</option>
               <?php while ($types = $result_typefood->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -257,13 +267,8 @@ $date = (int)$date;
               <option disabled>เลือกประเภท</option>
               <option>ประเภททั้งหมด</option>
               <?php while ($types = $result_typefood->fetch(PDO::FETCH_ASSOC)) { ?>
-
-                <?php if ($response_select == $types['type']) { ?>
-                  <option value="<?= $types['type'] ?>" selected><?= $types['type'] ?></option>
-                <?php } else { ?>
-                  <option value="<?= $types['type'] ?>"><?= $types['type'] ?></option>
-            <?php }
-              }
+                <option value="<?= $types['type'] ?>" <?= $response_select == $types['type'] ? 'selected' : '' ?>><?= $types['type'] ?></option>
+            <?php  }
             }
             ?>
           </select>
