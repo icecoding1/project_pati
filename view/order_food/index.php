@@ -1,12 +1,19 @@
 <?php $name_web = "สั่งออเดอร์";
 require_once "../../connection/config.php";
-
 ob_start();
 session_start();
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $count_table =  $_SESSION["count_table"];
+  $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
   // echo $count_table;
   // require_once "../../connection/config.php";
+
+  // check session table
+  if ($_SESSION["session_table"] == "คุณไม่ได้เลือกโต๊ะ") {
+    $btn_txt = 'd-none';
+  } else {
+    $btn_txt = '';
+  }
 ?>
 
 
@@ -33,7 +40,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
         <p class="mb-0 mx-2 text-white">สั่งออเดอร์</p>
       </div>
       <div>
-        <a href="order_receive.php" class="btn btn-light px-4 mx-2 my-3">รายการอาหารของฉัน</a>
+        <a href="order_receive.php" class="btn btn-light px-4 mx-2 my-3 <?= $btn_txt ?>">รายการอาหารของฉัน</a>
         <a href="../../home.php" class="btn btn-light px-4 mx-2 my-3">กลับ</a>
       </div>
     </header>

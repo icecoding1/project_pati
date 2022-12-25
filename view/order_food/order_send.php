@@ -183,9 +183,12 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
           <span class="input-group-text">โน๊ต</span>
           <textarea class="form-control " aria-label="With textarea" id="note" name="note"></textarea>
         </div>
-        <button class="btn btn-primary px-4 m-2  mt-2  mr-4" id="btn-confirm" type="submit" <?= $table == "คุณไม่ได้เลือกโต๊ะ" ? 'disabled' : '' ?>>
-          ยืนยันคำสั่ง
-        </button>
+
+        <?php if ($table == "คุณไม่ได้เลือกโต๊ะ") { ?>
+          <a href="index.php" class="btn btn-secondary">กรุณาเลือกโต๊ะก่อนสั่งซื้อ</a>
+        <?php  } else { ?>
+          <button class="btn btn-primary px-4 m-2  mt-2  mr-4" id="btn-confirm" type="submit">ยืนยันคำสั่ง</button>
+        <?php } ?>
       </div>
     </form>
 
