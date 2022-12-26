@@ -13,6 +13,8 @@ var nav_respone = document.querySelector(".nav_respone");
 var toggle = document.querySelector(".toggle_nav");
 var page = document.getElementById("page_output").value;
 
+
+// header
 $(document).ready(function () {
   $('.nav_respone').hide();
   $(".toggle_nav").click(function () {
@@ -34,6 +36,7 @@ function selectChange(val) {
   document.getElementById("form_search").submit();
 }
 
+// send email
 $('.content-show').hide();
 
 $("#closr_x").click(function () {
@@ -79,10 +82,13 @@ function isNotEmpty(caller) {
 
 
 if (page == 1) {
+  span.style.cssText = "right: 384px; width: 78px;";
   navbtn1.style.fontSize = "130%";
   document.querySelector(".contect").style.display = "none";
   document.querySelector(".menu_list_home").style.display = "none";
 } else if (page == 2) {
+  span.style.cssText = "right: 289px; width: 78px;";
+  navbtn1.style.fontSize = "130%";
   document.querySelector(".index").style.display = "none";
   document.querySelector(".contect").style.display = "block";
   document.querySelector(".menu_list_home").style.display = "none";
@@ -90,8 +96,18 @@ if (page == 1) {
   span.style.cssText = "right: 168px; width: 101px;";
   document.querySelector(".index").style.display = "none";
   document.querySelector(".contect").style.display = "none";
+  document.querySelector(".menu_introduce").style.display = "none";
+  document.querySelector(".menu_new").style.display = "none";
   document.querySelector(".menu_list_home").style.display = "block";
   navbtn3.style.fontSize = "130%";
+} else if (page == 4) {
+  span.style.cssText = "right: 168px; width: 101px;";
+  document.querySelector(".index").style.display = "none";
+  document.querySelector(".contect").style.display = "none";
+  document.querySelector(".menu_list_home").style.display = "block";
+  navbtn3.style.fontSize = "130%";
+} else {
+  location.assign("index.php");
 }
 
 

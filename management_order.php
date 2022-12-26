@@ -5,6 +5,9 @@ require_once("connection/config.php");
 $page_nav = 2;
 
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
+  // $sum_sql = "SELECT count(sound_notification) from table_order WHERE status = 1 AND sound_notification = 1";
+  // $result = $obj->query($sum_sql);
+  // $number_of_rows = $result->fetchColumn();
 ?>
 
 
@@ -23,6 +26,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 
     <!-- page to web -->
     <input type="number" id="nav_page" value="<?= $page_nav  ?>" class="d-none">
+    <input type="number" id="sumsound" class="d-none">
 
     <div class="wrapper">
       <?php include('layout/preloader.php') ?>
@@ -75,6 +79,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                             <div class="card-header ">
                               <div class="w-100 d-flex justify-content-between align-items-center flex-wrap py-2">
                                 <h3 class="card-title mx-2">ออเดอร์ใหม่</h3>
+                                <button class="btn btn-default" onclick="stop_sound();" id="ck_sound">ยืนยันทั้งหมด</button>
                               </div>
                             </div>
                             <div class="card-body table-responsive p-0" style="height: 400px;">
@@ -173,10 +178,13 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
     </div>
 
 
+    <!-- notification -->
+    <audio controls autoplaysrc="assets/audio/notification.mp3" id="notification" style="display:none;"></audio>
+
+
     <?php include 'add_framwork/js.php' ?>
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/management_order.js"></script>
-
   </body>
 
   </html>

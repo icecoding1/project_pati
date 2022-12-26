@@ -54,22 +54,27 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
     $text .= "
   <div class='d-flex justify-content-center align-items-center mb-3'>
   <input type='hidden' name='id' value=" . $row['id'] . ">
-  <input type='hidden' name='image' value=" . $row['image'] . ">
+  <input type='hidden' name='password_old' value=" . $row['password'] . ">
   " . $text_img . "
 </div>
 <div class='input-group mb-3 '>
   <span class='input-group-text fw-bold'>Name</span>
-  <input type='text' class='form-control'  name='name' value=" . $row['name'] . ">
+  <input type='text' class='form-control'  name='name' id='test_id' value=" . $row['name'] . " required>
 </div>
 <div class='input-group mb-3 '>
   <span class='input-group-text fw-bold'>Username</span>
   <input type='text' class='form-control'  name='username' value=" . $row['username'] . " disabled>
 </div>
-<p class='fw-bold  mb-1'>เปลี่ยนรูปภาพของคุณ ขนาดที่เเนะนำ <span class='text-danger'>50px * 50px เฉพาะ png, jpg/jpeg</span></p>
-<div class='input-group mb-3'>
-  <input type='file' class='form-control'  alt='Image' accept='image/jpeg, image/png' name='imgEdit'>
-</div>
  " . $text_status . "";
+    $text .= "<p class='fw-bold mt-4 mb-2 '>ต้องการเปลี่ยนรหัสผ่านใหม่สมาชิก</p>";
+    $text .= "<div class='input-group mb-3 '>
+    <span class='input-group-text fw-bold'>Password new</span>
+ <input type='password' class='form-control'  name='password_new' value='' placeholder='กรุณากรอกรหัสผ่านสมาชิกใหม่'>
+</div>";
+    $text .= "<div class='input-group mb-3 '>
+<span class='input-group-text fw-bold'>Password confirm </span>
+<input type='password' class='form-control'  name='password_admin' value='' placeholder='กรุณากรอกรหัสผ่านผู้เเก้ไข รหัสผ่านสมาชิก'>
+</div>";
   }
   echo $text;
 } else {

@@ -7,75 +7,89 @@ require_once "../../connection/config.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $id = isset($_POST["id"]) ? $_POST["id"] : null;
   $check_id = isset($_POST["id"]) ? true : false;
+  $password_new = isset($_POST["password_new"]) ? $_POST["password_new"] : false;
+  $password_old = isset($_POST["password_old"]) ? $_POST["password_old"] : false;
+  $password_admin = isset($_POST["password_admin"]) ? $_POST["password_admin"] : false;
   $name = $_POST["name"];
   $status = $_POST["status"];
-  $old_img = isset($_POST['image']) ? $_POST['image'] : "";
 
 
   date_default_timezone_set("Asia/Bangkok");
   $date = date("dmy");
   $numrandom = (mt_rand());
 
-  if ($check_id) {
-    $uplode_edit = isset($_FILES['imgEdit']) ? $_FILES['imgEdit'] : null;
-    if ($uplode_edit != null) {
-      $path = "../../image_myweb/img_member/";
-      $type = strrchr($_FILES['imgEdit']['name'], ".");
-      $nameimg = $date . $numrandom . $type;
-      $path_link =  "../../image_myweb/img_member/" . $nameimg;
-      move_uploaded_file($_FILES['imgEdit']['tmp_name'], $path_link);
-      if (strpos($nameimg, ".")) {
-        echo "<script>console.log('success');</script>";
-      } else {
-        $nameimg =  $old_img;
-      }
-    }
-  } else {
-    $uplode = isset($_FILES['img']) ? $_FILES['img'] : null;
-    if ($uplode != null) {
-      $path = "../../image_myweb/img_member/";
-      $type = strrchr($_FILES['img']['name'], ".");
-      $nameimg = $date . $numrandom . $type;
-      // $GLOBALS[$nameimg];
-      $path_link =  "../../image_myweb/img_member/" . $nameimg;
 
-      move_uploaded_file($_FILES['img']['tmp_name'], $path_link);
-    } else {
-      $nameimg = "NO img";
-    }
+  $uplode = isset($_FILES['img']) ? $_FILES['img'] : null;
+  if ($uplode != null) {
+    $path = "../../image_myweb/img_member/";
+    $type = strrchr($_FILES['img']['name'], ".");
+    $nameimg = $date . $numrandom . $type;
+    $path_link =  "../../image_myweb/img_member/" . $nameimg;
+
+    move_uploaded_file($_FILES['img']['tmp_name'], $path_link);
+  } else {
+    $nameimg = "NO img";
   }
 
 
 
-
-  $sql = $check_id ?   "UPDATE table_member SET image = :image, name = :name, password = :password, status = :status WHERE id = :id" : "INSERT INTO table_member(image, name, username, password, status) VALUES(:image,:name,:username,:password,:status)";
+  $sql = $check_id ?   "UPDATE table_member SET  name = :name, password = :password, status = :status WHERE id = :id" : "INSERT INTO table_member(image, name, username, password, status) VALUES(:image,:name,:username,:password,:status)";
 
   try {
     if ($check_id) {
-      $insert = $obj->prepare($sql);
-      $insert->bindParam(":image", $nameimg);
-      $insert->bindParam(":name", $name);
-      $insert->bindParam(":password", $password);
-      $insert->bindParam(":status", $status);
-      $insert->bindParam(":id", $id);
-      $result = $insert->execute();
-      if ($result) {
-        echo "<script>alert('การเเก้ไขสมาชิกสำเร็จ');</script>";
-        echo "<script>location.assign('../../set_session_member.php');</script>";
-        echo "<script> window.location.assign('../../management_member.php');</script>";
+      if ($password_new &&   $password_admin) {
+        $check_pw = "SELECT password  FROM table_member WHERE id = :id";
+        $fetch_check_pw = $obj->prepare($check_pw);
+        $fetch_check_pw->execute(["id" =>  $_SESSION["id_member"]]);
+        $result_check =   $fetch_check_pw->fetch();
+        $hash_pw_admin = md5($password_admin);
+        $hash_pw_new = md5($password_new);
+        if ($hash_pw_admin ==   $result_check['password']) {
+          $update_password = $obj->prepare($sql);
+          $update_password->bindParam(":name", $name);
+          $update_password->bindParam(":password", $hash_pw_new);
+          $update_password->bindParam(":status", $status);
+          $update_password->bindParam(":id", $id);
+          $update_password->execute();
+          echo "<script>alert('เเก้ไขข้อมูลเเละรหัสผ่านสำเร็จ');</script>";
+          echo "<script> window.location.assign('../../management_member.php');</script>";
+        } else {
+          echo "<script>alert('รหัสผ่านของคุณไม่ถุกต้อง');</script>";
+          echo "<script> window.location.assign('../../management_member.php');</script>";
+        }
+      } else {
+        $insert = $obj->prepare($sql);
+        $insert->bindParam(":name", $name);
+        $insert->bindParam(":password", $password_old);
+        $insert->bindParam(":status", $status);
+        $insert->bindParam(":id", $id);
+        $result = $insert->execute();
+        if ($result) {
+          echo "<script>alert('การเเก้ไขสมาชิกสำเร็จ');</script>";
+          echo "<script> window.location.assign('../../management_member.php');</script>";
+        }
       }
     } else {
       $username = $_POST["username"];
       $password = $_POST["password"];
       $hash = md5($password);
-      $insert = $obj->prepare($sql);
-      $insert->bindParam(":image", $nameimg);
-      $insert->bindParam(":name", $name);
-      $insert->bindParam(":username", $username);
-      $insert->bindParam(":password", $hash);
-      $insert->bindParam(":status", $status);
-      $result = $insert->execute();
-      if ($result) {
+
+      // check username
+      $sql_check_username = "SELECT COUNT(username) FROM table_member WHERE username = :username";
+      $fetch_check_user = $obj->prepare($sql_check_username);
+      $fetch_check_user->execute(["username" =>  $username]);
+      $result_username = $fetch_check_user->fetchColumn();
+
+      if ($result_username > 0) {
+        echo "<script>alert('มีชื่อสมาชิกนี่อยู่เเล้ว กรุณาใช้ชื่อื่น');</script>";
+      } else {
+        $insert = $obj->prepare($sql);
+        $insert->bindParam(":image", $nameimg);
+        $insert->bindParam(":name", $name);
+        $insert->bindParam(":username", $username);
+        $insert->bindParam(":password", $hash);
+        $insert->bindParam(":status", $status);
+        $result = $insert->execute();
         echo "<script>alert('การเพิ่มสมาชิกสำเร็จ');</script>";
         echo "<script> window.location.assign('../../management_member.php');</script>";
       }

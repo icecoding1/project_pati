@@ -272,90 +272,96 @@ $count_slide = count($image_slide_encode);
             }
             ?>
           </select>
-          <div class="input-group  inputform-search">
-            <span class="input-group-text" id="inputGroup-sizing-default">ค้นหารายการ</span>
-            <?php if ($response_text_search == "") { ?>
-              <input type="text" class="form-control" name="text_search">
-            <?php } else { ?>
-              <input type="text" class="form-control" name="text_search" value="<?= $response_text_search ?>">
-            <?php } ?>
-            <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
+          <div class="d-flex gap-2">
+            <div class="input-group  inputform-search">
+              <span class="input-group-text" id="inputGroup-sizing-default">ค้นหารายการ</span>
+              <?php if ($response_text_search == "") { ?>
+                <input type="text" class="form-control" name="text_search">
+              <?php } else { ?>
+                <input type="text" class="form-control" name="text_search" value="<?= $response_text_search ?>">
+              <?php } ?>
+              <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+            <a href="index.php?page=4" class="btn btn-dark <?= $page == 3 ? '' : 'd-none' ?>">รายการทั้งหมด</a>
           </div>
         </div>
       </form>
     </div>
 
-    <p class="font-titel mx-3 px-3 mb-1 fw-bold">เมนูเเนะนำ</p>
-    <div class="content_menu_list_home">
-      <div class="menu_intro">
+    <div class="menu_introduce">
+      <p class="font-titel mx-3 px-3 mb-1 fw-bold ">เมนูเเนะนำ</p>
+      <div class="content_menu_list_home ">
+        <div class="menu_intro">
 
-        <?php
+          <?php
 
-        $sql_check_intro = "SELECT * FROM table_listfood WHERE intro_check = 'yes'";
-        $response_check_intro = $obj->query($sql_check_intro);
-        $row_check_intro = $response_check_intro->fetchAll(PDO::FETCH_OBJ);
+          $sql_check_intro = "SELECT * FROM table_listfood WHERE intro_check = 'yes'";
+          $response_check_intro = $obj->query($sql_check_intro);
+          $row_check_intro = $response_check_intro->fetchAll(PDO::FETCH_OBJ);
 
 
-        foreach ($row_check_intro as $row_check_intro) { ?>
-          <div class="content_menu position-relative">
-            <?php if (strpos($row_check_intro->image, ".")) { ?>
-              <img src="image_myweb/img_product/<?= $row_check_intro->image; ?>" alt="img" class="img_menu">
-            <?php } else { ?>
-              <img src="assets/img/empty_bg.jpeg" alt="img" class="img_menu">
-            <?php } ?>
-            <div class="detail_bottom">
-              <p class="font_detail">ชื่อ : <?= $row_check_intro->name; ?></p>
-              <p class="font_detail">ราคา : <?= $row_check_intro->price_food . " ฿"; ?></p>
-            </div>
-            <div class="ribbon-wrapper">
-              <div class="ribbon bg-primary fw-bold">
-                เเนะนำ
-              </div>
-            </div>
-          </div>
-        <?php } ?>
-      </div>
-    </div>
-
-    <p class="font-titel mx-3 px-3 mb-1 fw-bold">เมนูใหม่</p>
-    <div class="content_menu_list_home">
-      <div class="menu_intro">
-
-        <?php
-
-        $sql_menu_new = "SELECT * FROM table_listfood";
-        $response_menu_new = $obj->query($sql_menu_new);
-        $row_menu_new = $response_menu_new->fetchAll(PDO::FETCH_OBJ);
-
-        foreach ($row_menu_new as  $row_menu_new) {
-          $check_date_menu_new = (int)$row_menu_new->new_menu;
-          $result_check_date = $date - $check_date_menu_new;
-          $value_dateCount = 5000000000000;
-
-          if ($result_check_date < $value_dateCount) { ?>
+          foreach ($row_check_intro as $row_check_intro) { ?>
             <div class="content_menu position-relative">
-              <?php if (strpos($row_menu_new->image, ".")) { ?>
-                <img src="image_myweb/img_product/<?= $row_menu_new->image; ?>" alt="img" class="img_menu">
+              <?php if (strpos($row_check_intro->image, ".")) { ?>
+                <img src="image_myweb/img_product/<?= $row_check_intro->image; ?>" alt="img" class="img_menu">
               <?php } else { ?>
                 <img src="assets/img/empty_bg.jpeg" alt="img" class="img_menu">
               <?php } ?>
               <div class="detail_bottom">
-                <p class="font_detail">ชื่อ : <?= $row_menu_new->name; ?></p>
-                <p class="font_detail">ราคา : <?= $row_menu_new->price_food . " ฿"; ?></p>
+                <p class="font_detail">ชื่อ : <?= $row_check_intro->name; ?></p>
+                <p class="font_detail">ราคา : <?= $row_check_intro->price_food . " ฿"; ?></p>
               </div>
               <div class="ribbon-wrapper">
-                <div class="ribbon bg-success fw-bold">
-                  ใหม่
+                <div class="ribbon bg-primary fw-bold">
+                  เเนะนำ
                 </div>
               </div>
             </div>
-        <?php }
-        } ?>
+          <?php } ?>
+        </div>
       </div>
     </div>
 
-    <p class="font-titel mx-3 px-3 mb-1 fw-bold">เมนูทั้งหมด</p>
+    <div class="menu_new">
+      <p class="font-titel mx-3 px-3 mb-1 fw-bold ">เมนูใหม่</p>
+      <div class="content_menu_list_home ">
+        <div class="menu_intro">
 
+          <?php
+
+          $sql_menu_new = "SELECT * FROM table_listfood";
+          $response_menu_new = $obj->query($sql_menu_new);
+          $row_menu_new = $response_menu_new->fetchAll(PDO::FETCH_OBJ);
+
+          foreach ($row_menu_new as  $row_menu_new) {
+            $check_date_menu_new = (int)$row_menu_new->new_menu;
+            $result_check_date = $date - $check_date_menu_new;
+            $value_dateCount = 5000000000000;
+
+            if ($result_check_date < $value_dateCount) { ?>
+              <div class="content_menu position-relative">
+                <?php if (strpos($row_menu_new->image, ".")) { ?>
+                  <img src="image_myweb/img_product/<?= $row_menu_new->image; ?>" alt="img" class="img_menu">
+                <?php } else { ?>
+                  <img src="assets/img/empty_bg.jpeg" alt="img" class="img_menu">
+                <?php } ?>
+                <div class="detail_bottom">
+                  <p class="font_detail">ชื่อ : <?= $row_menu_new->name; ?></p>
+                  <p class="font_detail">ราคา : <?= $row_menu_new->price_food . " ฿"; ?></p>
+                </div>
+                <div class="ribbon-wrapper">
+                  <div class="ribbon bg-success fw-bold">
+                    ใหม่
+                  </div>
+                </div>
+              </div>
+          <?php }
+          } ?>
+        </div>
+      </div>
+    </div>
+
+    <p class="font-titel mx-3 px-3 mb-1 mt-2 fw-bold">เมนูทั้งหมด</p>
     <?php
     $row = $result->fetchAll(PDO::FETCH_OBJ);
     $count = Count($row);

@@ -15,17 +15,33 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       echo $text;
     }
 
+
+
+    if (isset($_GET['update_sound'])) {
+      $sql = "UPDATE table_order SET sound_notification = 2 WHERE status = 1";
+      $result  = $obj->query($sql);
+      if ($result) {
+        echo "success";
+      }
+    }
+
+
     if (isset($_GET['get_ordernew1'])) {
       $sql1 = "SELECT * FROM table_order WHERE status = 1 ORDER BY number_sort DESC";
       $result  = $obj->query($sql1);
       $count_list_new = $result->rowCount();
+
+      $sum_sql = "SELECT count(sound_notification) from table_order WHERE status = 1 AND sound_notification = 1";
+      $result_sum_sql = $obj->query($sum_sql);
+      $number_of_rows = $result_sum_sql->fetchColumn();
       $text = "";
 
-      if ($count_list_new == 0) {
 
+      if ($count_list_new == 0) {
         $text .= "  <tr>
         <td colspan='5' align='center'>ไม่มีรายการ</td>
       </tr>";
+        $notification_sound = 0;
       } else {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
           $text .= " <tr>
@@ -37,7 +53,8 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
         </tr> ";
         }
       }
-      echo $text;
+      $arr = ["text" => $text, "notification_sound_check" => $number_of_rows];
+      echo json_encode($arr);
     }
 
 
