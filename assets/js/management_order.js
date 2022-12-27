@@ -9,9 +9,14 @@ var table_ordernew1 = document.getElementById("table_ordernew1");
 var table_ordernew2 = document.getElementById("table_ordernew2");
 var table_ordernew3 = document.getElementById("table_ordernew3");
 
-
 var form_search = document.getElementById("form_search");
 
+// modal show reload
+var show_dom = new bootstrap.Modal(document.getElementById("show_dom"));
+var close_modal = document.getElementById("close_modal");
+var refresh = document.getElementById("refresh").value;
+
+var tbody = document.querySelector("tbody");
 
 content_order2.style.display = "none";
 content_order3.style.display = "none";
@@ -45,6 +50,40 @@ active3.addEventListener("click", () => {
 })
 
 
+window.onload = function () {
+  if (refresh == 1) {
+    show_dom.show();
+  }
+};
+
+
+
+
+close_modal.addEventListener("click", () => {
+  show_dom.hide();
+})
+
+// confirm_order
+tbody.addEventListener("click", (e) => {
+  if (e.target.matches("button.confirm_order1")) {
+    e.preventDefault();
+    let id = e.target.getAttribute("data-id");
+    confirm_order1(id);
+  }
+})
+
+
+const confirm_order1 = async (id) => {
+
+  const data = await fetch(`fetch_count_order.php?confirm_order1=${id}`, {
+    method: "GET"
+  })
+  const res = await data.text();
+  if (res == "success") {
+    location.assign("management_order.php?refresh=2");
+  }
+  // console.log(res);
+}
 
 
 // fetch data
@@ -64,9 +103,6 @@ setInterval(fetchdata_ordernew1 = async () => {
 
 
 // // open sound notification
-// var sum_counter_before = document.getElementById("sumsound").value; // globalThis
-// var sum_counter = parseInt(sum_counter_before);
-// sum_counter = sum_counter * 12;
 
 // // open sound notification
 const output_sound = async (sum_counter) => {
@@ -76,6 +112,7 @@ const output_sound = async (sum_counter) => {
     if (sum_counter > 0) {
       audio.volume = 0.5;  // Set the volume to 50%
       audio.loop = false;  // Play the audio only once
+      audio.controls = true;
       audio.play();
       // console.log(sum_counter);
     } else {

@@ -15,8 +15,6 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       echo $text;
     }
 
-
-
     if (isset($_GET['update_sound'])) {
       $sql = "UPDATE table_order SET sound_notification = 2 WHERE status = 1";
       $result  = $obj->query($sql);
@@ -25,6 +23,14 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       }
     }
 
+    if (isset($_GET['confirm_order1'])) {
+      $id = $_GET['confirm_order1'];
+      $sql = "UPDATE table_order SET status = 2 WHERE id = $id";
+      $result  = $obj->query($sql);
+      if ($result) {
+        echo "success";
+      }
+    }
 
     if (isset($_GET['get_ordernew1'])) {
       $sql1 = "SELECT * FROM table_order WHERE status = 1 ORDER BY number_sort DESC";
@@ -49,14 +55,13 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
           <td nowrap> " . $row['create_date'] . "</td>
           <td nowrap>โต๊ะ " . $row['table_user'] . "</td>
           <td nowrap><span class='text-danger fw-semibold'>รอการยืนยัน</span></td>
-          <td nowrap> <a href='order_new.php?id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
+          <td nowrap> <a href='order_new.php?id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a> <button class='btn btn-success btn-sm confirm_order1' data-id='" . $row['id'] . "'>ยืนยันรายการ</button></td>
         </tr> ";
         }
       }
       $arr = ["text" => $text, "notification_sound_check" => $number_of_rows];
       echo json_encode($arr);
     }
-
 
     if (isset($_GET['get_ordernew2'])) {
       $sql1 = "SELECT * FROM table_order WHERE status = 2 ORDER BY number_sort DESC";
@@ -83,8 +88,6 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       echo $text;
     }
 
-
-
     if (isset($_GET['get_ordernew3'])) {
       $sql1 = "SELECT * FROM table_order WHERE status = 3 ORDER BY number_sort DESC";
       $result  = $obj->query($sql1);
@@ -110,9 +113,6 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       echo $text;
     }
 
-
-
-
     if (isset($_GET['read_detail_one'])) {
       $date_oneday = date("Y-m-d");
       $total_income = 0;
@@ -133,8 +133,6 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       <div class='col-xl-6 mb-2'>" . number_format($count_orderday) . " <span> &nbsp;&nbsp;&nbsp;ออเดอร์ </span></div>";
       echo $text;
     }
-
-
 
     if (isset($_GET['read_detail_All'])) {
       $date_now = date("Y-m-d");
