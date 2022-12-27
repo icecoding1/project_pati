@@ -330,7 +330,6 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                         <input type="hidden" value="<?= $row['slide_image'] ?>" name="postslide_image">
                         <input type="hidden" value="<?= $row['id'] ?>" name="id">
                       </div>
-
                     </div>
                   </div>
                 </div>

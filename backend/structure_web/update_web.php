@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       }
     } else  if ($count_array_img == 1) {
       $num_of_imgs = count($imge_slide['name']);
-      $count =  count($imge_slide['name']);
-      if ($count > 3) {
+      $count =  count($imge_slide['name']) + count($_SESSION['image_slide_food']);
+      if ($count > 5) {
         http_response_code(400);
         echo "รูปภาพเกินกว่ากำหนด";
       } else {
@@ -61,21 +61,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           );
           array_push($_SESSION['image_slide_food'], $items);
         }
-      }
 
-      $all_image_encode = json_encode($_SESSION['image_slide_food']);
-      $sql_update = "UPDATE structure_management SET 	slide_image = :slide_image WHERE id = :id";
-      $update = $obj->prepare($sql_update);
-      $update->bindParam(":slide_image", $all_image_encode);
-      $update->bindParam(":id", $id);
-      $result = $update->execute();
-      if ($result) {
-        http_response_code(200);
-        unset($_SESSION['image_pd']);
-        echo "เเก้ไขข้อมูลสำเร็จ";
-      } else {
-        http_response_code(400);
-        echo "เเก้ไขข้อมูลไม่สำเร็จ";
+
+        $all_image_encode = json_encode($_SESSION['image_slide_food']);
+        $sql_update = "UPDATE structure_management SET 	slide_image = :slide_image WHERE id = :id";
+        $update = $obj->prepare($sql_update);
+        $update->bindParam(":slide_image", $all_image_encode);
+        $update->bindParam(":id", $id);
+        $result = $update->execute();
+        if ($result) {
+          http_response_code(200);
+          unset($_SESSION['image_pd']);
+          echo "เเก้ไขข้อมูลสำเร็จ";
+        } else {
+          http_response_code(400);
+          echo "เเก้ไขข้อมูลไม่สำเร็จ";
+        }
       }
     }
   }

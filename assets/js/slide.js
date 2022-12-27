@@ -12,6 +12,7 @@ redio1.addEventListener("click", () => {
 redio2.addEventListener("click", () => {
   counter = 2;
 });
+
 redio3.addEventListener("click", () => {
   counter = 3;
 });
