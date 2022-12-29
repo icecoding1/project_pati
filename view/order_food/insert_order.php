@@ -44,8 +44,14 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   // echo "</pre>";
 
 
-
-
+  // create lsit menu to text to notification line
+  $text_list = "";
+  $sMessage = "";
+  foreach ($list as $data) {
+    $text_list .= $data['name'] . " จำนวน: " . $data['count'] . "\r\n";
+  }
+  $text_note = empty($note) ? "ไม่มี" : $note;
+  // echo $text_list;
 
 
   if (count($array) > 0) {
@@ -66,12 +72,37 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       ]);
 
       if ($result) {
-        unset($_SESSION['send_order']);
-        unset($_SESSION['data']);
-        unset($_SESSION['total']);
-        unset($_SESSION["count_order"]);
-        echo "<script>alert('เพิ่มรายการสำเร็จ');</script>";
-        echo "<script>location.assign('order_receive.php');</script>";
+        $sToken = "ps5bEUJhaITa5G5jI0EfuxAbBWNovLsCzumqyB0GKsN";
+        $sMessage .=  "โต๊ะ " . $table . " ได้ทำการสั่งอาหาร\r\n";
+        $sMessage .= "จำนวนรายทั้งสิ้น:  " . $count_order . " รายการ ดังนี้ \r\n";
+        $sMessage .=  $text_list . "\r\n";
+        $sMessage .= "รวมเป็นเงินทั้งสิ้น: " . $priceAll . " บาท\r\n";
+        $sMessage .= "เพิ่มเติม รายละเอียดจากลูกค้า: " . $text_note . " \r\n";
+
+        $chOne = curl_init();
+        curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($chOne, CURLOPT_POST, 1);
+        curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=" . $sMessage);
+        $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $sToken . '',);
+        curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+        $result_notification = curl_exec($chOne);
+
+        //Result error 
+        if (curl_error($chOne)) {
+          echo 'error:' . curl_error($chOne);
+        } else {
+          $result_notification = json_decode($result_notification, true);
+          unset($_SESSION['send_order']);
+          unset($_SESSION['data']);
+          unset($_SESSION['total']);
+          unset($_SESSION["count_order"]);
+          echo "<script>alert('เพิ่มรายการสำเร็จ');</script>";
+          echo "<script>location.assign('order_receive.php');</script>";
+        }
+        curl_close($chOne);
       }
     } catch (PDOException $e) {
       echo "error" .    $e->getMessage();
