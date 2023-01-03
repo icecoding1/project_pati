@@ -134,7 +134,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
           })
           const res = await data.text();
           document.getElementById("report_oneday").innerHTML = res;
-        }, 100);
+        }, 1000);
 
         form_date.addEventListener("submit", async (e) => {
           e.preventDefault();
