@@ -90,9 +90,15 @@
                 <p>สั่งออเดอร์</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="article.php" class="nav-link" id="nav-link6">
+                <i class="bi bi-pen-fill"></i>
+                <p>จัดการบทความ</p>
+              </a>
+            </li>
             <?php if ($_SESSION["session_status"] == "admin") { ?>
               <li class="nav-item" id="nav-item-end">
-                <a href="setting.php" class="nav-link" id="nav-link6">
+                <a href="setting.php" class="nav-link" id="nav-link7">
                   <i class="bi bi-gear-wide nav-icon"></i>
                   <p>ตั้งค่า</p>
                 </a>

@@ -77,7 +77,6 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                             <div class="card-header ">
                               <div class="w-100 d-flex justify-content-between align-items-center flex-wrap py-2">
                                 <h3 class="card-title mx-2">ออเดอร์ใหม่</h3>
-                                <button class="btn btn-dark">click me</button>
                               </div>
                             </div>
                             <div class="card-body table-responsive p-0" style="height: 400px;">

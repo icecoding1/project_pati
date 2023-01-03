@@ -7,7 +7,7 @@ session_start();
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
   $slide_edit = isset($_GET['slide_edit']) ? $_GET['slide_edit'] : false;
-  $page_nav = 6;
+  $page_nav = 7;
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     date_default_timezone_set('Asia/Bangkok');
