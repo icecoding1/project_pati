@@ -63,6 +63,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                 </div>
                 <div class="card-body  p-4 ">
                   <form class="row" method="POST" enctype="multipart/form-data" id="form_update_article">
+                    <input type="hidden" value="<?= $rows['id'] ?>" name="id_article">
                     <p class="col-12 mb-0 fw-bold">หัวข้อ</p>
                     <div class="col-12 mb-3">
                       <input type="text" name="header" class="form-control" required value="<?= $rows['header'] ?>">

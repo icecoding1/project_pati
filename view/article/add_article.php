@@ -56,19 +56,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
   if (isset($_POST['submit_update'])) {
+    $id = $_POST['id_article'];
     $header = $_POST['header'];
     $type = $_POST['type'];
     $detail_article = $_POST['detail_article'];
     $name_edit = $_SESSION["session_name"];
     $date = date('Y-m-d H:i:s');
-    $arr = [$header, $type, $detail_article, $name_edit,  $date];
+    $arr = [$header, $type, $detail_article, $name_edit,  $date,  $id];
 
     if (empty($detail_article)) {
       http_response_code(400);
       echo "ไม่มีข้อมูลบทความ";
     } else {
       try {
-        $sql = "UPDATE  table_article  SET  header = ?, type = ?, detail = ?, name_edit = ?, date_created = ?";
+        $sql = "UPDATE  table_article  SET  header = ?, type = ?, detail = ?, name_edit = ?, date_created = ? WHERE id = ?";
         $insert = $obj->prepare($sql);
         $result =  $insert->execute($arr);
         if ($result) {

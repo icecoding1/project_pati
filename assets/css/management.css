@@ -970,7 +970,6 @@ html {
 }
 
 .bg-home {
-  overflow-x: hidden;
   position: relative;
   background: #d3cdcd76;
   min-height: 100vh;
@@ -981,6 +980,8 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .bg-home .header_nav {
@@ -1037,6 +1038,13 @@ html {
   text-decoration: none;
   color: #ffff;
   cursor: pointer;
+}
+
+.bg-home .header_nav .navbar ul li a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #ffff;
 }
 
 .bg-home .header_nav .navbar ul li span {
@@ -1101,14 +1109,15 @@ html {
 .bg-home .content_index {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(500px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
   gap: 10px 15px;
   padding: 5px 20px;
   padding-right: 30px;
 }
 
 .bg-home .content_index .in_content_index {
+  max-width: 500px;
   background-color: rgba(255, 255, 255, 0) !important;
   margin: 0px !important;
   padding: 5px !important;
@@ -1781,7 +1790,6 @@ html {
 }
 
 .bg-home {
-  overflow-x: hidden;
   position: relative;
   background: #d3cdcd76;
   min-height: 100vh;
@@ -1792,6 +1800,8 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .bg-home .header_nav {
@@ -1848,6 +1858,13 @@ html {
   text-decoration: none;
   color: #ffff;
   cursor: pointer;
+}
+
+.bg-home .header_nav .navbar ul li a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #ffff;
 }
 
 .bg-home .header_nav .navbar ul li span {
@@ -1912,14 +1929,15 @@ html {
 .bg-home .content_index {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(500px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
   gap: 10px 15px;
   padding: 5px 20px;
   padding-right: 30px;
 }
 
 .bg-home .content_index .in_content_index {
+  max-width: 500px;
   background-color: rgba(255, 255, 255, 0) !important;
   margin: 0px !important;
   padding: 5px !important;

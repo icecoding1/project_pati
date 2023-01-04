@@ -5,6 +5,7 @@ session_start();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $select = isset($_GET['select_type']) ? $_GET['select_type'] : "";
 $text_search = isset($_GET['text_search']) ? $_GET['text_search'] : "";
+$lsit_type = isset($_GET['input_list_type_article']) ? $_GET['input_list_type_article'] : "";
 $_SESSION['response_select'] =  $select;
 $response_select = $_SESSION['response_select'];
 $_SESSION['response_text_search'] =  $text_search;
@@ -38,6 +39,17 @@ $image_decode = json_decode($result_str['slide_image']);
 $image_slide_encode = json_decode(json_encode($image_decode), true);
 $count_slide = count($image_slide_encode);
 // print_r($image_slide_encode);
+
+
+//article
+if ($lsit_type) {
+  $sql_article = "SELECT * FROM  table_article WHERE 	type =  '$lsit_type' LIMIT  10";
+} else {
+  $sql_article = "SELECT * FROM  table_article LIMIT  10";
+}
+$select_article =  $obj->prepare($sql_article);
+$select_article->execute();
+$rows = $select_article->fetchAll();
 ?>
 
 
@@ -160,24 +172,43 @@ $count_slide = count($image_slide_encode);
     </div>
 
     <div class="py-4 my-3 set_content">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 mt-3 fw-bold fs-3 mx-4">บทความ</p>
+        <form method="GET" class="mb-0 mt-3 fw-bold fs-3 mx-4">
+          <!-- <input list="list_type_article" id="input_list_type_article" name="input_list_type_article"> -->
+          <div class="input-group mb-3">
+            <input type="hidden" name="page" value="1">
+            <input type="text" class="form-control" list="list_type_article" id="input_list_type_article" name="input_list_type_article" value="<?= $lsit_type ?>">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2"> <i class="bi bi-search"></i></button>
+          </div>
+          <datalist id="list_type_article">\
+            <?php foreach ($rows  as $row) { ?>
+              <option value="<?= $row['type'] ?>">
+              <?php } ?>
+          </datalist>
+        </form>
+      </div>
+
       <div class="content_index ">
-        <?php foreach (range(1, 10) as $row) { ?>
-          <div class="card mb-3 in_content_index">
-            <div class="row g-0 content">
-              <div class="col-md-4 image">
-                <img src="assets/img/empty_bg.jpeg" class="img-fluid rounded-start" alt="img">
-              </div>
-              <div class="col-md-8 detail_box">
-                <div class="card-body detail">
-                  <h5 class="card-title titel">Card title</h5>
-                  <p class="card-text text_detail">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                  <a href="">see more..</a>
+        <?php if (empty($rows)) { ?>
+          <p class="text-center fs-5">ยังไม่มีบทความ!!</p>
+        <?php } else { ?>
+          <?php foreach ($rows  as $row) {
+            $txt = substr($row['detail'], 0, 250);
+          ?>
+            <div class="card mb-3 in_content_index">
+              <div class="row g-0 content">
+                <div class="col-md-12 detail_box">
+                  <div class="card-body detail">
+                    <h5 class="card-title titel"><?= $row['header'] ?></h5>
+                    <p class="card-text text_detail"><?= $txt  ?> <a href="index_article.php?id=<?= $row['id'] ?>" class="fw-bold fs-5">see more....</a></p>
+                    <p class="card-text"><small class="text-muted">Last updated <?= date("d-m-Y H:i:s", strtotime($row['date_created'])) ?> ago.</small></p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <?php  } ?>
+        <?php  }
+        } ?>
       </div>
     </div>
   </div>

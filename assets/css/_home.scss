@@ -1,10 +1,12 @@
 .bg-home {
-  overflow-x: hidden;
+  // overflow-x: hidden;
   position: relative;
   background: #d3cdcd76;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
 
 
 
@@ -52,6 +54,13 @@
             text-decoration: none;
             color: #ffff;
             cursor: pointer;
+          }
+
+          a {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            color: #ffff;
           }
 
 
@@ -122,7 +131,8 @@
   .content_index {
     // height: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    // grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px 15px;
     padding: 5px 20px;
     padding-right: 30px;
@@ -131,6 +141,7 @@
 
 
     .in_content_index {
+      max-width: 500px;
       background-color: rgba(255, 255, 255, 0) !important;
       margin: 0px !important;
       padding: 5px !important;
@@ -165,6 +176,7 @@
       }
     }
   }
+
 
   .contect {
     .box-email {
