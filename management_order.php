@@ -86,6 +86,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                                     <th>เลขที่ออเดอร์</th>
                                     <th>วันเวลา</th>
                                     <th>โต๊ะ</th>
+                                    <th>ผู้รับรายการ</th>
                                     <th>สถานะ</th>
                                     <th>รายการ</th>
                                   </tr>
@@ -114,6 +115,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                                   <th>เลขที่ออเดอร์</th>
                                   <th>วันเวลา</th>
                                   <th>โต๊ะ</th>
+                                  <th>ผู้ยืนยันรายการ</th>
                                   <th>สถานะ</th>
                                   <th>รายการ</th>
                                 </tr>

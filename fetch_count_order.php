@@ -25,10 +25,19 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 
     if (isset($_GET['confirm_order1'])) {
       $id = $_GET['confirm_order1'];
-      $sql = "UPDATE table_order SET status = 2 WHERE id = $id";
-      $result  = $obj->query($sql);
+      $sql_select = "SELECT * FROM table_order WHERE id = $id";
+      $result_select  = $obj->query($sql_select);
+      $row = $result_select->fetch();
+      $item = ["order_send" => $row["name_edit"], "order_confirm" => $_SESSION["session_name"]];
+      $list_name_confirm = json_encode($item);
+      $update_date = date("d-m-Y  H:i:s");
+      $sql = "UPDATE table_order SET status = 2, name_edit = ?, create_date = ? WHERE id = ?";
+      $update  = $obj->prepare($sql);
+      $result = $update->execute([$list_name_confirm, $update_date, $id]);
       if ($result) {
         echo "success";
+      } else {
+        echo "error";
       }
     }
 
@@ -54,6 +63,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
           <td nowrap>" . $row['number_order'] . "</td>
           <td nowrap> " . $row['create_date'] . "</td>
           <td nowrap>โต๊ะ " . $row['table_user'] . "</td>
+          <td nowrap>" . $row['name_edit'] . "</td>
           <td nowrap><span class='text-danger fw-semibold'>รอการยืนยัน</span></td>
           <td nowrap> <a href='order_new.php?id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a> <button class='btn btn-success btn-sm confirm_order1' data-id='" . $row['id'] . "'>ยืนยันรายการ</button></td>
         </tr> ";
@@ -76,10 +86,13 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       </tr>";
       } else {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+          $decode_name_confirm = json_decode($row['name_edit']);
+          $ende_name_confirm  = json_decode(json_encode($decode_name_confirm), true);
           $text .= " <tr>
           <td nowrap>" . $row['number_order'] . "</td>
           <td nowrap> " . $row['create_date'] . "</td>
           <td nowrap>โต๊ะ " . $row['table_user'] . "</td>
+          <td nowrap>" .   $ende_name_confirm['order_confirm'] . "</td>
           <td nowrap><span class='text-warning fw-semibold'>ยืนยันเเล้ว</span></td>
           <td nowrap> <a href='order_new.php?id= " . $row['id'] . "'class='btn btn-primary btn-sm'>รายละเอียด</a></td>
         </tr> ";

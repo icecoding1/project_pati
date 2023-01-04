@@ -82,7 +82,7 @@ const confirm_order1 = async (id) => {
   if (res == "success") {
     location.assign("management_order.php?refresh=2");
   }
-  // console.log(res);
+  console.log(res);
 }
 
 

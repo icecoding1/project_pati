@@ -104,6 +104,13 @@
                 </a>
               </li>
             <?php } ?>
+            <!-- Instruction manual -->
+            <li class="nav-item">
+              <a href="manual.php" class="nav-link" id="nav-link8">
+                <i class="bi bi-sliders"></i>
+                <p>คู่มือการใช้งาน</p>
+              </a>
+            </li>
           </ul>
         </li>
       </ul>

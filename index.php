@@ -4,7 +4,7 @@ ob_start();
 session_start();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $select = isset($_GET['select_type']) ? $_GET['select_type'] : "";
-$text_search = isset($_GET['text_search']) ? $_GET['text_search'] : "";
+$text_search = isset($_GET['text_search']) ? $_GET['text_search'] : false;
 $lsit_type = isset($_GET['input_list_type_article']) ? $_GET['input_list_type_article'] : "";
 $_SESSION['response_select'] =  $select;
 $response_select = $_SESSION['response_select'];
@@ -191,7 +191,7 @@ $rows = $select_article->fetchAll();
 
       <div class="content_index ">
         <?php if (empty($rows)) { ?>
-          <p class="text-center fs-5">ยังไม่มีบทความ!!</p>
+          <p class="text-center fs-5 ">ยังไม่มีบทความ!!</p>
         <?php } else { ?>
           <?php foreach ($rows  as $row) {
             $txt = substr($row['detail'], 0, 250);

@@ -6,6 +6,7 @@ session_start();
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $page_nav = 6;
   $id = isset($_GET["id"]) ? $_GET["id"] : header('location:article.php');
+  empty($id) ? header("Location:article.php") : '';
 ?>
 
   <?php if ($_SESSION["session_status"] == "admin") {

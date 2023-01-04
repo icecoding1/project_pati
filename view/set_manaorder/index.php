@@ -13,10 +13,18 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 
   if ($status == 1) {
     try {
-      $sql = "UPDATE table_order SET status = 2, create_date = :create_date, number_sort = :number_sort   WHERE id = $id";
+      $sql_select = "SELECT * FROM table_order WHERE id = $id";
+      $result_select  = $obj->query($sql_select);
+      $row = $result_select->fetch();
+      $item = ["order_send" => $row["name_edit"], "order_confirm" => $_SESSION["session_name"]];
+      $list_name_confirm = json_encode($item);
+
+
+      $sql = "UPDATE table_order SET status = 2, create_date = :create_date, number_sort = :number_sort, name_edit = :name_edit   WHERE id = $id";
       $result = $obj->prepare($sql);
       $result->bindParam(':create_date', $update_date);
       $result->bindParam(':number_sort', $number_sort);
+      $result->bindParam(':name_edit', $list_name_confirm);
       $result->execute();
       if ($result) {
         echo "<script>location.assign('../../order_new.php?page=2&id=" . $id . "')</script>";
@@ -32,10 +40,20 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       $result_update->execute();
     }
     try {
-      $sql = "UPDATE table_order SET status = 3, create_date = :create_date,  number_sort = :number_sort   WHERE id = $id";
+      $sql_select = "SELECT * FROM table_order WHERE id = $id";
+      $result_select  = $obj->query($sql_select);
+      $row = $result_select->fetch();
+      $decode_name_confirm = json_decode($row['name_edit']);
+      $ende_name_confirm  = json_decode(json_encode($decode_name_confirm), true);
+      $item = ["order_send" => $ende_name_confirm['order_send'], "order_confirm" => $ende_name_confirm['order_confirm'], "order_success" => $_SESSION["session_name"]];
+      $list_name_confirm = json_encode($item);
+
+
+      $sql = "UPDATE table_order SET status = 3, create_date = :create_date,  number_sort = :number_sort, name_edit = :name_edit  WHERE id = $id";
       $result = $obj->prepare($sql);
       $result->bindParam(':create_date', $update_date);
       $result->bindParam(':number_sort', $number_sort);
+      $result->bindParam(':name_edit', $list_name_confirm);
       $result->execute();
       if ($result) {
         echo "<script>location.assign('../../order_new.php?page=3&id=" . $id . "')</script>";

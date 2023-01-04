@@ -4,6 +4,7 @@ session_start();
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   require_once "connection/config.php";
   $id = isset($_GET['id']) ? $_GET['id'] : '';
+  empty($id) ? header("Location:list_menu.php") : '';
   $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
   $page_nav = 3;
   $id_delete = isset($_GET['id_delete']) ? $_GET['id_delete'] : false;

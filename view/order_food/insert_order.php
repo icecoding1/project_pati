@@ -32,6 +32,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $note = isset($_POST['note']) ? $_POST['note'] : "";
   $create_date = date("d-m-Y  H:i:s");
   $date_report = date("Y-m-d");
+  $name_edit =   $_SESSION["session_name"];
 
   $list_order =  json_encode($list);
   $listAll_order =  json_encode($listAll);
@@ -56,7 +57,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
 
   if (count($array) > 0) {
     try {
-      $sql = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort, date_report) VALUES(:number_order, :list_order, :listAll_order, :priceAll, :count_order, :table_user, :note, :create_date, :number_sort, :date_report)";
+      $sql = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort, date_report, name_edit) VALUES(:number_order, :list_order, :listAll_order, :priceAll, :count_order, :table_user, :note, :create_date, :number_sort, :date_report, :name_edit)";
       $result = $obj->prepare($sql);
       $result->execute([
         'number_order' => $number_order,
@@ -69,15 +70,18 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
         'create_date' => $create_date,
         'number_sort' => $number_sort,
         'date_report' => $date_report,
+        'name_edit' => $name_edit,
       ]);
 
       if ($result) {
         $sToken = "ps5bEUJhaITa5G5jI0EfuxAbBWNovLsCzumqyB0GKsN";
+        $sMessage .=  "เลขรายการ " . $number_order . "\r\n";
         $sMessage .=  "โต๊ะ " . $table . " ได้ทำการสั่งอาหาร\r\n";
         $sMessage .= "จำนวนรายทั้งสิ้น:  " . $count_order . " รายการ ดังนี้ \r\n";
         $sMessage .=  $text_list . "\r\n";
         $sMessage .= "รวมเป็นเงินทั้งสิ้น: " . $priceAll . " บาท\r\n";
         $sMessage .= "เพิ่มเติม รายละเอียดจากลูกค้า: " . $text_note . " \r\n";
+        $sMessage .= "ผู้รับรายการอาหาร: " . $_SESSION["session_name"] . " \r\n";
 
         $chOne = curl_init();
         curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");

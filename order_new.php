@@ -2,14 +2,19 @@
 require_once "connection/config.php";
 $name_web = "ระบบจัดการร้านอาหาร";
 $page_nav = 2;
-$id = isset($_GET['id']) ? $_GET['id'] : header("Location: management_order.php");
+$id = isset($_GET['id']) ? $_GET['id'] : header("Location:management_order.php");
+empty($id) ? header("Location:management_order.php") : '';
 ob_start();
 session_start();
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $sql = "SELECT * FROM table_order WHERE id = $id";
-  $result = $obj->query($sql);
-  $data = $result->fetch(PDO::FETCH_OBJ);
+  $select_order = $obj->prepare($sql);
+  $select_order->execute();
+  $data = $select_order->fetch(PDO::FETCH_OBJ);
   $page = $data->status;
+
+  $decode_name_confirm = json_decode($data->name_edit);
+  $ende_name_confirm  = json_decode(json_encode($decode_name_confirm), true);
 ?>
 
   <!DOCTYPE html>
@@ -99,6 +104,22 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                     echo (empty($str)) ?  "-" : $data->note;
                     ?>
                   </div>
+                  <?php if ($page == 1) { ?>
+                    <div class="col-md-5 font-five ">ผู้รับรายการ</div>
+                    <div class="col-md-5 mb-2"><?= $data->name_edit; ?></div>
+                  <?php } else if (($page == 2)) { ?>
+                    <div class="col-md-5 font-five ">ผู้รับรายการ</div>
+                    <div class="col-md-5 mb-2"><?= $ende_name_confirm['order_send'] ?></div>
+                    <div class="col-md-5 font-five ">ผู้ยืนยันรายการ</div>
+                    <div class="col-md-5 mb-2"><?= $ende_name_confirm['order_confirm'] ?></div>
+                  <?php } else if ($page == 3) { ?>
+                    <div class="col-md-5 font-five ">ผู้รับรายการ</div>
+                    <div class="col-md-5 mb-2"><?= $ende_name_confirm['order_send'] ?></div>
+                    <div class="col-md-5 font-five ">ผู้ยืนยันรายการ</div>
+                    <div class="col-md-5 mb-2"><?= $ende_name_confirm['order_confirm'] ?></div>
+                    <div class="col-md-5 font-five ">ผู้ยืนยันรายการเสร็จสิ้น</div>
+                    <div class="col-md-5 mb-2"><?= $ende_name_confirm['order_success'] ?></div>
+                  <?php } ?>
                 </div>
               </div>
 

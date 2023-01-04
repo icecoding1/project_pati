@@ -26,6 +26,9 @@ function displayActiveNav(page) {
   } else if (page == 7) {
     var active = document.querySelector("#nav-link7");
     active.classList.add("active");
+  } else if (page == 8) {
+    var active = document.querySelector("#nav-link8");
+    active.classList.add("active");
   }
 
 };
