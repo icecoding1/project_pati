@@ -100,7 +100,7 @@ $result_str = $select_str->fetch();
             <p class="col-12 mb-0 fw-bold">เรื่อง</p>
             <p class="col-12 mb-4 "><?= $rows['header'] ?></p>
             <p class="col-12 mb-0 fw-bold">ประเภทบทความ</p>
-            <p class="col-12 mb-4 ><?= $rows['type'] ?></p>
+            <p class="col-12 mb-4 "><?= $rows['type'] ?></p>
             <p class=" col-12 mb-0 fw-bold">เนื้อหา</p>
             <div class="col-12 p-2 mb-4">
               <?= $rows['detail'] ?>
