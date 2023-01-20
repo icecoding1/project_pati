@@ -1,8 +1,28 @@
 <?php
-
-ob_start();
 session_start();
 require_once "connection/config.php";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $username = htmlentities($_POST['txt_username'], ENT_QUOTES);
+  $password = htmlentities($_POST['txt_password'], ENT_QUOTES);
+
+  $hash = md5($password);
+
+  $sql = "SELECT * FROM table_member WHERE username = '$username' AND password = '$hash'";
+  $result =  $obj->query($sql);
+
+  $num = $result->rowCount();
+
+  if ($num > 0) {
+    $row = $result->fetch(PDO::FETCH_ASSOC);
+    $_SESSION["id_member"] = $row["id"];
+    $_SESSION["session_status"] = $row["status"];
+    $_SESSION["session_image"] = $row["image"];
+    $_SESSION["session_name"] = $row["name"];
+    header("Location:set_session_structure.php");
+  } else {
+    header("Location:login.php");
+  }
+}
 
 $sql_structure = "SELECT * FROM structure_management";
 $select_bg = $obj->query($sql_structure);
@@ -45,7 +65,7 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
           <p class="login-box-msg">Sign in to management</p>
 
 
-          <form action="setupLogin.php" method="post" enctype="multipart/form">
+          <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form">
             <div class="input-group mb-3">
               <input type="username" class="form-control" placeholder="Username" name="txt_username" require>
               <div class="input-group-append">
@@ -67,7 +87,7 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
                 <div class="icheck-primary">
                   <input type="checkbox" name="show_password" id="show_password">
                   <label for="show_password">
-                    Show password
+                    Show password <?= isset($_SESSION["session_name"]) ? "มี" : "ไม่มี" ?>
                   </label>
                 </div>
               </div>

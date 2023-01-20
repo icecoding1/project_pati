@@ -1,6 +1,7 @@
-<?php $name_web = "ระบบจัดการร้านอาหาร";
-ob_start();
+<?php
 session_start();
+ob_start();
+$name_web = "ระบบจัดการร้านอาหาร";
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $page_nav = 3;
   include "connection/config.php";
@@ -22,7 +23,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $row = $result->fetchAll(PDO::FETCH_OBJ);
   $count = $result->rowCount();
 
-  $btn_check_input = isset($_GET['ant']) || isset($_GET['search_menu']) ? '<a href="list_menu.php" class="btn btn-dark mx-2 ">รายการอาหารทั้งหมด</a>' : '<a href="list_menu.php?ant=1" class="btn btn-danger mx-2 ">รายการอาหารที่หมด</a>';
+  $btn_check_input = isset($_GET['ant']) || isset($_GET['search_menu']) ? '<a href="list_menu.php" class="btn btn-dark mx-1 mb-1">รายการอาหารทั้งหมด</a>' : '<a href="list_menu.php?ant=1" class="btn btn-danger mx-1 mb-1 ">รายการอาหารที่หมด</a>';
 
 ?>
 
@@ -69,7 +70,7 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
             <div class="content-top">
               <div class="search_listmenu ">
 
-                <form action="<?php $_SERVER['PHP_SELF'] ?> " method="GET" class="mb-0">
+                <form action="<?php $_SERVER['PHP_SELF'] ?> " method="GET" class="mb-3">
                   <div class="card-tools">
                     <div class="input-group input-group" style="max-width:450px;">
                       <input type="text" name="search_menu" class="form-control float-right" placeholder="Search" value="<?= $search ?>">
@@ -82,10 +83,12 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
                   </div>
                 </form>
 
-                <a href="add_detail_list_menu.php" class="btn btn-primary mx-2 ">+ เพิ่มรายการ</a>
+                <div class="mb-3">
+                  <a href="add_detail_list_menu.php " class="btn btn-primary mx-1 mb-1 ">+ เพิ่มรายการ</a>
 
-                <!-- tag btn <a></a> -->
-                <?= $btn_check_input ?>
+                  <!-- tag btn <a></a> -->
+                  <?= $btn_check_input ?>
+                </div>
               </div>
             </div>
 

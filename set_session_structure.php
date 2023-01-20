@@ -1,6 +1,6 @@
 <?php
-ob_start();
 session_start();
+ob_start();
 require_once "connection/config.php";
 isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"]) ?  '' : header("location: login.php");
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -17,7 +17,8 @@ if ($row = $set_session_structure->fetch(PDO::FETCH_ASSOC)) {
 
   if ($check_id == 1) {
     echo "<script> window.location.assign('setting.php');</script>";
+    header("Location:setting.php");
   } else {
-    echo "<script> window.location.assign('home.php');</script>";
+    header("Location:home.php");
   }
 }
