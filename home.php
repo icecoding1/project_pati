@@ -58,4 +58,5 @@ if(confirm('กรุณา login ก่อนเข้าสู่ระบบ'
   location.assign('login.php');
 }
 </script>";
-} ?>
+}
+?>
