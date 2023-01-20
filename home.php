@@ -3,7 +3,6 @@ session_start();
 ob_start();
 require_once("connection/config.php");
 $name_web = "ระบบจัดการร้านอาหาร";
-
 include("check_session.php");
 ?>
 

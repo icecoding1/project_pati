@@ -1,8 +1,8 @@
 <?php
-require_once "connection/config.php";
 ob_start();
 session_start();
-isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"]) ? '' : header("Location: login.php");
+require_once "connection/config.php";
+include("check_session.php");
 $name_web = "ออกบิลรายการร้านอาหาร";
 $page_nav = 2;
 $pay_money = false;

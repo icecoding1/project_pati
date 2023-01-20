@@ -10,10 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $sql = "SELECT * FROM table_member WHERE username = '$username' AND password = '$hash'";
   $result =  $obj->query($sql);
 
-  $num = $result->rowCount();
+  $row = $result->fetch(PDO::FETCH_ASSOC);
+  $num = count($row);
 
   if ($num > 0) {
-    $row = $result->fetch(PDO::FETCH_ASSOC);
     $_SESSION["id_member"] = $row["id"];
     $_SESSION["session_status"] = $row["status"];
     $_SESSION["session_image"] = $row["image"];

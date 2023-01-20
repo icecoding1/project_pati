@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "connection/config.php";
-isset($_SESSION['session_name']) && isset($_SESSION['session_status']) ? '' : header("Location: login.php");
+include("check_session.php");
 $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
 $sql = "SELECT * FROM  table_member WHERE id = " . $_SESSION["id_member"];
 $select =  $obj->prepare($sql);
