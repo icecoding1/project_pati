@@ -6,9 +6,6 @@ $password = '';
 // Create connection
 try {
   $obj = new PDO($dns, $username, $password);
-} catch (PDOException $e) { ?>
-  <script>
-    console.log("not connection")
-  </script>
-<?php }
-?>
+} catch (PDOException $e) {
+  die($e->getMessage());
+}

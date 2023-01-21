@@ -1,6 +1,6 @@
 <?php
-session_start();
 ob_start();
+session_start();
 require_once("../../connection/config.php");
 date_default_timezone_set("Asia/Bangkok");
 require_once("../../check_session.php");
