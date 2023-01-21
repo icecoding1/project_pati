@@ -52,17 +52,6 @@ try {
   if (count($array) > 0) {
     $sql_insert = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort, date_report, name_edit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insert = $obj->prepare($sql_insert);
-    $insert->bindParam(":number_order", $number_order);
-    $insert->bindParam(":list_order", $list_order);
-    $insert->bindParam(":listAll_order", $listAll_order);
-    $insert->bindParam(":priceAll", $priceAll);
-    $insert->bindParam(":count_order", $count_order);
-    $insert->bindParam(":table_user", $table);
-    $insert->bindParam(":note", $text_note);
-    $insert->bindParam(":create_date", $create_date);
-    $insert->bindParam(":number_sort", $number_sort);
-    $insert->bindParam(":date_report", $date_report);
-    $insert->bindParam(":name_edit", $name_edit);
     $data_execute = $insert->execute([
       $number_order,
       $list_order,
