@@ -1,9 +1,9 @@
 <?php
 session_start();
 ob_start();
-require_once "../../connection/config.php";
+require_once("../../connection/config.php");
 date_default_timezone_set("Asia/Bangkok");
-include("check_session.php");
+require_once("../../check_session.php");
 
 
 if (isset($_SESSION['check_update']) == "") {
@@ -37,13 +37,6 @@ $name_edit =   $_SESSION["session_name"];
 $list_order =  json_encode($list);
 $listAll_order =  json_encode($listAll);
 
-// echo $list_order;
-// echo "<hr>";
-// $list_decode =  json_decode($list_order);
-// echo "<pre>";
-// print_r($list_decode);
-// echo "</pre>";
-
 
 // create list menu to text to notification line
 $text_list = "";
@@ -57,8 +50,8 @@ $text_note = empty($note) ? "-" : $note;
 
 try {
   if (count($array) > 0) {
-    $sql = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort, date_report, name_edit) VALUES(:number_order, :list_order, :listAll_order, :priceAll, :count_order, :table_user, :note, :create_date, :number_sort, :date_report, :name_edit)";
-    $insert = $obj->prepare($sql);
+    $sql_insert = "INSERT INTO table_order(number_order, list_order, listAll_order, priceAll, count_order, table_user, note, create_date, number_sort, date_report, name_edit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $insert = $obj->prepare($sql_insert);
     $insert->bindParam(":number_order", $number_order);
     $insert->bindParam(":list_order", $list_order);
     $insert->bindParam(":listAll_order", $listAll_order);
@@ -70,20 +63,20 @@ try {
     $insert->bindParam(":number_sort", $number_sort);
     $insert->bindParam(":date_report", $date_report);
     $insert->bindParam(":name_edit", $name_edit);
-    // $data_execute = $result->execute([
-    //   'number_order' => $number_order,
-    //   'list_order' => $list_order,
-    //   'listAll_order' => $listAll_order,
-    //   'priceAll' => $priceAll,
-    //   'count_order' => $count_order,
-    //   'table_user' => $table,
-    //   'note' => $text_note,
-    //   'create_date' => $create_date,
-    //   'number_sort' => $number_sort,
-    //   'date_report' => $date_report,
-    //   'name_edit' => $name_edit,
-    // ]);
-    $data_execute = $insert->execute();
+    $data_execute = $insert->execute([
+      $number_order,
+      $list_order,
+      $listAll_order,
+      $priceAll,
+      $count_order,
+      $table,
+      $text_note,
+      $create_date,
+      $number_sort,
+      $date_report,
+      $name_edit,
+    ]);
+
     if ($data_execute) {
       $sToken = "ps5bEUJhaITa5G5jI0EfuxAbBWNovLsCzumqyB0GKsN";
       $sMessage .=  "เลขรายการ " . $number_order . "\r\n";

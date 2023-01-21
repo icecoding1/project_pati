@@ -2,8 +2,9 @@
 ob_start();
 session_start();
 $name_web = "สั่งออเดอร์";
-require_once "../../connection/config.php";
-include("check_session.php");
+require_once("../../connection/config.php");
+require_once("../../check_session.php");
+
 
 $count_table =  $_SESSION["count_table"];
 $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
