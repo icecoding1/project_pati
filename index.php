@@ -213,7 +213,7 @@ $rows = $select_article->fetchAll();
     </div>
   </div>
 
-  <div class="contect ">
+  <div class="contect">
     <div class="py-4 my-3 ">
       <div class="row px-4 ">
         <div class="col-xl-6">

@@ -983,8 +983,12 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
+  min-width: 100vw !important;
   overflow-x: hidden;
+}
+
+.bg-home .index {
+  overflow: hidden;
 }
 
 .bg-home .header_nav {
@@ -1803,8 +1807,12 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
+  min-width: 100vw !important;
   overflow-x: hidden;
+}
+
+.bg-home .index {
+  overflow: hidden;
 }
 
 .bg-home .header_nav {
