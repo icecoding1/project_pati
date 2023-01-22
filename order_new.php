@@ -78,9 +78,10 @@ $ende_name_confirm  = json_decode(json_encode($decode_name_confirm), true);
               <button type="button" class="btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#print_bill">ออกบิล</button>
               <?php if ($data->pay_from_user > 0) { ?>
                 <a href="view/set_manaorder/index.php?id=<?= $id; ?>&status=<?= $data->status; ?>" class="btn btn-success m-1">เสร็จสิ้นออเดอร์</a>
-              <?php  } ?>
-              <a href="view/add_editorder/index.php?id=<?= $id; ?>" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</a>
-              <a href="view/add_editorder/deleteAll_order.php?id=<?= $id; ?>" class="btn btn-danger m-1">ลบ</a>
+              <?php  } else { ?>
+                <a href="view/add_editorder/index.php?id=<?= $id; ?>" class="btn btn-primary m-1">เพิ่ม/เเก้ไข</a>
+                <a href="view/add_editorder/deleteAll_order.php?id=<?= $id; ?>" class="btn btn-danger m-1">ลบ</a>
+              <?php } ?>
             <?php   } else if ($page == 3) { ?>
               <a href="print_all.php?id_confrim=<?= $data->id ?>&show_all=1" class="btn btn-dark m-1">ออกบิล</a>
             <?php    } ?>

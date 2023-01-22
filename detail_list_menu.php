@@ -2,9 +2,8 @@
 ob_start();
 session_start();
 $name_web = "ระบบจัดการร้านอาหาร";
-include("check_session.php");
-
 require_once "connection/config.php";
+include("check_session.php");
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 empty($id) ? header("Location:list_menu.php") : '';
 $is_edit = isset($_GET['is_edit']) ? $_GET['is_edit'] : false;
