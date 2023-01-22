@@ -7,7 +7,6 @@ include("check_session.php");
 $page_nav = 6;
 ?>
 
-<?php if ($_SESSION["session_status"] == "admin") {
   $sql = "SELECT * FROM  table_article ";
   $select =  $obj->prepare($sql);
   $select->execute();
@@ -222,4 +221,3 @@ $page_nav = 6;
   </body>
 
   </html>
-<?php } ?>

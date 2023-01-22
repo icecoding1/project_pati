@@ -8,7 +8,6 @@ include("check_session.php");
 $page_nav = 6;
 ?>
 
-<?php if ($_SESSION["session_status"] == "admin") {
 ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -137,4 +136,3 @@ $page_nav = 6;
   </body>
 
   </html>
-<?php } ?>
