@@ -62,7 +62,8 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
 
       <div class="card padding-card-login ">
         <div class="card-body   ">
-          <p class="login-box-msg">Sign in to management</p>
+        <p class="login-box-msg pb-0">Sign in to management</p>
+          <p class="login-box-msg ">for members</p>
 
 
           <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form">
