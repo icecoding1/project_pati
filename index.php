@@ -303,7 +303,7 @@ $rows = $select_article->fetchAll();
             }
             ?>
           </select>
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-2 flex-wrap justify-content-center">
             <div class="input-group  inputform-search">
               <span class="input-group-text" id="inputGroup-sizing-default">ค้นหารายการ</span>
               <?php if ($response_text_search == "") { ?>
