@@ -8,12 +8,11 @@ include("check_session.php");
 $page_nav = 6;
 $id = isset($_GET["id"]) ? $_GET["id"] : header('location:article.php');
 empty($id) ? header("Location:article.php") : '';
-?>
 
 $sql = "SELECT * FROM table_article WHERE id = '$id'";
 $select = $obj->prepare($sql);
 $select->execute();
-$rows = $select->fetch();
+$rows = $select->fetch();up
 ?>
 <!DOCTYPE html>
 <html lang="en">
