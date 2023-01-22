@@ -87,7 +87,7 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
                 <div class="icheck-primary">
                   <input type="checkbox" name="show_password" id="show_password">
                   <label for="show_password">
-                    Show password <?= isset($_SESSION["session_name"]) ? "มี" : "ไม่มี" ?>
+                    Show password
                   </label>
                 </div>
               </div>

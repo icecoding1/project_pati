@@ -1,7 +1,7 @@
 <?php
-require_once("../../connection/config.php");
 ob_start();
 session_start();
+require_once("../../connection/config.php");
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   $id  = isset($_POST['id']) ? $_POST['id'] : "";
   // echo "<pre>";

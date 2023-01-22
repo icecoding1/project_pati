@@ -1,9 +1,8 @@
 <?php
-$name_web = "สั่งออเดอร์";
-require_once "../../connection/config.php";
-
 ob_start();
 session_start();
+$name_web = "สั่งออเดอร์";
+require_once "../../connection/config.php";
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   if (isset($_SESSION['array_order']) == "") {
     echo "<script>window.history.back();</script>";

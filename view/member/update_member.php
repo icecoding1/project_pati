@@ -3,7 +3,7 @@ ob_start();
 session_start();
 $name_web = "เพิ่มสมาชิก";
 require_once "../../connection/config.php";
-include("check_session.php");
+include("../../check_session.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $id = isset($_POST["id"]) ? $_POST["id"] : null;
