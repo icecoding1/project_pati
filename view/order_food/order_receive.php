@@ -2,8 +2,8 @@
 ob_start();
 session_start();
 $name_web = "สั่งออเดอร์";
-require_once "../../connection/config.php";
-include("check_session.php");
+require_once("../../connection/config.php");
+require_once("../../check_session.php");
 $count_order = isset($_GET['count_order']) ? $_GET['count_order'] : 0;
 $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
 $_SESSION["session_table"] = isset($_POST['select_table']) ? $_POST['select_table'] :  $_SESSION["session_table"];
@@ -172,7 +172,7 @@ $count = Count($row);
         <div class="content-menu">
           <div>
             <?php if (strpos($row->image, ".")) { ?>
-              <img src="../../image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+              <img src="../../image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu" loading="lazy">
             <?php } else { ?>
               <img src="../../assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
             <?php } ?>

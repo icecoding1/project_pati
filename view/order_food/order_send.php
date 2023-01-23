@@ -1,7 +1,8 @@
 <?php
 ob_start();
 session_start();
-include("check_session.php");
+require_once("../../connection/config.php");
+require_once("../../check_session.php");
 $name_web = "สั่งออเดอร์";
 $table =   $_SESSION["session_table"] = isset($_SESSION["session_table"]) ? $_SESSION["session_table"] :  "คุณไม่ได้เลือกโต๊ะ";
 $food = "ขนมปัง กาเเฟ";
@@ -103,7 +104,7 @@ if (isset($_SESSION['data'])) {
         <div class="content-menu">
           <div>
             <?php if (strpos($data[$i]['image'], ".")) { ?>
-              <img src="../..//image_myweb/img_product/<?= $data[$i]['image'] ?>" alt="food_lists" class="img_menu">
+              <img src="../..//image_myweb/img_product/<?= $data[$i]['image'] ?>" alt="food_lists" class="img_menu" loading="lazy">
             <?php } else { ?>
               <img src="../../assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
             <?php } ?>

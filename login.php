@@ -62,7 +62,8 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
 
       <div class="card padding-card-login ">
         <div class="card-body   ">
-          <p class="login-box-msg">Sign in to management</p>
+        <p class="login-box-msg pb-0">Sign in to management</p>
+          <p class="login-box-msg ">for members</p>
 
 
           <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form">
@@ -87,7 +88,7 @@ $datafetch = $select_bg->fetch(PDO::FETCH_ASSOC);
                 <div class="icheck-primary">
                   <input type="checkbox" name="show_password" id="show_password">
                   <label for="show_password">
-                    Show password <?= isset($_SESSION["session_name"]) ? "มี" : "ไม่มี" ?>
+                    Show password
                   </label>
                 </div>
               </div>

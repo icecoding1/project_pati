@@ -101,7 +101,7 @@ $btn_check_input = isset($_GET['ant']) || isset($_GET['search_menu']) ? '<a href
                 <div class="content-menu position-relative">
                   <div class="content-img">
                     <?php if (strpos($row->image, ".")) { ?>
-                      <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+                      <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu" loading="lazy">
                     <?php } else { ?>
                       <img src="assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
                     <?php } ?>
@@ -134,7 +134,7 @@ $btn_check_input = isset($_GET['ant']) || isset($_GET['search_menu']) ? '<a href
                 <div class="content-menu position-relative">
                   <div class="content-img">
                     <?php if (strpos($row->image, ".")) { ?>
-                      <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu">
+                      <img src="image_myweb/img_product/<?= $row->image ?>" alt="food_lists" class="img_menu" loading="lazy">
                     <?php } else { ?>
                       <img src="assets/img/empty_bg.jpeg" alt="food_lists" class="img_menu">
                     <?php } ?>

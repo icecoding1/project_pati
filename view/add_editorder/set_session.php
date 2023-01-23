@@ -1,8 +1,9 @@
 <?php
-require_once("../../connection/config.php");
 ob_start();
 session_start();
-if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
+require_once("../../connection/config.php");
+include("../../check_session.php");
+
   $id  = isset($_POST['id']) ? $_POST['id'] : "";
   // echo "<pre>";
   // print_r($_SESSION["array_order"]);
@@ -60,12 +61,3 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
     http_response_code(500);
     echo $e->getMessage();
   }
-} else {
-  echo "<script>
-if(confirm('กรุณา login ก่อนเข้าสู่ระบบ')){
-location.assign('../../login.php');
-}else {
-location.assign('../../login.php');
-}
-</script>";
-}
