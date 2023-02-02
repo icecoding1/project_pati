@@ -26,14 +26,16 @@ if ($text_search == "" && $select == "") {
   $sql = "SELECT * FROM table_listfood WHERE  name LIKE '%$text_search%'  OR  type_food LIKE '%$text_search%' OR number_menu LIKE '%$text_search%' ";
 }
 
-$result = $obj->query($sql);
+$result = $obj->prepare($sql);
+$result->execute();
 date_default_timezone_set("Asia/Bangkok");
 $date = date("dmYHis");
 $date = (int)$date;
 
 
 $sql_select = "SELECT * FROM structure_management";
-$select_str = $obj->query($sql_select);
+$select_str = $obj->prepare($sql_select);
+$select_str->execute();
 $result_str = $select_str->fetch();
 $image_decode = json_decode($result_str['slide_image']);
 $image_slide_encode = json_decode(json_encode($image_decode), true);

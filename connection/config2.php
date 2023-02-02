@@ -1,7 +1,7 @@
 <?php
-$dns = 'mysql:host=localhost;dbname=system_managefood';
+$dns = 'mysql:host=172.28.0.1;dbname=system_managefood';
 $username = 'root';
-$password = '';
+$password = '64150';
 
 // Create connection
 try {
