@@ -1,7 +1,7 @@
 <?php
-require_once("connection/config.php");
 ob_start();
 session_start();
+require_once("connection/config.php");
 date_default_timezone_set("Asia/Bangkok");
 if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
   if ($_SERVER['REQUEST_METHOD']  == 'GET') {
@@ -31,9 +31,14 @@ if (isset($_SESSION["session_name"])  &&  isset($_SESSION["session_status"])) {
       $item = ["order_send" => $row["name_edit"], "order_confirm" => $_SESSION["session_name"]];
       $list_name_confirm = json_encode($item);
       $update_date = date("d-m-Y  H:i:s");
-      $sql = "UPDATE table_order SET status = 2, name_edit = ?, create_date = ? WHERE id = ?";
-      $update  = $obj->prepare($sql);
-      $result = $update->execute([$list_name_confirm, $update_date, $id]);
+      $number_sort = date("dmYHis");
+
+      $sql = "UPDATE table_order SET status = 2, create_date = :create_date, number_sort = :number_sort, name_edit = :name_edit   WHERE id = $id";
+      $result = $obj->prepare($sql);
+      $result->bindParam(':create_date', $update_date);
+      $result->bindParam(':number_sort', $number_sort);
+      $result->bindParam(':name_edit', $list_name_confirm);
+      $result->execute();
       if ($result) {
         echo "success";
       } else {

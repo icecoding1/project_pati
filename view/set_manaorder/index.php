@@ -1,7 +1,7 @@
 <?php
-require_once "../../connection/config.php";
 ob_start();
 session_start();
+require_once "../../connection/config.php";
 include("../../check_session.php");
 
 $array = $_SESSION['add_count_sales'];
